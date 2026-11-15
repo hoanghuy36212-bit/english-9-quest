@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English 9 Adventure - Chinh Phục Tiếng Anh 9</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #f0f4f8;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 3D Button & Card Styling (Duolingo/Game inspired) */
+    .btn-3d {
+      transition: all 0.1s ease;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    }
+    .btn-3d:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: translateY(2px);
+    }
+
+    .btn-green { background-color: #58cc02; box-shadow: 0 4px 0 #46a302; color: white; }
+    .btn-green:hover:not(:disabled) { background-color: #61e002; }
+    
+    .btn-blue { background-color: #1cb0f6; box-shadow: 0 4px 0 #1899d6; color: white; }
+    .btn-blue:hover:not(:disabled) { background-color: #2bc0ff; }
+
+    .btn-purple { background-color: #ce82ff; box-shadow: 0 4px 0 #a55eea; color: white; }
+    .btn-purple:hover:not(:disabled) { background-color: #d99bff; }
+
+    .btn-amber { background-color: #ffc800; box-shadow: 0 4px 0 #e5b400; color: #4a3800; }
+    .btn-amber:hover:not(:disabled) { background-color: #ffd433; }
+
+    .btn-red { background-color: #ff4b4b; box-shadow: 0 4px 0 #ea2b2b; color: white; }
+    .btn-red:hover:not(:disabled) { background-color: #ff6666; }
+
+    .btn-white { background-color: #ffffff; box-shadow: 0 4px 0 #e5e7eb; border: 2px solid #e5e7eb; color: #374151; }
+    .btn-white:hover:not(:disabled) { background-color: #f9fafb; }
+
+    /* Flip Card Effect */
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1); }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .animate-shake { animation: shake 0.4s ease-in-out; }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop { animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800">
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- TOP NAVIGATION / HUD BAR -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b-2 border-slate-200 px-3 sm:px-6 py-2.5 shadow-sm">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-2">
+      <!-- Brand & Level -->
+      <div class="flex items-center gap-2 sm:gap-3 cursor-pointer" onclick="app.goHome()">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-xl shadow-md">
+          E9
+        </div>
+        <div class="hidden sm:block">
+          <h1 class="font-black text-base leading-tight text-slate-800">English 9 Quest</h1>
+          <p class="text-xs font-bold text-emerald-600">Global Success Edition</p>
+        </div>
+      </div>
+
+      <!-- Player Stats HUD -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Level & XP Pill -->
+        <div class="flex items-center gap-2 bg-indigo-50 border-2 border-indigo-200 px-2.5 sm:px-3 py-1 rounded-2xl" title="Cấp độ & Kinh nghiệm">
+          <span class="bg-indigo-600 text-white text-xs font-black px-2 py-0.5 rounded-lg" id="hud-level">Lv.1</span>
+          <div class="w-16 sm:w-24 h-2.5 bg-indigo-200 rounded-full overflow-hidden">
+            <div id="hud-xp-bar" class="h-full bg-indigo-600 transition-all duration-500" style="width: 20%"></div>
+          </div>
+          <span class="text-xs font-extrabold text-indigo-700 hidden md:inline" id="hud-xp-text">0/100 XP</span>
+        </div>
+
+        <!-- Streak -->
+        <div class="flex items-center gap-1 bg-orange-50 border-2 border-orange-200 px-2.5 py-1 rounded-2xl" title="Chuỗi ngày học liên tiếp">
+          <span class="text-base sm:text-lg">🔥</span>
+          <span class="font-black text-sm text-orange-600" id="hud-streak">1</span>
+        </div>
+
+        <!-- Coins -->
+        <div class="flex items-center gap-1 bg-amber-50 border-2 border-amber-200 px-2.5 py-1 rounded-2xl cursor-pointer hover:bg-amber-100 transition" onclick="app.switchTab('shop')" title="Xu vàng - Nhấn để mở Cửa hàng">
+          <span class="text-base sm:text-lg">🪙</span>
+          <span class="font-black text-sm text-amber-600" id="hud-coins">50</span>
+        </div>
+
+        <!-- Hearts -->
+        <div class="flex items-center gap-1 bg-rose-50 border-2 border-rose-200 px-2.5 py-1 rounded-2xl cursor-pointer hover:bg-rose-100 transition" onclick="app.switchTab('shop')" title="Số tim (Mạng sống)">
+          <span class="text-base sm:text-lg">❤️</span>
+          <span class="font-black text-sm text-rose-600" id="hud-hearts">5</span>
+        </div>
+
+        <!-- Sound Toggle -->
+        <button id="btn-sound" onclick="app.toggleSound()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition" title="Bật/Tắt âm thanh">
+          🔊
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main id="app-container" class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-6 py-5 pb-24">
+    <!-- Dynamic Views Rendered Here -->
+  </main>
+
+  <!-- BOTTOM NAVIGATION BAR (Mobile & Desktop Quick Switch) -->
+  <nav id="bottom-nav" class="fixed bottom-0 inset-x-0 z-30 bg-white border-t-2 border-slate-200 px-4 py-2 shadow-lg">
+    <div class="max-w-md mx-auto flex justify-around items-center">
+      <button onclick="app.switchTab('map')" id="nav-map" class="nav-btn flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl font-extrabold text-xs text-emerald-600 bg-emerald-50">
+        <span class="text-xl">🗺️</span>
+        <span>Bản đồ</span>
+      </button>
+      <button onclick="app.switchTab('shop')" id="nav-shop" class="nav-btn flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl font-extrabold text-xs text-slate-500 hover:bg-slate-100">
+        <span class="text-xl">🏪</span>
+        <span>Cửa hàng</span>
+      </button>
+      <button onclick="app.switchTab('badges')" id="nav-badges" class="nav-btn flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl font-extrabold text-xs text-slate-500 hover:bg-slate-100">
+        <span class="text-xl">🏆</span>
+        <span>Huy hiệu</span>
+      </button>
+      <button onclick="app.switchTab('profile')" id="nav-profile" class="nav-btn flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl font-extrabold text-xs text-slate-500 hover:bg-slate-100">
+        <span class="text-xl">🎒</span>
+        <span>Hồ sơ</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CUSTOM MODAL / TOAST CONTAINER (Replaces alert/confirm) -->
+  <div id="modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div id="modal-box" class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-2 border-slate-100 animate-pop text-center">
+      <div id="modal-icon" class="text-5xl mb-3">🎉</div>
+      <h3 id="modal-title" class="text-xl font-black text-slate-800 mb-2">Thông báo</h3>
+      <p id="modal-message" class="text-slate-600 font-semibold text-sm mb-6 leading-relaxed"></p>
+      <div id="modal-actions" class="flex gap-3 justify-center"></div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST -->
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-800 text-white px-5 py-2.5 rounded-2xl font-bold text-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2">
+    <span id="toast-icon">✨</span>
+    <span id="toast-text">Thông báo</span>
+  </div>
+
+  <script>
+    /**
+     * ============================================================================
+     * 1. SOUND ENGINE (Web Audio API - No external files required)
+     * ============================================================================
+     */
+    class SoundFX {
+      constructor() {
+        this.enabled = true;
+        this.ctx = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playTone(freq, type, duration, delay = 0, vol = 0.15) {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + delay);
+          gain.gain.setValueAtTime(vol, this.ctx.currentTime + delay);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + delay + duration);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(this.ctx.currentTime + delay);
+          osc.stop(this.ctx.currentTime + delay + duration);
+        } catch (e) {}
+      }
+
+      click() { this.playTone(520, 'sine', 0.08, 0, 0.1); }
+      correct() {
+        this.playTone(587.33, 'triangle', 0.12, 0, 0.18); // D5
+        this.playTone(880, 'triangle', 0.25, 0.1, 0.2);   // A5
+      }
+      wrong() {
+        this.playTone(220, 'sawtooth', 0.18, 0, 0.15);
+        this.playTone(175, 'sawtooth', 0.25, 0.12, 0.15);
+      }
+      levelUp() {
+        [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
+          this.playTone(f, 'triangle', 0.22, i * 0.1, 0.2);
+        });
+      }
+      victory() {
+        const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 1046.50];
+        const times = [0, 0.1, 0.2, 0.3, 0.45, 0.58];
+        notes.forEach((f, i) => this.playTone(f, 'sine', 0.25, times[i], 0.22));
+      }
+      coin() {
+        this.playTone(987.77, 'sine', 0.08, 0, 0.15);
+        this.playTone(1318.51, 'sine', 0.2, 0.07, 0.15);
+      }
+    }
+
+    const sfx = new SoundFX();
+
+    /**
+     * ============================================================================
+     * 2. SPEECH SYNTHESIS (English Pronunciation)
+     * ============================================================================
+     */
+    function speakEnglish(text) {
+      sfx.click();
+      if (!('speechSynthesis' in window)) {
+        app.showToast('Trình duyệt của bạn không hỗ trợ đọc giọng nói.', '⚠️');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.92;
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find(v => v.lang.includes('en-US') && v.name.includes('Google')) || voices.find(v => v.lang.includes('en'));
+      if (enVoice) utterance.voice = enVoice;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /**
+     * ============================================================================
+     * 3. CURRICULUM DATA: TIẾNG ANH 9 - GLOBAL SUCCESS (UNITS 1 - 6)
+     * ============================================================================
+     */
+    const UNITS_DATA = [
+      {
+        id: 1,
+        code: "UNIT 1",
+        title: "Local Community",
+        viTitle: "Cộng đồng địa phương",
+        themeColor: "emerald",
+        gradient: "from-emerald-400 to-teal-600",
+        icon: "🏘️",
+        bossName: "Bậc Thầy Làng Nghề",
+        bossIcon: "🏺",
+        badge: { id: "u1_master", name: "Sứ Giả Cộng Đồng", icon: "🏅", desc: "Hoàn thành xuất sắc Unit 1: Local Community" },
+        vocab: [
+          { word: "artisan", ipa: "/ˌɑːtɪˈzæn/", type: "(n)", meaning: "thợ làm nghề thủ công", example: "The artisans in Bat Trang village make beautiful pottery." },
+          { word: "handicraft", ipa: "/ˈhændikrɑːft/", type: "(n)", meaning: "sản phẩm thủ công", example: "Tourists love buying local handicrafts as souvenirs." },
+          { word: "community helper", ipa: "/kəˈmjuːnəti ˈhelpə/", type: "(n)", meaning: "người phục vụ cộng đồng", example: "Firefighters and police officers are important community helpers." },
+          { word: "pass down", ipa: "/pɑːs daʊn/", type: "(phr.v)", meaning: "truyền lại (cho thế hệ sau)", example: "Traditional weaving skills are passed down from generation to generation." },
+          { word: "preserve", ipa: "/prɪˈzɜːv/", type: "(v)", meaning: "bảo tồn, giữ gìn", example: "We need to preserve our traditional craft villages." },
+          { word: "facility", ipa: "/fəˈsɪləti/", type: "(n)", meaning: "cơ sở vật chất, tiện nghi", example: "Our neighbourhood has great sports facilities." }
+        ],
+        grammarNote: {
+          title: "Từ để hỏi trước To-infinitive & Phrasal Verbs",
+          points: [
+            "<b>Wh-word + to-V:</b> Dùng sau các động từ như <i>ask, wonder, decide, tell, know</i> để diễn tả câu hỏi gián tiếp về việc nên làm gì. (VD: <i>I don't know <b>where to buy</b> traditional lanterns.</i>)",
+            "<b>Cụm động từ (Phrasal Verbs) phổ biến:</b><br>• <b>pass down:</b> truyền lại<br>• <b>find out:</b> tìm ra thông tin<br>• <b>look around:</b> đi ngắm nghía xung quanh<br>• <b>cut down on:</b> cắt giảm<br>• <b>get on with:</b> hòa thuận với"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "We don't know ______ to ask for advice about the local craft fair.",
+            options: ["who", "what", "why", "which"],
+            answer: 0,
+            explain: "Dùng 'who + to-V' (hỏi ai) vì phía sau có động từ 'ask for advice' (xin lời khuyên từ ai)."
+          },
+          {
+            q: "The craft of basket weaving is usually ______ from generation to generation.",
+            options: ["passed down", "cut down", "looked around", "found out"],
+            answer: 0,
+            explain: "'pass down' có nghĩa là truyền lại từ thế hệ này sang thế hệ khác."
+          },
+          {
+            q: "Could you tell me ______ to get to the nearest police station?",
+            options: ["how", "what", "who", "whose"],
+            answer: 0,
+            explain: "'how to get to...' nghĩa là làm thế nào để đi đến đâu đó (hỏi đường)."
+          },
+          {
+            q: "To stay healthy, you should ______ on fast food and sugary drinks.",
+            options: ["cut down", "pass down", "come back", "run out"],
+            answer: 0,
+            explain: "'cut down on' nghĩa là cắt giảm tiêu thụ thứ gì đó."
+          }
+        ],
+        sentences: [
+          { hint: "Tôi không biết nên mua quà lưu niệm đặc sản ở đâu.", words: ["I", "don't", "know", "where", "to", "buy", "speciality", "souvenirs."] },
+          { hint: "Các nghệ nhân truyền lại kỹ năng của họ cho con cái.", words: ["Artisans", "pass", "down", "their", "skills", "to", "their", "children."] },
+          { hint: "Chúng tôi đã đi dạo quanh ngôi làng để ngắm cảnh.", words: ["We", "looked", "around", "the", "village", "to", "enjoy", "the", "view."] }
+        ],
+        bossQuestions: [
+          {
+            q: "A ______ is a person who makes things skillfully, especially with their hands.",
+            options: ["artisan", "electrician", "delivery person", "garbage collector"],
+            answer: 0,
+            explain: "Artisan: nghệ nhân, thợ thủ công làm đồ bằng tay khéo léo."
+          },
+          {
+            q: "She is wondering ______ to wear to the community festival tomorrow.",
+            options: ["what", "who", "where", "how"],
+            answer: 0,
+            explain: "'what to wear' nghĩa là mặc cái gì."
+          },
+          {
+            q: "Our village has ______ of clay, so we have to buy it from another province.",
+            options: ["run out", "passed down", "looked after", "got on"],
+            answer: 0,
+            explain: "'run out of' nghĩa là cạn kiệt, hết sạch nguyên liệu."
+          },
+          {
+            q: "Firefighters are brave ______ who save people from fires.",
+            options: ["community helpers", "handicrafts", "pottery", "suburbs"],
+            answer: 0,
+            explain: "Lính cứu hỏa là những người phục vụ cộng đồng (community helpers) dũng cảm."
+          }
+        ]
+      },
+      {
+        id: 2,
+        code: "UNIT 2",
+        title: "City Life",
+        viTitle: "Cuộc sống đô thị",
+        themeColor: "sky",
+        gradient: "from-sky-400 to-blue-600",
+        icon: "🏙️",
+        bossName: "Hộ Vệ Đô Thị",
+        bossIcon: "🤖",
+        badge: { id: "u2_master", name: "Nhà Thám Hiểm Đô Thị", icon: "🌆", desc: "Chinh phục thành công Unit 2: City Life" },
+        vocab: [
+          { word: "bustling", ipa: "/ˈbʌslɪŋ/", type: "(adj)", meaning: "nhộn nhịp, hối hả", example: "Ho Chi Minh City is a bustling metropolis." },
+          { word: "traffic congestion", ipa: "/ˈtræfɪk kənˈdʒestʃən/", type: "(n)", meaning: "ùn tắc giao thông", example: "Traffic congestion is a major problem during rush hour." },
+          { word: "construction site", ipa: "/kənˈstrʌkʃn saɪt/", type: "(n)", meaning: "công trường xây dựng", example: "It's dusty and noisy near the construction site." },
+          { word: "liveable", ipa: "/ˈlɪvəbl/", type: "(adj)", meaning: "đáng sống", example: "Da Nang is known as one of the most liveable cities in Vietnam." },
+          { word: "metro", ipa: "/ˈmetrəʊ/", type: "(n)", meaning: "tàu điện ngầm / đường sắt đô thị", example: "Taking the metro helps reduce air pollution." },
+          { word: "get around", ipa: "/ɡet əˈraʊnd/", type: "(phr.v)", meaning: "đi lại, di chuyển quanh", example: "It's easy to get around the city by public transport." }
+        ],
+        grammarNote: {
+          title: "So sánh kép (Double Comparatives) & Phrasal Verbs",
+          points: [
+            "<b>Cấu trúc Càng... càng...:</b><br><code>The + so sánh hơn + S + V, the + so sánh hơn + S + V</code>",
+            "<b>Ví dụ:</b><br>• <i><b>The bigger</b> the city is, <b>the more crowded</b> it becomes.</i> (Thành phố càng lớn thì càng đông đúc.)<br>• <i><b>The harder</b> you study, <b>the better</b> results you get.</i>",
+            "<b>Phrasal Verbs đô thị:</b> <i>get around</i> (đi lại), <i>carry out</i> (tiến hành), <i>come down with</i> (bị ốm/mắc bệnh), <i>hang out with</i> (đi chơi cùng)."
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "______ the city gets, ______ the air pollution becomes.",
+            options: ["The more crowded / the worse", "The crowded / the bad", "More crowded / worse", "The most crowded / the worst"],
+            answer: 0,
+            explain: "Cấu trúc so sánh kép: The + so sánh hơn (more crowded), the + so sánh hơn (worse - dạng so sánh hơn của bad)."
+          },
+          {
+            q: "The ______ the underground system is, the ______ people use private cars.",
+            options: ["better / fewer", "good / less", "best / fewer", "better / less"],
+            answer: 0,
+            explain: "So sánh hơn của 'good' là 'better'; 'cars' là danh từ đếm được số nhiều nên dùng 'fewer' (ít hơn)."
+          },
+          {
+            q: "Many city dwellers ______ with respiratory diseases due to fine dust.",
+            options: ["come down", "get around", "carry out", "hang out"],
+            answer: 0,
+            explain: "'come down with + bệnh' nghĩa là mắc phải căn bệnh gì đó."
+          },
+          {
+            q: "The city council decided to ______ a project to widen the main road.",
+            options: ["carry out", "get over", "cut down", "turn off"],
+            answer: 0,
+            explain: "'carry out a project' nghĩa là tiến hành, thực hiện một dự án."
+          }
+        ],
+        sentences: [
+          { hint: "Thành phố càng hiện đại, cuộc sống càng trở nên tiện lợi.", words: ["The", "more", "modern", "the", "city", "is,", "the", "more", "convenient", "life", "becomes."] },
+          { hint: "Di chuyển quanh thành phố bằng xe buýt rất rẻ.", words: ["Getting", "around", "the", "city", "by", "bus", "is", "very", "cheap."] },
+          { hint: "Giờ cao điểm luôn gây ra ùn tắc giao thông nghiêm trọng.", words: ["Rush", "hour", "always", "causes", "serious", "traffic", "congestion."] }
+        ],
+        bossQuestions: [
+          {
+            q: "The ______ you leave home, the ______ likely you are to avoid rush hour.",
+            options: ["earlier / more", "early / most", "earliest / more", "more early / less"],
+            answer: 0,
+            explain: "So sánh kép: The earlier (càng sớm) ... the more likely (càng có khả năng)."
+          },
+          {
+            q: "There is a lot of noise and dust coming from the ______ next to our school.",
+            options: ["construction site", "public amenity", "sky train", "green space"],
+            answer: 0,
+            explain: "Construction site: công trường xây dựng (nơi phát ra tiếng ồn và bụi)."
+          },
+          {
+            q: "A ______ city offers clean air, green parks, and safe neighbourhoods.",
+            options: ["liveable", "congested", "polluted", "packed"],
+            answer: 0,
+            explain: "Liveable: đáng sống."
+          },
+          {
+            q: "Teenagers often ______ with their friends at shopping malls on weekends.",
+            options: ["hang out", "carry out", "come down", "pass down"],
+            answer: 0,
+            explain: "'hang out with' nghĩa là đi chơi, tụ tập cùng bạn bè."
+          }
+        ]
+      },
+      {
+        id: 3,
+        code: "UNIT 3",
+        title: "Healthy Living for Teens",
+        viTitle: "Sống khỏe cho tuổi teen",
+        themeColor: "rose",
+        gradient: "from-rose-400 to-pink-600",
+        icon: "💪",
+        bossName: "Chiến Binh Sức Khỏe",
+        bossIcon: "⚡",
+        badge: { id: "u3_master", name: "Bậc Thầy Cân Bằng", icon: "🧘", desc: "Hoàn thành xuất sắc Unit 3: Healthy Living" },
+        vocab: [
+          { word: "well-balanced", ipa: "/ˌwel ˈbælənst/", type: "(adj)", meaning: "cân bằng, hợp lý", example: "A well-balanced diet keeps your body strong." },
+          { word: "counsellor", ipa: "/ˈkaʊnsələ/", type: "(n)", meaning: "cố vấn, người tư vấn", example: "You can talk to the school counsellor about your stress." },
+          { word: "priority", ipa: "/praɪˈɒrəti/", type: "(n)", meaning: "sự ưu tiên", example: "Studying for the exam should be your top priority." },
+          { word: "deadline", ipa: "/ˈdedlaɪn/", type: "(n)", meaning: "hạn chót", example: "I always finish my assignments before the deadline." },
+          { word: "stressed out", ipa: "/strest aʊt/", type: "(adj)", meaning: "căng thẳng, kiệt sức", example: "She feels stressed out because of too much homework." },
+          { word: "accomplish", ipa: "/əˈkʌmplɪʃ/", type: "(v)", meaning: "hoàn thành, đạt được", example: "Good time management helps you accomplish your goals." }
+        ],
+        grammarNote: {
+          title: "Động từ khuyết thiếu trong Câu điều kiện loại 1",
+          points: [
+            "Thay vì chỉ dùng <i>will</i> ở mệnh đề chính của câu điều kiện loại 1, ta có thể dùng <b>can, must, may, might, should</b> để diễn tả khả năng, sự cần thiết hoặc lời khuyên.",
+            "<b>Cấu trúc:</b> <code>If + S + V(hiện tại đơn), S + can/must/should/may/might + V(nguyên thể)</code>",
+            "<b>Ví dụ:</b><br>• <i>If you want to stay healthy, you <b>should</b> eat more vegetables.</i> (Lời khuyên)<br>• <i>If you finish your homework early, you <b>can</b> play video games.</i> (Sự cho phép/khả năng)"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "If you want to have good mental health, you ______ get enough sleep every night.",
+            options: ["should", "might not", "mustn't", "couldn't"],
+            answer: 0,
+            explain: "Dùng 'should' (nên) trong câu điều kiện loại 1 để đưa ra lời khuyên tốt cho sức khỏe."
+          },
+          {
+            q: "If Mai ______ her time well, she can avoid missing the deadline.",
+            options: ["manages", "managed", "will manage", "manage"],
+            answer: 0,
+            explain: "Mệnh đề If của câu điều kiện loại 1 chia thì hiện tại đơn. Chủ ngữ 'Mai' số ít nên dùng 'manages'."
+          },
+          {
+            q: "You ______ consult a doctor if the headache continues for several days.",
+            options: ["must", "can't", "would", "did"],
+            answer: 0,
+            explain: "Dùng 'must' (phải/cần thiết) để nhấn mạnh sự cần thiết phải đi khám bác sĩ."
+          },
+          {
+            q: "If we don't hurry up, we ______ miss the morning yoga class.",
+            options: ["might", "should", "must", "can't"],
+            answer: 0,
+            explain: "Dùng 'might' (có thể sẽ) để diễn tả một khả năng có thể xảy ra nếu không nhanh lên."
+          }
+        ],
+        sentences: [
+          { hint: "Nếu bạn tập thể dục đều đặn, bạn có thể cải thiện sức khỏe.", words: ["If", "you", "exercise", "regularly,", "you", "can", "improve", "your", "health."] },
+          { hint: "Việc học nên là ưu tiên hàng đầu của bạn.", words: ["Studying", "should", "be", "your", "top", "priority."] },
+          { hint: "Đừng thức quá khuya nếu bạn không muốn bị căng thẳng.", words: ["Don't", "stay", "up", "too", "late", "if", "you", "don't", "want", "to", "feel", "stressed", "out."] }
+        ],
+        bossQuestions: [
+          {
+            q: "To ______ your goal of passing the entrance exam, make a clear study plan.",
+            options: ["accomplish", "delay", "distract", "ignore"],
+            answer: 0,
+            explain: "Accomplish a goal: hoàn thành, đạt được mục tiêu."
+          },
+          {
+            q: "If you feel overwhelmed with schoolwork, you ______ talk to your parents or counsellor.",
+            options: ["should", "mustn't", "would", "had to"],
+            answer: 0,
+            explain: "Lời khuyên trong câu điều kiện loại 1: If + hiện tại đơn, S + should + V."
+          },
+          {
+            q: "Eating a ______ diet with fruits, vegetables, and protein keeps teens energetic.",
+            options: ["well-balanced", "fattening", "stressed", "anxious"],
+            answer: 0,
+            explain: "A well-balanced diet: chế độ ăn uống cân bằng dinh dưỡng."
+          },
+          {
+            q: "If Nam ______ his assignment tonight, he can go to the cinema tomorrow.",
+            options: ["finishes", "will finish", "finished", "finishing"],
+            answer: 0,
+            explain: "Mệnh đề If chia thì hiện tại đơn: Nam (ngôi 3 số ít) -> finishes."
+          }
+        ]
+      },
+      {
+        id: 4,
+        code: "UNIT 4",
+        title: "Remembering the Past",
+        viTitle: "Ký ức quá khứ",
+        themeColor: "amber",
+        gradient: "from-amber-400 to-orange-600",
+        icon: "🏛️",
+        bossName: "Người Giữ Thời Gian",
+        bossIcon: "⏳",
+        badge: { id: "u4_master", name: "Nhà Sử Học Trẻ", icon: "📜", desc: "Hoàn thành xuất sắc Unit 4: Remembering the Past" },
+        vocab: [
+          { word: "monument", ipa: "/ˈmɒnjumənt/", type: "(n)", meaning: "tượng đài, công trình kỷ niệm", example: "We visited an ancient monument in Hue." },
+          { word: "heritage", ipa: "/ˈherɪtɪdʒ/", type: "(n)", meaning: "di sản", example: "Ha Long Bay is a World Natural Heritage site." },
+          { word: "generation", ipa: "/ˌdʒenəˈreɪʃn/", type: "(n)", meaning: "thế hệ", example: "Older generations have many stories to tell." },
+          { word: "barefoot", ipa: "/ˈbeəfʊt/", type: "(adj/adv)", meaning: "chân trần", example: "Children in the past often walked barefoot to school." },
+          { word: "worship", ipa: "/ˈwɜːʃɪp/", type: "(v)", meaning: "thờ cúng, tôn kính", example: "Vietnamese people worship their ancestors." },
+          { word: "magnificence", ipa: "/mæɡˈnɪfɪsns/", type: "(n)", meaning: "sự tráng lệ, nguy nga", example: "Visitors were amazed by the magnificence of the royal palace." }
+        ],
+        grammarNote: {
+          title: "Quá khứ tiếp diễn & Câu ước (Wish + Quá khứ đơn)",
+          points: [
+            "<b>1. Thì Quá khứ tiếp diễn (Past Continuous):</b> Diễn tả hành động đang xảy ra tại một thời điểm cụ thể trong quá khứ hoặc đang xảy ra thì hành động khác xen vào.<br><code>S + was/were + V-ing</code> (VD: <i>At 8 PM yesterday, we <b>were watching</b> a documentary.</i>)",
+            "<b>2. Câu ước ở hiện tại (Wish):</b> Diễn tả mong ước trái với thực tế ở hiện tại.<br><code>S + wish(es) + S + V2/ed (to be -> were)</code><br>(VD: <i>I wish I <b>had</b> a time machine. / She wishes she <b>were</b> taller.</i>)"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "I wish I ______ more free time to visit ancient temples in Vietnam.",
+            options: ["had", "have", "will have", "am having"],
+            answer: 0,
+            explain: "Câu ước ở hiện tại: S + wish + S + V2/ed (quá khứ đơn của 'have' là 'had')."
+          },
+          {
+            q: "While my grandmother ______ a story about the past, the lights went out.",
+            options: ["was telling", "told", "is telling", "tells"],
+            answer: 0,
+            explain: "Hành động đang diễn ra trong quá khứ (was telling) thì hành động khác xen vào (went out)."
+          },
+          {
+            q: "Lan wishes she ______ in a peaceful countryside village instead of a noisy city.",
+            options: ["lived", "lives", "will live", "living"],
+            answer: 0,
+            explain: "Ước điều không có thật ở hiện tại -> động từ lùi về quá khứ đơn: 'lived'."
+          },
+          {
+            q: "What ______ you ______ at 9 o'clock last Sunday morning?",
+            options: ["were / doing", "did / do", "are / doing", "was / doing"],
+            answer: 0,
+            explain: "Có mốc thời gian cụ thể trong quá khứ (at 9 o'clock last Sunday morning) -> dùng quá khứ tiếp diễn 'were you doing'."
+          }
+        ],
+        sentences: [
+          { hint: "Tôi ước gì tôi có thể du hành ngược thời gian.", words: ["I", "wish", "I", "could", "travel", "back", "in", "time."] },
+          { hint: "Trẻ em ngày xưa thường đi chân trần tới trường.", words: ["Children", "in", "the", "past", "often", "walked", "barefoot", "to", "school."] },
+          { hint: "Chúng ta phải bảo vệ di sản văn hóa của mình.", words: ["We", "must", "protect", "our", "cultural", "heritage."] }
+        ],
+        bossQuestions: [
+          {
+            q: "At this time yesterday, the students ______ about Vietnamese historical monuments.",
+            options: ["were learning", "learned", "are learning", "learn"],
+            answer: 0,
+            explain: "'At this time yesterday' (vào giờ này hôm qua) là dấu hiệu của thì Quá khứ tiếp diễn."
+          },
+          {
+            q: "Phong wishes he ______ speak English as fluently as a native speaker.",
+            options: ["could", "can", "will", "may"],
+            answer: 0,
+            explain: "Trong câu ước hiện tại, 'can' lùi thì thành 'could'."
+          },
+          {
+            q: "In Vietnam, almost every family has an altar to ______ their ancestors.",
+            options: ["worship", "preserve", "occupy", "promote"],
+            answer: 0,
+            explain: "Worship ancestors: thờ cúng tổ tiên."
+          },
+          {
+            q: "My dad ______ the old photos when he found his childhood diary.",
+            options: ["was tidying", "tidied", "tidies", "has tidied"],
+            answer: 0,
+            explain: "Hành động đang dọn dẹp (was tidying) bị cắt ngang bởi hành động tìm thấy (found)."
+          }
+        ]
+      },
+      {
+        id: 5,
+        code: "UNIT 5",
+        title: "Our Experiences",
+        viTitle: "Những trải nghiệm của chúng ta",
+        themeColor: "purple",
+        gradient: "from-purple-500 to-indigo-600",
+        icon: "🎒",
+        bossName: "Nhà Du Hành Vũ Trụ",
+        bossIcon: "🚀",
+        badge: { id: "u5_master", name: "Nhà Thám Hiểm Kỳ Cựu", icon: "🧭", desc: "Hoàn thành xuất sắc Unit 5: Our Experiences" },
+        vocab: [
+          { word: "exhilarating", ipa: "/ɪɡˈzɪləreɪtɪŋ/", type: "(adj)", meaning: "đầy phấn khích, sảng khoái", example: "Paragliding over the mountains was an exhilarating experience." },
+          { word: "unforgettable", ipa: "/ˌʌnfəˈɡetəbl/", type: "(adj)", meaning: "không thể nào quên", example: "Our summer camp in Da Lat was truly unforgettable." },
+          { word: "embarrassing", ipa: "/ɪmˈbærəsɪŋ/", type: "(adj)", meaning: "ngượng ngùng, xấu hổ", example: "Forgetting my lines on stage was the most embarrassing moment." },
+          { word: "eco-tour", ipa: "/ˈiːkəʊ tʊə/", type: "(n)", meaning: "du lịch sinh thái", example: "We joined an eco-tour to explore the national park." },
+          { word: "snorkelling", ipa: "/ˈsnɔːkəlɪŋ/", type: "(n)", meaning: "lặn với ống thở", example: "Have you ever tried snorkelling to see coral reefs?" },
+          { word: "by rote", ipa: "/baɪ rəʊt/", type: "(idm)", meaning: "học vẹt, học thuộc lòng máy móc", example: "Learning vocabulary by rote is not very effective." }
+        ],
+        grammarNote: {
+          title: "Thì Hiện tại hoàn thành (Present Perfect)",
+          points: [
+            "<b>Công thức:</b> <code>S + have/has + V3/ed (Past Participle)</code>",
+            "<b>Cách dùng chính trong Unit 5:</b> Diễn tả một trải nghiệm, kinh nghiệm tính đến thời điểm hiện tại (thường đi với <b>ever, never, before, once, twice, several times</b>).",
+            "<b>Ví dụ:</b><br>• <i><b>Have</b> you <b>ever ridden</b> a jeep?</i> (Bạn đã bao giờ đi xe jeep chưa?)<br>• <i>I <b>have never seen</b> such a beautiful sunset before.</i>"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "______ you ever ______ snorkelling in Nha Trang?",
+            options: ["Have / tried", "Did / try", "Are / trying", "Has / tried"],
+            answer: 0,
+            explain: "Hỏi về trải nghiệm trong đời với 'ever' -> dùng Hiện tại hoàn thành: Have you ever + V3/ed (tried)."
+          },
+          {
+            q: "My sister ______ to Sapa three times, and she still wants to go back.",
+            options: ["has been", "went", "was", "goes"],
+            answer: 0,
+            explain: "Diễn tả số lần trải nghiệm tính đến hiện tại (three times) -> dùng Hiện tại hoàn thành 'has been'."
+          },
+          {
+            q: "This is the most ______ performance I have ever watched!",
+            options: ["amazing", "amazed", "embarrassed", "bored"],
+            answer: 0,
+            explain: "Tính từ đuôi -ing (amazing) dùng để miêu tả tính chất của sự vật/màn trình diễn."
+          },
+          {
+            q: "We haven't ______ our tent yet because it started raining heavily.",
+            options: ["put up", "putting up", "puts up", "putted up"],
+            answer: 0,
+            explain: "Sau 'haven't' là V3/ed. Quá khứ phân từ của 'put' vẫn là 'put' (put up: dựng lều)."
+          }
+        ],
+        sentences: [
+          { hint: "Bạn đã bao giờ tham gia một chuyến du lịch sinh thái chưa?", words: ["Have", "you", "ever", "joined", "an", "eco-tour?"] },
+          { hint: "Đó là trải nghiệm khó quên nhất trong đời tôi.", words: ["That", "was", "the", "most", "unforgettable", "experience", "in", "my", "life."] },
+          { hint: "Tôi chưa từng đi xe jeep trên đồi cát trước đây.", words: ["I", "have", "never", "ridden", "a", "jeep", "on", "sand", "dunes", "before."] }
+        ],
+        bossQuestions: [
+          {
+            q: "Nam ______ never ______ a coral reef with his own eyes.",
+            options: ["has / seen", "have / seen", "did / see", "was / seeing"],
+            answer: 0,
+            explain: "Chủ ngữ 'Nam' số ít + never + V3/ed (seen) trong thì Hiện tại hoàn thành."
+          },
+          {
+            q: "Going down the river on a bamboo raft was a(n) ______ adventure!",
+            options: ["exhilarating", "embarrassed", "helpless", "unpleasant"],
+            answer: 0,
+            explain: "Exhilarating: đầy hứng khởi, sảng khoái."
+          },
+          {
+            q: "Instead of learning ______, you should understand the meaning of new words.",
+            options: ["by rote", "by heart", "by mistake", "by chance"],
+            answer: 0,
+            explain: "Learn by rote: học vẹt."
+          },
+          {
+            q: "How many times ______ your class ______ a camping trip this year?",
+            options: ["has / organized", "did / organize", "have / organized", "does / organize"],
+            answer: 0,
+            explain: "'your class' là danh từ tập hợp số ít -> dùng 'has organized'."
+          }
+        ]
+      },
+      {
+        id: 6,
+        code: "UNIT 6",
+        title: "Vietnamese Lifestyle: Then and Now",
+        viTitle: "Lối sống Việt Nam xưa và nay",
+        themeColor: "teal",
+        gradient: "from-teal-400 to-cyan-600",
+        icon: "🚲",
+        bossName: "Đại Sứ Văn Hóa Việt",
+        bossIcon: "🐉",
+        badge: { id: "u6_master", name: "Huyền Thoại Tiếng Anh 9", icon: "👑", desc: "Chinh phục toàn bộ hành trình Tiếng Anh 9!" },
+        vocab: [
+          { word: "extended family", ipa: "/ɪkˌstendɪd ˈfæməli/", type: "(n)", meaning: "gia đình nhiều thế hệ", example: "In the past, most Vietnamese people lived in extended families." },
+          { word: "nuclear family", ipa: "/ˌnjuːkliə ˈfæməli/", type: "(n)", meaning: "gia đình hạt nhân (bố mẹ và con)", example: "Nuclear families are very common in modern cities today." },
+          { word: "generation gap", ipa: "/ˌdʒenəˈreɪʃn ɡæp/", type: "(n)", meaning: "khoảng cách thế hệ", example: "Open communication helps bridge the generation gap." },
+          { word: "pursue", ipa: "/pəˈsjuː/", type: "(v)", meaning: "theo đuổi (ước mơ, sự nghiệp)", example: "Young people today have more freedom to pursue their passions." },
+          { word: "democratic", ipa: "/ˌdeməˈkrætɪk/", type: "(adj)", meaning: "dân chủ, bình đẳng", example: "Family relationships have become more democratic nowadays." },
+          { word: "depend on", ipa: "/dɪˈpend ɒn/", type: "(phr.v)", meaning: "phụ thuộc vào", example: "Students today depend less on printed books thanks to the internet." }
+        ],
+        grammarNote: {
+          title: "Động từ theo sau bởi To-V hoặc V-ing",
+          points: [
+            "<b>1. Động từ + To-V:</b> <i>want, decide, plan, hope, promise, agree, learn, afford...</i><br>(VD: <i>She decided <b>to pursue</b> a career in medicine.</i>)",
+            "<b>2. Động từ + V-ing:</b> <i>enjoy, fancy, mind, avoid, suggest, finish, practise...</i><br>(VD: <i>Grandparents enjoy <b>telling</b> folk tales to their grandchildren.</i>)",
+            "<b>3. Lưu ý đặc biệt:</b><br>• <b>remember/forget + to-V:</b> nhớ/quên phải làm gì (chưa làm)<br>• <b>remember/forget + V-ing:</b> nhớ/quên đã làm gì (trong quá khứ)"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "Young people today fancy ______ online rather than writing handwritten letters.",
+            options: ["chatting", "to chat", "chat", "chatted"],
+            answer: 0,
+            explain: "Sau động từ 'fancy' (thích) luôn dùng dạng V-ing -> 'chatting'."
+          },
+          {
+            q: "My parents promised ______ me to the Museum of Ethnology this weekend.",
+            options: ["to take", "taking", "take", "took"],
+            answer: 0,
+            explain: "Sau động từ 'promise' (hứa) luôn dùng 'to-V' -> 'to take'."
+          },
+          {
+            q: "I still remember ______ traditional games like hide-and-seek when I was small.",
+            options: ["playing", "to play", "play", "played"],
+            answer: 0,
+            explain: "'remember + V-ing' diễn tả việc nhớ lại một kỷ niệm đã xảy ra trong quá khứ."
+          },
+          {
+            q: "Many students plan ______ abroad to experience different cultures.",
+            options: ["to study", "studying", "study", "studied"],
+            answer: 0,
+            explain: "Sau 'plan' (lên kế hoạch) dùng 'to-V' -> 'to study'."
+          }
+        ],
+        sentences: [
+          { hint: "Ngày nay, nhiều người thích sống trong gia đình hạt nhân.", words: ["Nowadays,", "many", "people", "prefer", "living", "in", "nuclear", "families."] },
+          { hint: "Ông bà tôi rất thích kể chuyện ngày xưa.", words: ["My", "grandparents", "enjoy", "telling", "stories", "about", "the", "past."] },
+          { hint: "Giới trẻ ngày nay có nhiều cơ hội theo đuổi ước mơ.", words: ["Young", "people", "today", "have", "more", "chances", "to", "pursue", "their", "dreams."] }
+        ],
+        bossQuestions: [
+          {
+            q: "In an ______, grandparents, parents, and children live together under one roof.",
+            options: ["extended family", "nuclear family", "single family", "modern office"],
+            answer: 0,
+            explain: "Extended family: đại gia đình (nhiều thế hệ cùng chung sống)."
+          },
+          {
+            q: "Would you mind ______ me how people travelled in Hanoi 50 years ago?",
+            options: ["telling", "to tell", "tell", "told"],
+            answer: 0,
+            explain: "Sau 'Would you mind' luôn dùng động từ đuôi -ing -> 'telling'."
+          },
+          {
+            q: "My brother decided ______ a bicycle instead of asking for a motorbike.",
+            options: ["to ride", "riding", "ride", "rode"],
+            answer: 0,
+            explain: "Sau 'decide' (quyết định) dùng 'to-V' -> 'to ride'."
+          },
+          {
+            q: "Parents and teens should talk openly to reduce the ______.",
+            options: ["generation gap", "traffic jam", "living standard", "craft village"],
+            answer: 0,
+            explain: "Generation gap: khoảng cách thế hệ."
+          }
+        ]
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * 4. SHOP ITEMS & ACHIEVEMENTS CONFIG
+     * ============================================================================
+     */
+    const SHOP_ITEMS = [
+      {
+        id: "refill_heart",
+        name: "Bình Máu Hồi Sinh",
+        desc: "Hồi phục ngay +1 Tim để tiếp tục chinh phục thử thách.",
+        icon: "❤️",
+        price: 30,
+        type: "heart"
+      },
+      {
+        id: "full_hearts",
+        name: "Trái Tim Bất Tử",
+        desc: "Hồi đầy tối đa 5/5 Tim ngay lập tức.",
+        icon: "💖",
+        price: 100,
+        type: "full_heart"
+      },
+      {
+        id: "hint_pack",
+        name: "Cuộn Giấy Gợi Ý (x2)",
+        desc: "Nhận thêm 2 lượt gợi ý 50/50 trong đấu trường Ngữ pháp & Boss.",
+        icon: "💡",
+        price: 40,
+        type: "hint"
+      },
+      {
+        id: "xp_boost",
+        name: "Thuốc Nhân Đôi XP",
+        desc: "Nhận ngay +80 XP để thăng cấp thần tốc!",
+        icon: "🧪",
+        price: 60,
+        type: "xp"
+      }
+    ];
+
+    const EXTRA_BADGES = [
+      { id: "first_step", name: "Khởi Đầu Hành Trình", icon: "🌱", desc: "Hoàn thành chặng thử thách đầu tiên." },
+      { id: "rich_scholar", name: "Triệu Phú Tri Thức", icon: "💰", desc: "Tích lũy được từ 150 Xu vàng trở lên." },
+      { id: "level_5", name: "Chiến Binh Cấp 5", icon: "⚔️", desc: "Đạt đến Cấp độ 5 (Level 5)." }
+    ];
+
+    /**
+     * ============================================================================
+     * 5. MAIN GAME ENGINE & STATE MANAGEMENT
+     * ============================================================================
+     */
+    const DEFAULT_STATE = {
+      xp: 0,
+      level: 1,
+      coins: 60,
+      hearts: 5,
+      maxHearts: 5,
+      hints: 2,
+      streak: 1,
+      lastLogin: new Date().toDateString(),
+      sound: true,
+      // unitProgress: { 1: [true, false, false, false], 2: ... } -> 4 stages per unit
+      unitProgress: {
+        1: [false, false, false, false],
+        2: [false, false, false, false],
+        3: [false, false, false, false],
+        4: [false, false, false, false],
+        5: [false, false, false, false],
+        6: [false, false, false, false]
+      },
+      unlockedUnits: [1],
+      badges: []
+    };
+
+    class English9Game {
+      constructor() {
+        this.state = this.loadState();
+        this.currentTab = 'map';
+        this.activeSession = null; // Holds current stage game state
+        this.timerInterval = null;
+        this.init();
+      }
+
+      loadState() {
+        try {
+          const saved = localStorage.getItem('eng9_adventure_save_v1');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            return { ...DEFAULT_STATE, ...parsed };
+          }
+        } catch (e) {}
+        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+
+      saveState() {
+        try {
+          localStorage.setItem('eng9_adventure_save_v1', JSON.stringify(this.state));
+        } catch (e) {}
+        this.updateHUD();
+      }
+
+      init() {
+        // Check streak
+        const today = new Date().toDateString();
+        if (this.state.lastLogin !== today) {
+          this.state.streak += 1;
+          this.state.lastLogin = today;
+          if (this.state.hearts < this.state.maxHearts) {
+            this.state.hearts = this.state.maxHearts; // Daily heart refill
+          }
+        }
+        sfx.enabled = this.state.sound;
+        document.getElementById('btn-sound').textContent = this.state.sound ? '🔊' : '🔇';
+        this.saveState();
+        this.render();
+      }
+
+      toggleSound() {
+        this.state.sound = !this.state.sound;
+        sfx.enabled = this.state.sound;
+        document.getElementById('btn-sound').textContent = this.state.sound ? '🔊' : '🔇';
+        if (this.state.sound) sfx.click();
+        this.saveState();
+      }
+
+      updateHUD() {
+        const xpNeeded = this.state.level * 100;
+        const pct = Math.min(100, Math.round((this.state.xp / xpNeeded) * 100));
+        document.getElementById('hud-level').textContent = `Lv.${this.state.level}`;
+        document.getElementById('hud-xp-bar').style.width = `${pct}%`;
+        document.getElementById('hud-xp-text').textContent = `${this.state.xp}/${xpNeeded} XP`;
+        document.getElementById('hud-streak').textContent = this.state.streak;
+        document.getElementById('hud-coins').textContent = this.state.coins;
+        document.getElementById('hud-hearts').textContent = this.state.hearts;
+      }
+
+      addXP(amount) {
+        this.state.xp += amount;
+        let leveledUp = false;
+        while (this.state.xp >= this.state.level * 100) {
+          this.state.xp -= this.state.level * 100;
+          this.state.level += 1;
+          this.state.coins += 25;
+          leveledUp = true;
+        }
+        if (this.state.level >= 5) this.unlockBadge('level_5');
+        if (leveledUp) {
+          sfx.levelUp();
+          this.showToast(`🎉 Thăng cấp! Bạn đã đạt Level ${this.state.level} (+25 Xu)`, '⭐');
+        }
+        this.saveState();
+      }
+
+      addCoins(amount) {
+        this.state.coins += amount;
+        if (this.state.coins >= 150) this.unlockBadge('rich_scholar');
+        this.saveState();
+      }
+
+      loseHeart() {
+        if (this.state.hearts > 0) {
+          this.state.hearts -= 1;
+          this.saveState();
+        }
+        if (this.state.hearts <= 0) {
+          this.clearTimer();
+          this.showModal(
+            '💔',
+            'Hết Tim Rồi!',
+            'Bạn đã dùng hết số tim trong lượt này. Hãy vào Cửa hàng để hồi phục tim hoặc luyện tập lại nhé!',
+            [
+              { label: 'Về Bản Đồ', class: 'btn-white', onClick: () => { this.closeModal(); this.goHome(); } },
+              { label: 'Đến Cửa Hàng', class: 'btn-amber', onClick: () => { this.closeModal(); this.switchTab('shop'); } }
+            ]
+          );
+          return true;
+        }
+        return false;
+      }
+
+      unlockBadge(badgeId) {
+        if (!this.state.badges.includes(badgeId)) {
+          this.state.badges.push(badgeId);
+          this.saveState();
+        }
+      }
+
+      clearTimer() {
+        if (this.timerInterval) {
+          clearInterval(this.timerInterval);
+          this.timerInterval = null;
+        }
+      }
+
+      switchTab(tab) {
+        sfx.click();
+        this.clearTimer();
+        this.activeSession = null;
+        this.currentTab = tab;
+        document.getElementById('bottom-nav').classList.remove('hidden');
+
+        // Update nav active states
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('text-emerald-600', 'bg-emerald-50');
+          btn.classList.add('text-slate-500');
+        });
+        const activeBtn = document.getElementById(`nav-${tab}`);
+        if (activeBtn) {
+          activeBtn.classList.remove('text-slate-500');
+          activeBtn.classList.add('text-emerald-600', 'bg-emerald-50');
+        }
+
+        this.render();
+      }
+
+      goHome() {
+        this.switchTab('map');
+      }
+
+      showToast(text, icon = '✨') {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-text').textContent = text;
+        document.getElementById('toast-icon').textContent = icon;
+        toast.classList.remove('opacity-0', '-translate-y-2');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        clearTimeout(this.toastTimeout);
+        this.toastTimeout = setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', '-translate-y-2');
+        }, 2600);
+      }
+
+      showModal(icon, title, message, buttons) {
+        const overlay = document.getElementById('modal-overlay');
+        document.getElementById('modal-icon').textContent = icon;
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-message').innerHTML = message;
+        const actionsEl = document.getElementById('modal-actions');
+        actionsEl.innerHTML = '';
+        buttons.forEach(b => {
+          const btn = document.createElement('button');
+          btn.className = `btn-3d ${b.class || 'btn-blue'} px-5 py-2.5 rounded-2xl font-extrabold text-sm flex-1`;
+          btn.textContent = b.label;
+          btn.onclick = b.onClick;
+          actionsEl.appendChild(btn);
+        });
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+      }
+
+      closeModal() {
+        const overlay = document.getElementById('modal-overlay');
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+      }
+
+      /**
+       * ==========================================================================
+       * 6. RENDER VIEWS (MAP, SHOP, BADGES, PROFILE)
+       * ==========================================================================
+       */
+      render() {
+        const container = document.getElementById('app-container');
+        if (this.activeSession) {
+          this.renderStageSession(container);
+          return;
+        }
+        switch (this.currentTab) {
+          case 'map': this.renderMap(container); break;
+          case 'shop': this.renderShop(container); break;
+          case 'badges': this.renderBadges(container); break;
+          case 'profile': this.renderProfile(container); break;
+        }
+      }
+
+      renderMap(container) {
+        const totalStages = UNITS_DATA.length * 4;
+        let completedStages = 0;
+        Object.values(this.state.unitProgress).forEach(arr => {
+          completedStages += arr.filter(Boolean).length;
+        });
+        const overallPct = Math.round((completedStages / totalStages) * 100);
+
+        let html = `
+          <!-- Adventure Banner -->
+          <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 rounded-3xl p-5 sm:p-6 text-white shadow-lg mb-7 relative overflow-hidden">
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="inline-block bg-white/20 backdrop-blur-sm text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+                  🗺️ HÀNH TRÌNH CHINH PHỤC LỚP 9
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Bản Đồ Thế Giới Global Success</h2>
+                <p class="text-white/90 text-sm font-semibold mt-1">Hoàn thành 4 chặng mỗi Unit để đánh bại Boss và mở khóa vùng đất mới!</p>
+              </div>
+              <div class="bg-white/15 backdrop-blur-md rounded-2xl p-3.5 min-w-[150px] border border-white/20">
+                <div class="flex justify-between text-xs font-extrabold mb-1">
+                  <span>Tiến độ tổng</span>
+                  <span>${overallPct}%</span>
+                </div>
+                <div class="w-full h-2.5 bg-black/25 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-300 rounded-full transition-all duration-500" style="width: ${overallPct}%"></div>
+                </div>
+                <div class="text-[11px] font-bold text-white/80 mt-1.5">${completedStages}/${totalStages} chặng hoàn thành</div>
+              </div>
+            </div>
+            <div class="absolute -right-6 -bottom-8 text-8xl opacity-15 pointer-events-none">🧭</div>
+          </div>
+
+          <!-- Units Adventure Path -->
+          <div class="space-y-6">
+        `;
+
+        UNITS_DATA.forEach((unit) => {
+          const isUnlocked = this.state.unlockedUnits.includes(unit.id);
+          const progress = this.state.unitProgress[unit.id] || [false, false, false, false];
+          const doneCount = progress.filter(Boolean).length;
+          const isUnitComplete = doneCount === 4;
+
+          const stageMeta = [
+            { idx: 0, title: "Kho Báu Từ Vựng", sub: "Flashcards & Ghép cặp", icon: "💎", unlocked: isUnlocked },
+            { idx: 1, title: "Đấu Trường Ngữ Pháp", sub: "Lý thuyết & Trắc nghiệm", icon: "⚔️", unlocked: isUnlocked && progress[0] },
+            { idx: 2, title: "Thử Thách Ghép Câu", sub: "Sắp xếp câu chuẩn SGK", icon: "🧩", unlocked: isUnlocked && progress[1] },
+            { idx: 3, title: `Boss: ${unit.bossName}`, sub: "Đấu Boss tính giờ", icon: unit.bossIcon, unlocked: isUnlocked && progress[2] }
+          ];
+
+          html += `
+            <div class="bg-white rounded-3xl border-2 ${isUnlocked ? 'border-slate-200 shadow-md' : 'border-slate-200/70 opacity-75'} overflow-hidden transition-all">
+              <!-- Unit Header -->
+              <div class="bg-gradient-to-r ${isUnlocked ? unit.gradient : 'from-slate-400 to-slate-500'} p-4 sm:p-5 text-white flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-2xl sm:text-3xl shadow-inner">
+                    ${isUnlocked ? unit.icon : '🔒'}
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-black uppercase tracking-wider bg-black/20 px-2.5 py-0.5 rounded-lg">${unit.code}</span>
+                      ${isUnitComplete ? '<span class="text-xs font-black bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded-lg">★ ĐÃ CHINH PHỤC</span>' : ''}
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-black mt-0.5">${unit.title}</h3>
+                    <p class="text-xs sm:text-sm font-bold text-white/90">${unit.viTitle}</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-xs font-extrabold bg-white/20 px-3 py-1.5 rounded-xl">
+                    ${doneCount}/4 Chặng
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 Stages Grid -->
+              <div class="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                ${stageMeta.map(st => {
+                  const isDone = progress[st.idx];
+                  const canPlay = st.unlocked;
+                  let cardStyle = "bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed";
+                  let badgeHtml = `<span class="text-xs font-extrabold text-slate-400">🔒 Khóa</span>`;
+
+                  if (isDone) {
+                    cardStyle = "bg-emerald-50/70 border-emerald-300 text-slate-800 hover:bg-emerald-50 cursor-pointer";
+                    badgeHtml = `<span class="text-xs font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-lg">✔ Hoàn thành</span>`;
+                  } else if (canPlay) {
+                    cardStyle = "bg-white border-sky-300 text-slate-800 hover:border-sky-400 hover:shadow-md cursor-pointer ring-2 ring-sky-100";
+                    badgeHtml = `<span class="text-xs font-black text-sky-600 bg-sky-100 px-2 py-0.5 rounded-lg animate-pulse">▶ Chơi ngay</span>`;
+                  }
+
+                  return `
+                    <div onclick="${canPlay ? `app.startStage(${unit.id}, ${st.idx})` : `app.showLockedHint(${isUnlocked})`}"
+                         class="rounded-2xl border-2 p-3.5 flex flex-col justify-between transition-all ${cardStyle}">
+                      <div class="flex items-start justify-between gap-2 mb-2">
+                        <span class="text-2xl ${canPlay ? '' : 'grayscale opacity-50'}">${st.icon}</span>
+                        ${badgeHtml}
+                      </div>
+                      <div>
+                        <div class="font-extrabold text-sm leading-snug">${st.idx + 1}. ${st.title}</div>
+                        <div class="text-xs font-semibold text-slate-500 mt-0.5">${st.sub}</div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+        container.innerHTML = html;
+      }
+
+      showLockedHint(unitUnlocked) {
+        sfx.wrong();
+        if (!unitUnlocked) {
+          this.showToast('Hãy đánh bại Boss ở Unit trước để mở khóa Unit này!', '🔒');
+        } else {
+          this.showToast('Hãy hoàn thành chặng trước đó để mở chặng này!', '🔒');
+        }
+      }
+
+      renderShop(container) {
+        container.innerHTML = `
+          <div class="mb-6">
+            <h2 class="text-2xl font-black text-slate-800 flex items-center gap-2">
+              <span>🏪</span> Cửa Hàng Vật Phẩm
+            </h2>
+            <p class="text-sm font-semibold text-slate-500 mt-1">Sử dụng Xu vàng kiếm được từ các bài học để mua vật phẩm hỗ trợ.</p>
+          </div>
+
+          <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">💰</span>
+              <div>
+                <div class="text-xs font-bold text-amber-700 uppercase">Túi đồ hiện tại</div>
+                <div class="font-black text-slate-800 text-base">
+                  ${this.state.coins} Xu vàng &nbsp;•&nbsp; ${this.state.hearts}/${this.state.maxHearts} Tim &nbsp;•&nbsp; ${this.state.hints} Thẻ gợi ý 💡
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            ${SHOP_ITEMS.map(item => `
+              <div class="bg-white rounded-3xl border-2 border-slate-200 p-5 flex flex-col justify-between shadow-sm">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-3xl shrink-0">
+                    ${item.icon}
+                  </div>
+                  <div>
+                    <h3 class="font-black text-base text-slate-800">${item.name}</h3>
+                    <p class="text-xs font-semibold text-slate-500 mt-1 leading-relaxed">${item.desc}</p>
+                  </div>
+                </div>
+                <button onclick="app.buyItem('${item.id}')" class="btn-3d btn-amber w-full py-2.5 rounded-2xl font-black text-sm flex items-center justify-center gap-1.5">
+                  <span>Mua ngay:</span>
+                  <span>🪙 ${item.price}</span>
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      buyItem(itemId) {
+        const item = SHOP_ITEMS.find(i => i.id === itemId);
+        if (!item) return;
+
+        if (this.state.coins < item.price) {
+          sfx.wrong();
+          this.showToast('Bạn không đủ Xu vàng! Hãy làm thêm bài tập để kiếm Xu nhé.', '🪙');
+          return;
+        }
+
+        if ((item.type === 'heart' || item.type === 'full_heart') && this.state.hearts >= this.state.maxHearts) {
+          sfx.wrong();
+          this.showToast('Số tim của bạn đã đầy (5/5) rồi!', '❤️');
+          return;
+        }
+
+        this.state.coins -= item.price;
+        sfx.coin();
+
+        if (item.type === 'heart') {
+          this.state.hearts = Math.min(this.state.maxHearts, this.state.hearts + 1);
+          this.showToast('Đã hồi phục +1 Tim!', '❤️');
+        } else if (item.type === 'full_heart') {
+          this.state.hearts = this.state.maxHearts;
+          this.showToast('Đã hồi đầy 5/5 Tim!', '💖');
+        } else if (item.type === 'hint') {
+          this.state.hints += 2;
+          this.showToast('Đã nhận +2 Thẻ gợi ý 50/50!', '💡');
+        } else if (item.type === 'xp') {
+          this.addXP(80);
+          this.showToast('Đã nhận +80 XP!', '🧪');
+        }
+
+        this.saveState();
+        this.render();
+      }
+
+      renderBadges(container) {
+        const allBadges = [
+          ...UNITS_DATA.map(u => u.badge),
+          ...EXTRA_BADGES
+        ];
+
+        container.innerHTML = `
+          <div class="mb-6">
+            <h2 class="text-2xl font-black text-slate-800 flex items-center gap-2">
+              <span>🏆</span> Phòng Trưng Bày Huy Hiệu
+            </h2>
+            <p class="text-sm font-semibold text-slate-500 mt-1">Đã mở khóa ${this.state.badges.length}/${allBadges.length} huy hiệu danh giá.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            ${allBadges.map(b => {
+              const unlocked = this.state.badges.includes(b.id);
+              return `
+                <div class="rounded-3xl border-2 p-5 text-center transition-all ${unlocked ? 'bg-white border-amber-300 shadow-md' : 'bg-slate-100/80 border-slate-200 opacity-65'}">
+                  <div class="w-16 h-16 mx-auto rounded-2xl ${unlocked ? 'bg-amber-100 animate-float' : 'bg-slate-200 grayscale'} flex items-center justify-center text-4xl mb-3">
+                    ${b.icon}
+                  </div>
+                  <div class="inline-block text-[11px] font-black px-2.5 py-0.5 rounded-full mb-1.5 ${unlocked ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-500'}">
+                    ${unlocked ? 'ĐÃ ĐẠT ĐƯỢC' : 'CHƯA MỞ KHÓA'}
+                  </div>
+                  <h3 class="font-black text-base text-slate-800">${b.name}</h3>
+                  <p class="text-xs font-semibold text-slate-500 mt-1">${b.desc}</p>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      renderProfile(container) {
+        let totalWords = 0;
+        UNITS_DATA.forEach(u => {
+          if (this.state.unitProgress[u.id]?.[0]) totalWords += u.vocab.length;
+        });
+
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border-2 border-slate-200 p-6 shadow-sm mb-6">
+            <div class="flex flex-col sm:flex-row items-center gap-5">
+              <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-4xl text-white shadow-md">
+                🧑‍🎓
+              </div>
+              <div class="text-center sm:text-left flex-1">
+                <div class="inline-block bg-indigo-100 text-indigo-700 font-black text-xs px-3 py-1 rounded-full mb-1">
+                  HỌC VIÊN LỚP 9 • LEVEL ${this.state.level}
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Nhà Thám Hiểm Ngôn Ngữ</h2>
+                <p class="text-sm font-semibold text-slate-500">Chương trình Tiếng Anh 9 - Global Success</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t-2 border-slate-100">
+              <div class="bg-slate-50 p-3.5 rounded-2xl text-center">
+                <div class="text-2xl font-black text-indigo-600">Lv.${this.state.level}</div>
+                <div class="text-xs font-bold text-slate-500 mt-0.5">Cấp độ hiện tại</div>
+              </div>
+              <div class="bg-slate-50 p-3.5 rounded-2xl text-center">
+                <div class="text-2xl font-black text-orange-500">🔥 ${this.state.streak}</div>
+                <div class="text-xs font-bold text-slate-500 mt-0.5">Chuỗi ngày học</div>
+              </div>
+              <div class="bg-slate-50 p-3.5 rounded-2xl text-center">
+                <div class="text-2xl font-black text-emerald-600">${totalWords}</div>
+                <div class="text-xs font-bold text-slate-500 mt-0.5">Từ vựng đã thuộc</div>
+              </div>
+              <div class="bg-slate-50 p-3.5 rounded-2xl text-center">
+                <div class="text-2xl font-black text-amber-500">${this.state.badges.length}</div>
+                <div class="text-xs font-bold text-slate-500 mt-0.5">Huy hiệu đạt được</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl border-2 border-slate-200 p-6 shadow-sm">
+            <h3 class="font-black text-base text-slate-800 mb-2">⚙️ Cài đặt dữ liệu học tập</h3>
+            <p class="text-xs font-semibold text-slate-500 mb-4">Tiến độ của bạn được tự động lưu trên trình duyệt này. Nếu muốn bắt đầu lại từ đầu, bạn có thể đặt lại dữ liệu.</p>
+            <button onclick="app.confirmReset()" class="btn-3d btn-red px-5 py-2.5 rounded-2xl font-extrabold text-sm">
+              🗑️ Đặt lại toàn bộ tiến trình
+            </button>
+          </div>
+        `;
+      }
+
+      confirmReset() {
+        sfx.click();
+        this.showModal(
+          '⚠️',
+          'Đặt lại tiến trình?',
+          'Toàn bộ cấp độ, xu vàng, huy hiệu và các Unit đã mở khóa sẽ quay về ban đầu. Bạn có chắc chắn không?',
+          [
+            { label: 'Hủy bỏ', class: 'btn-white', onClick: () => this.closeModal() },
+            {
+              label: 'Đồng ý đặt lại',
+              class: 'btn-red',
+              onClick: () => {
+                localStorage.removeItem('eng9_adventure_save_v1');
+                this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+                this.saveState();
+                this.closeModal();
+                this.switchTab('map');
+                this.showToast('Đã đặt lại tiến trình về ban đầu!', '🔄');
+              }
+            }
+          ]
+        );
+      }
+
+      /**
+       * ==========================================================================
+       * 7. STAGE GAMEPLAY CONTROLLERS (4 STAGES PER UNIT)
+       * ==========================================================================
+       */
+      startStage(unitId, stageIdx) {
+        if (this.state.hearts <= 0) {
+          sfx.wrong();
+          this.showModal(
+            '💔',
+            'Bạn đã hết Tim!',
+            'Cần ít nhất 1 Tim để tham gia thử thách. Hãy ghé Cửa hàng để hồi phục tim bằng Xu vàng nhé!',
+            [
+              { label: 'Để sau', class: 'btn-white', onClick: () => this.closeModal() },
+              { label: 'Mở Cửa Hàng', class: 'btn-amber', onClick: () => { this.closeModal(); this.switchTab('shop'); } }
+            ]
+          );
+          return;
+        }
+
+        sfx.click();
+        const unit = UNITS_DATA.find(u => u.id === unitId);
+        document.getElementById('bottom-nav').classList.add('hidden');
+
+        if (stageIdx === 0) {
+          // Stage 1: Vocabulary Flashcards + Matching Mini-game
+          const pairs = [...unit.vocab].slice(0, 5);
+          const leftItems = pairs.map((v, i) => ({ id: i, text: v.word })).sort(() => Math.random() - 0.5);
+          const rightItems = pairs.map((v, i) => ({ id: i, text: v.meaning })).sort(() => Math.random() - 0.5);
+
+          this.activeSession = {
+            unit,
+            stageIdx: 0,
+            phase: 'flashcards', // 'flashcards' -> 'matching'
+            cardIdx: 0,
+            flipped: false,
+            leftItems,
+            rightItems,
+            selectedLeft: null,
+            selectedRight: null,
+            matchedIds: []
+          };
+        } else if (stageIdx === 1) {
+          // Stage 2: Grammar Quest (Theory + Quiz)
+          this.activeSession = {
+            unit,
+            stageIdx: 1,
+            phase: 'theory', // 'theory' -> 'quiz'
+            qIdx: 0,
+            selectedOption: null,
+            isAnswered: false,
+            hiddenOptions: []
+          };
+        } else if (stageIdx === 2) {
+          // Stage 3: Sentence Builder
+          const sentences = unit.sentences.map(s => ({
+            ...s,
+            shuffled: [...s.words].sort(() => Math.random() - 0.5)
+          }));
+          this.activeSession = {
+            unit,
+            stageIdx: 2,
+            sIdx: 0,
+            sentences,
+            chosenIndices: [],
+            isChecked: false,
+            isCorrect: false
+          };
+        } else if (stageIdx === 3) {
+          // Stage 4: Boss Challenge (Timed Quiz)
+          this.activeSession = {
+            unit,
+            stageIdx: 3,
+            qIdx: 0,
+            timeLeft: 60,
+            bossHp: 100,
+            selectedOption: null,
+            isAnswered: false,
+            hiddenOptions: []
+          };
+          this.startBossTimer();
+        }
+
+        this.render();
+      }
+
+      startBossTimer() {
+        this.clearTimer();
+        this.timerInterval = setInterval(() => {
+          if (!this.activeSession || this.activeSession.stageIdx !== 3) {
+            this.clearTimer();
+            return;
+          }
+          this.activeSession.timeLeft -= 1;
+          const timerEl = document.getElementById('boss-timer');
+          if (timerEl) {
+            timerEl.textContent = `${this.activeSession.timeLeft}s`;
+            if (this.activeSession.timeLeft <= 10) timerEl.classList.add('text-rose-600', 'animate-pulse');
+          }
+          if (this.activeSession.timeLeft <= 0) {
+            this.clearTimer();
+            sfx.wrong();
+            this.showModal(
+              '⏰',
+              'Hết Giờ Đấu Boss!',
+              `${this.activeSession.unit.bossName} đã trốn thoát vì hết thời gian. Hãy thử lại và trả lời nhanh hơn nhé!`,
+              [{ label: 'Quay về Bản Đồ', class: 'btn-blue', onClick: () => { this.closeModal(); this.goHome(); } }]
+            );
+          }
+        }, 1000);
+      }
+
+      renderStageSession(container) {
+        const s = this.activeSession;
+        const unit = s.unit;
+
+        // Top Stage Header with Exit button
+        let html = `
+          <div class="flex items-center justify-between gap-3 mb-5">
+            <button onclick="app.exitStage()" class="btn-3d btn-white px-3.5 py-2 rounded-2xl font-extrabold text-xs sm:text-sm flex items-center gap-1">
+              ✕ Thoát
+            </button>
+            <div class="text-center">
+              <span class="text-xs font-black uppercase text-slate-400">${unit.code}: ${unit.title}</span>
+              <h2 class="font-black text-base sm:text-lg text-slate-800">
+                ${['💎 Kho Báu Từ Vựng', '⚔️ Đấu Trường Ngữ Pháp', '🧩 Thử Thách Ghép Câu', `${unit.bossIcon} Đấu Boss: ${unit.bossName}`][s.stageIdx]}
+              </h2>
+            </div>
+            <div class="w-16 text-right font-black text-sm text-rose-500">
+              ❤️ ${this.state.hearts}
+            </div>
+          </div>
+        `;
+
+        if (s.stageIdx === 0) html += this.renderStage1Vocab(s);
+        else if (s.stageIdx === 1) html += this.renderStage2Grammar(s);
+        else if (s.stageIdx === 2) html += this.renderStage3Sentence(s);
+        else if (s.stageIdx === 3) html += this.renderStage4Boss(s);
+
+        container.innerHTML = html;
+      }
+
+      exitStage() {
+        sfx.click();
+        this.clearTimer();
+        this.goHome();
+      }
+
+      /**
+       * --- STAGE 1: VOCABULARY FLASHCARDS & MATCHING ---
+       */
+      renderStage1Vocab(s) {
+        if (s.phase === 'flashcards') {
+          const vocabList = s.unit.vocab;
+          const item = vocabList[s.cardIdx];
+          const progressPct = Math.round(((s.cardIdx + 1) / vocabList.length) * 100);
+
+          return `
+            <div class="max-w-lg mx-auto">
+              <!-- Progress -->
+              <div class="flex items-center gap-3 mb-4">
+                <div class="flex-1 h-3 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 transition-all duration-300" style="width: ${progressPct}%"></div>
+                </div>
+                <span class="text-xs font-black text-slate-500">Thẻ ${s.cardIdx + 1}/${vocabList.length}</span>
+              </div>
+
+              <!-- Flashcard -->
+              <div onclick="app.flipCard()" class="perspective-1000 cursor-pointer h-80 sm:h-88 mb-5">
+                <div class="relative w-full h-full transform-style-3d ${s.flipped ? 'rotate-y-180' : ''}">
+                  <!-- Front -->
+                  <div class="absolute inset-0 backface-hidden bg-white rounded-3xl border-2 border-slate-200 shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                    <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full mb-4">NHẤN ĐỂ LẬT THẺ 🔄</span>
+                    <h3 class="text-3xl sm:text-4xl font-black text-slate-800 mb-2">${item.word}</h3>
+                    <div class="text-base font-bold text-slate-400 mb-5">${item.ipa} <span class="text-indigo-500">${item.type}</span></div>
+                    <button onclick="event.stopPropagation(); speakEnglish('${item.word.replace(/'/g, "\\'")}')" class="btn-3d btn-blue px-5 py-2.5 rounded-2xl font-extrabold text-sm flex items-center gap-2">
+                      🔊 Nghe phát âm
+                    </button>
+                  </div>
+
+                  <!-- Back -->
+                  <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl border-2 border-emerald-300 shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                    <div class="text-xs font-black text-emerald-700 uppercase mb-1">Nghĩa tiếng Việt</div>
+                    <h3 class="text-2xl sm:text-3xl font-black text-emerald-800 mb-4">${item.meaning}</h3>
+                    <div class="bg-white/90 rounded-2xl p-4 border border-emerald-200 w-full">
+                      <div class="text-xs font-extrabold text-slate-400 mb-1">Ví dụ trong ngữ cảnh:</div>
+                      <p class="text-sm font-bold text-slate-700 italic">"${item.example}"</p>
+                      <button onclick="event.stopPropagation(); speakEnglish('${item.example.replace(/'/g, "\\'")}')" class="mt-2.5 text-xs font-black text-sky-600 hover:underline">
+                        🔊 Đọc câu ví dụ
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="flex gap-3">
+                <button onclick="app.prevCard()" ${s.cardIdx === 0 ? 'disabled' : ''} class="btn-3d btn-white px-5 py-3 rounded-2xl font-extrabold text-sm">
+                  ← Trước
+                </button>
+                <button onclick="app.nextCard()" class="btn-3d btn-green flex-1 py-3 rounded-2xl font-black text-sm">
+                  ${s.cardIdx < vocabList.length - 1 ? 'Từ tiếp theo →' : 'Vào Mini-Game Ghép Cặp 🎮'}
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          // Matching Phase
+          return `
+            <div class="max-w-2xl mx-auto">
+              <div class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-3.5 text-center mb-5">
+                <p class="font-extrabold text-sm text-sky-800">🎯 Ghép từ tiếng Anh ở cột trái với nghĩa tiếng Việt tương ứng ở cột phải!</p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 sm:gap-5">
+                <!-- Left Column (English) -->
+                <div class="space-y-3">
+                  ${s.leftItems.map(item => {
+                    const isMatched = s.matchedIds.includes(item.id);
+                    const isSelected = s.selectedLeft === item.id;
+                    let cls = "btn-white";
+                    if (isMatched) cls = "bg-emerald-100 border-2 border-emerald-400 text-emerald-700 opacity-50 pointer-events-none";
+                    else if (isSelected) cls = "bg-sky-100 border-2 border-sky-500 text-sky-900 ring-2 ring-sky-200";
+
+                    return `
+                      <button onclick="app.selectMatch('left', ${item.id})" class="btn-3d ${cls} w-full p-3.5 rounded-2xl font-black text-sm sm:text-base text-center">
+                        ${item.text}
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+
+                <!-- Right Column (Vietnamese) -->
+                <div class="space-y-3">
+                  ${s.rightItems.map(item => {
+                    const isMatched = s.matchedIds.includes(item.id);
+                    const isSelected = s.selectedRight === item.id;
+                    let cls = "btn-white";
+                    if (isMatched) cls = "bg-emerald-100 border-2 border-emerald-400 text-emerald-700 opacity-50 pointer-events-none";
+                    else if (isSelected) cls = "bg-sky-100 border-2 border-sky-500 text-sky-900 ring-2 ring-sky-200";
+
+                    return `
+                      <button onclick="app.selectMatch('right', ${item.id})" class="btn-3d ${cls} w-full p-3.5 rounded-2xl font-bold text-xs sm:text-sm text-center">
+                        ${item.text}
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      flipCard() {
+        sfx.click();
+        this.activeSession.flipped = !this.activeSession.flipped;
+        this.render();
+      }
+
+      prevCard() {
+        if (this.activeSession.cardIdx > 0) {
+          sfx.click();
+          this.activeSession.cardIdx -= 1;
+          this.activeSession.flipped = false;
+          this.render();
+        }
+      }
+
+      nextCard() {
+        sfx.click();
+        const s = this.activeSession;
+        if (s.cardIdx < s.unit.vocab.length - 1) {
+          s.cardIdx += 1;
+          s.flipped = false;
+        } else {
+          s.phase = 'matching';
+        }
+        this.render();
+      }
+
+      selectMatch(side, id) {
+        const s = this.activeSession;
+        if (s.matchedIds.includes(id)) return;
+
+        if (side === 'left') {
+          s.selectedLeft = id;
+          const wordObj = s.leftItems.find(i => i.id === id);
+          if (wordObj) speakEnglish(wordObj.text);
+        } else {
+          sfx.click();
+          s.selectedRight = id;
+        }
+
+        if (s.selectedLeft !== null && s.selectedRight !== null) {
+          if (s.selectedLeft === s.selectedRight) {
+            sfx.correct();
+            s.matchedIds.push(s.selectedLeft);
+            s.selectedLeft = null;
+            s.selectedRight = null;
+            if (s.matchedIds.length === s.leftItems.length) {
+              setTimeout(() => this.completeStage(30, 15), 400);
+            }
+          } else {
+            sfx.wrong();
+            s.selectedLeft = null;
+            s.selectedRight = null;
+            this.showToast('Chưa khớp rồi, thử lại nhé!', '❌');
+            if (this.loseHeart()) return;
+          }
+        }
+        this.render();
+      }
+
+      /**
+       * --- STAGE 2: GRAMMAR QUEST ---
+       */
+      renderStage2Grammar(s) {
+        if (s.phase === 'theory') {
+          const note = s.unit.grammarNote;
+          return `
+            <div class="max-w-2xl mx-auto bg-white rounded-3xl border-2 border-slate-200 p-6 shadow-md">
+              <div class="inline-block bg-indigo-100 text-indigo-700 font-black text-xs px-3 py-1 rounded-full mb-2">
+                📖 BÍ KÍP NGỮ PHÁP TRỌNG TÂM
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-800 mb-4">${note.title}</h3>
+              <div class="space-y-3 mb-6">
+                ${note.points.map(p => `
+                  <div class="bg-slate-50 border-l-4 border-indigo-500 p-4 rounded-r-2xl text-sm text-slate-700 leading-relaxed font-medium">
+                    ${p}
+                  </div>
+                `).join('')}
+              </div>
+              <button onclick="app.startGrammarQuiz()" class="btn-3d btn-green w-full py-3.5 rounded-2xl font-black text-base">
+                Đã hiểu bí kíp! Bắt đầu thực chiến ⚔️
+              </button>
+            </div>
+          `;
+        }
+
+        const questions = s.unit.grammarQuiz;
+        const q = questions[s.qIdx];
+        const pct = Math.round(((s.qIdx) / questions.length) * 100);
+
+        return `
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <div class="flex-1 h-3 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full bg-indigo-500 transition-all duration-300" style="width: ${pct}%"></div>
+              </div>
+              <span class="text-xs font-black text-slate-500">Câu ${s.qIdx + 1}/${questions.length}</span>
+              <button onclick="app.useHint()" ${s.isAnswered || s.hiddenOptions.length > 0 ? 'disabled' : ''} class="btn-3d btn-amber px-3 py-1.5 rounded-xl font-black text-xs flex items-center gap-1" title="Dùng thẻ gợi ý 50/50">
+                💡 50/50 (${this.state.hints})
+              </button>
+            </div>
+
+            <div class="bg-white rounded-3xl border-2 border-slate-200 p-5 sm:p-6 shadow-md mb-4">
+              <p class="text-lg sm:text-xl font-extrabold text-slate-800 leading-relaxed mb-5">${q.q}</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${q.options.map((opt, idx) => {
+                  if (s.hiddenOptions.includes(idx)) {
+                    return `<div class="p-3.5 rounded-2xl border-2 border-dashed border-slate-200 text-slate-300 text-center font-bold text-sm">Đã loại bỏ</div>`;
+                  }
+                  let btnClass = "btn-white";
+                  if (s.isAnswered) {
+                    if (idx === q.answer) btnClass = "btn-green";
+                    else if (idx === s.selectedOption) btnClass = "btn-red";
+                    else btnClass = "btn-white opacity-50";
+                  }
+                  return `
+                    <button onclick="app.answerQuiz(${idx})" ${s.isAnswered ? 'disabled' : ''} class="btn-3d ${btnClass} p-3.5 rounded-2xl font-extrabold text-sm sm:text-base text-left flex items-center gap-2.5">
+                      <span class="w-7 h-7 rounded-lg bg-black/10 flex items-center justify-center text-xs font-black shrink-0">${['A','B','C','D'][idx]}</span>
+                      <span>${opt}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            ${s.isAnswered ? `
+              <div class="rounded-3xl p-4 sm:p-5 border-2 mb-4 animate-pop ${s.selectedOption === q.answer ? 'bg-emerald-50 border-emerald-300' : 'bg-rose-50 border-rose-300'}">
+                <div class="font-black text-base mb-1 ${s.selectedOption === q.answer ? 'text-emerald-700' : 'text-rose-700'}">
+                  ${s.selectedOption === q.answer ? '🎉 Chính xác!' : '😅 Chưa chính xác rồi!'}
+                </div>
+                <p class="text-sm font-semibold text-slate-700 leading-relaxed mb-4">💡 <b>Giải thích:</b> ${q.explain}</p>
+                <button onclick="app.nextQuizQuestion()" class="btn-3d ${s.selectedOption === q.answer ? 'btn-green' : 'btn-blue'} w-full py-3 rounded-2xl font-black text-sm">
+                  ${s.qIdx < questions.length - 1 ? 'Câu tiếp theo →' : 'Hoàn thành Đấu Trường 🏆'}
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      startGrammarQuiz() {
+        sfx.click();
+        this.activeSession.phase = 'quiz';
+        this.render();
+      }
+
+      useHint() {
+        const s = this.activeSession;
+        if (s.isAnswered || s.hiddenOptions.length > 0) return;
+        if (this.state.hints <= 0) {
+          sfx.wrong();
+          this.showToast('Bạn đã hết Thẻ gợi ý! Có thể mua thêm trong Cửa hàng.', '💡');
+          return;
+        }
+        const questions = s.stageIdx === 1 ? s.unit.grammarQuiz : s.unit.bossQuestions;
+        const q = questions[s.qIdx];
+        const wrongIndices = [0, 1, 2, 3].filter(i => i !== q.answer).sort(() => Math.random() - 0.5);
+        s.hiddenOptions = wrongIndices.slice(0, 2);
+        this.state.hints -= 1;
+        sfx.coin();
+        this.saveState();
+        this.render();
+      }
+
+      answerQuiz(idx) {
+        const s = this.activeSession;
+        if (s.isAnswered) return;
+        const questions = s.stageIdx === 1 ? s.unit.grammarQuiz : s.unit.bossQuestions;
+        const q = questions[s.qIdx];
+
+        s.selectedOption = idx;
+        s.isAnswered = true;
+
+        if (idx === q.answer) {
+          sfx.correct();
+          if (s.stageIdx === 3) {
+            s.bossHp = Math.max(0, s.bossHp - Math.ceil(100 / questions.length));
+          }
+        } else {
+          sfx.wrong();
+          if (this.loseHeart()) return;
+        }
+        this.render();
+      }
+
+      nextQuizQuestion() {
+        sfx.click();
+        const s = this.activeSession;
+        const questions = s.stageIdx === 1 ? s.unit.grammarQuiz : s.unit.bossQuestions;
+
+        if (s.qIdx < questions.length - 1) {
+          s.qIdx += 1;
+          s.selectedOption = null;
+          s.isAnswered = false;
+          s.hiddenOptions = [];
+          this.render();
+        } else {
+          if (s.stageIdx === 1) {
+            this.completeStage(40, 20);
+          } else {
+            this.clearTimer();
+            this.completeStage(80, 40, true);
+          }
+        }
+      }
+
+      /**
+       * --- STAGE 3: SENTENCE BUILDER ---
+       */
+      renderStage3Sentence(s) {
+        const item = s.sentences[s.sIdx];
+        const pct = Math.round((s.sIdx / s.sentences.length) * 100);
+
+        return `
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1 h-3 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full bg-purple-500 transition-all duration-300" style="width: ${pct}%"></div>
+              </div>
+              <span class="text-xs font-black text-slate-500">Câu ${s.sIdx + 1}/${s.sentences.length}</span>
+            </div>
+
+            <div class="bg-white rounded-3xl border-2 border-slate-200 p-5 sm:p-6 shadow-md mb-5">
+              <div class="text-xs font-black text-purple-600 uppercase mb-1">🇻🇳 Dịch & Sắp xếp thành câu tiếng Anh hoàn chỉnh:</div>
+              <p class="text-base sm:text-lg font-extrabold text-slate-800 mb-5">"${item.hint}"</p>
+
+              <!-- Answer Drop Zone -->
+              <div class="min-h-[84px] bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-3 flex flex-wrap gap-2 items-center mb-5">
+                ${s.chosenIndices.length === 0 ? `<span class="text-xs font-bold text-slate-400 mx-auto">Nhấn vào các từ bên dưới để ghép câu...</span>` : ''}
+                ${s.chosenIndices.map((wordIdx, pos) => `
+                  <button onclick="app.removeWord(${pos})" ${s.isChecked && s.isCorrect ? 'disabled' : ''} class="btn-3d btn-blue px-3.5 py-2 rounded-xl font-extrabold text-sm">
+                    ${item.shuffled[wordIdx]}
+                  </button>
+                `).join('')}
+              </div>
+
+              <!-- Word Bank -->
+              <div class="flex flex-wrap gap-2.5 justify-center">
+                ${item.shuffled.map((w, idx) => {
+                  const used = s.chosenIndices.includes(idx);
+                  return `
+                    <button onclick="app.pickWord(${idx})" ${used || (s.isChecked && s.isCorrect) ? 'disabled' : ''} class="btn-3d ${used ? 'bg-slate-200 text-transparent border-slate-200 shadow-none' : 'btn-white'} px-3.5 py-2 rounded-xl font-extrabold text-sm">
+                      ${w}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            ${!s.isChecked || !s.isCorrect ? `
+              <button onclick="app.checkSentence()" ${s.chosenIndices.length !== item.words.length ? 'disabled' : ''} class="btn-3d btn-green w-full py-3.5 rounded-2xl font-black text-base">
+                Kiểm tra câu trả lời ✔
+              </button>
+            ` : `
+              <div class="bg-emerald-50 border-2 border-emerald-300 rounded-3xl p-4 animate-pop">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="font-black text-emerald-700 text-base">🎉 Tuyệt vời! Câu hoàn toàn chính xác.</span>
+                  <button onclick="speakEnglish('${item.words.join(' ').replace(/'/g, "\\'")}')" class="text-xs font-black text-sky-600 bg-white px-3 py-1.5 rounded-xl border border-sky-200">
+                    🔊 Nghe câu
+                  </button>
+                </div>
+                <button onclick="app.nextSentence()" class="btn-3d btn-green w-full py-3 rounded-2xl font-black text-sm">
+                  ${s.sIdx < s.sentences.length - 1 ? 'Câu tiếp theo →' : 'Hoàn thành Ghép Câu 🏆'}
+                </button>
+              </div>
+            `}
+          </div>
+        `;
+      }
+
+      pickWord(wordIdx) {
+        sfx.click();
+        const s = this.activeSession;
+        if (!s.chosenIndices.includes(wordIdx)) {
+          s.chosenIndices.push(wordIdx);
+          s.isChecked = false;
+          this.render();
+        }
+      }
+
+      removeWord(pos) {
+        sfx.click();
+        const s = this.activeSession;
+        s.chosenIndices.splice(pos, 1);
+        s.isChecked = false;
+        this.render();
+      }
+
+      checkSentence() {
+        const s = this.activeSession;
+        const item = s.sentences[s.sIdx];
+        const userSentence = s.chosenIndices.map(i => item.shuffled[i]).join(' ');
+        const targetSentence = item.words.join(' ');
+
+        s.isChecked = true;
+        if (userSentence === targetSentence) {
+          sfx.correct();
+          s.isCorrect = true;
+          speakEnglish(targetSentence);
+        } else {
+          sfx.wrong();
+          s.isCorrect = false;
+          this.showToast('Thứ tự từ chưa đúng rồi, hãy sắp xếp lại nhé!', '❌');
+          if (this.loseHeart()) return;
+        }
+        this.render();
+      }
+
+      nextSentence() {
+        sfx.click();
+        const s = this.activeSession;
+        if (s.sIdx < s.sentences.length - 1) {
+          s.sIdx += 1;
+          s.chosenIndices = [];
+          s.isChecked = false;
+          s.isCorrect = false;
+          this.render();
+        } else {
+          this.completeStage(50, 25);
+        }
+      }
+
+      /**
+       * --- STAGE 4: UNIT BOSS CHALLENGE ---
+       */
+      renderStage4Boss(s) {
+        const questions = s.unit.bossQuestions;
+        const q = questions[s.qIdx];
+
+        return `
+          <div class="max-w-2xl mx-auto">
+            <!-- Boss Arena Bar -->
+            <div class="bg-slate-900 text-white rounded-3xl p-4 sm:p-5 mb-5 shadow-lg border-2 border-slate-700">
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-14 h-14 rounded-2xl bg-rose-500/20 border-2 border-rose-500 flex items-center justify-center text-3xl animate-float">
+                    ${s.unit.bossIcon}
+                  </div>
+                  <div>
+                    <div class="text-xs font-black text-rose-400 uppercase">BOSS CUỐI UNIT</div>
+                    <div class="font-black text-base sm:text-lg">${s.unit.bossName}</div>
+                    <!-- Boss HP Bar -->
+                    <div class="w-36 sm:w-48 h-3 bg-slate-700 rounded-full overflow-hidden mt-1.5 border border-slate-600">
+                      <div class="h-full bg-gradient-to-r from-rose-500 to-amber-500 transition-all duration-500" style="width: ${s.bossHp}%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Timer -->
+                <div class="text-center bg-slate-800 px-4 py-2 rounded-2xl border border-slate-700">
+                  <div class="text-[10px] font-extrabold text-slate-400 uppercase">Thời gian</div>
+                  <div id="boss-timer" class="text-xl sm:text-2xl font-black text-amber-400">${s.timeLeft}s</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-black text-slate-500">Đòn tấn công ${s.qIdx + 1}/${questions.length}</span>
+              <button onclick="app.useHint()" ${s.isAnswered || s.hiddenOptions.length > 0 ? 'disabled' : ''} class="btn-3d btn-amber px-3 py-1 rounded-xl font-black text-xs">
+                💡 50/50 (${this.state.hints})
+              </button>
+            </div>
+
+            <div class="bg-white rounded-3xl border-2 border-slate-200 p-5 sm:p-6 shadow-md mb-4">
+              <p class="text-lg sm:text-xl font-extrabold text-slate-800 leading-relaxed mb-5">${q.q}</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${q.options.map((opt, idx) => {
+                  if (s.hiddenOptions.includes(idx)) {
+                    return `<div class="p-3.5 rounded-2xl border-2 border-dashed border-slate-200 text-slate-300 text-center font-bold text-sm">Đã loại bỏ</div>`;
+                  }
+                  let btnClass = "btn-white";
+                  if (s.isAnswered) {
+                    if (idx === q.answer) btnClass = "btn-green";
+                    else if (idx === s.selectedOption) btnClass = "btn-red";
+                    else btnClass = "btn-white opacity-50";
+                  }
+                  return `
+                    <button onclick="app.answerQuiz(${idx})" ${s.isAnswered ? 'disabled' : ''} class="btn-3d ${btnClass} p-3.5 rounded-2xl font-extrabold text-sm sm:text-base text-left flex items-center gap-2.5">
+                      <span class="w-7 h-7 rounded-lg bg-black/10 flex items-center justify-center text-xs font-black shrink-0">${['A','B','C','D'][idx]}</span>
+                      <span>${opt}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            ${s.isAnswered ? `
+              <div class="rounded-3xl p-4 border-2 animate-pop ${s.selectedOption === q.answer ? 'bg-emerald-50 border-emerald-300' : 'bg-rose-50 border-rose-300'}">
+                <div class="font-black text-sm mb-1 ${s.selectedOption === q.answer ? 'text-emerald-700' : 'text-rose-700'}">
+                  ${s.selectedOption === q.answer ? '⚔️ Đòn đánh chí mạng! Boss mất máu!' : '🛡️ Boss đỡ được đòn!'}
+                </div>
+                <p class="text-xs sm:text-sm font-semibold text-slate-700 mb-3">${q.explain}</p>
+                <button onclick="app.nextQuizQuestion()" class="btn-3d btn-purple w-full py-3 rounded-2xl font-black text-sm">
+                  ${s.qIdx < questions.length - 1 ? 'Tiếp tục tấn công →' : 'Kết liễu Boss! 💥'}
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      /**
+       * ==========================================================================
+       * 8. STAGE COMPLETION & CELEBRATION
+       * ==========================================================================
+       */
+      completeStage(xpReward, coinReward, isBoss = false) {
+        const s = this.activeSession;
+        const unitId = s.unit.id;
+        const stageIdx = s.stageIdx;
+
+        // Mark stage complete
+        this.state.unitProgress[unitId][stageIdx] = true;
+        this.unlockBadge('first_step');
+
+        let extraMsg = '';
+        if (isBoss) {
+          this.unlockBadge(s.unit.badge.id);
+          const nextUnitId = unitId + 1;
+          if (nextUnitId <= UNITS_DATA.length && !this.state.unlockedUnits.includes(nextUnitId)) {
+            this.state.unlockedUnits.push(nextUnitId);
+            extraMsg = `<br><span class="text-emerald-600 font-black">🔓 Đã mở khóa Unit ${nextUnitId}!</span>`;
+          }
+          extraMsg += `<br><span class="text-amber-600 font-black">🏅 Nhận huy hiệu: ${s.unit.badge.name}</span>`;
+          sfx.victory();
+          triggerConfetti();
+        } else {
+          sfx.levelUp();
+        }
+
+        this.addXP(xpReward);
+        this.addCoins(coinReward);
+        this.saveState();
+
+        this.showModal(
+          isBoss ? '👑' : '🎉',
+          isBoss ? `Đánh Bại ${s.unit.bossName}!` : 'Hoàn Thành Chặng Thử Thách!',
+          `Bạn nhận được <b>+${xpReward} XP</b> và <b>+${coinReward} Xu vàng</b>!${extraMsg}`,
+          [
+            {
+              label: 'Tiếp tục hành trình 🗺️',
+              class: 'btn-green',
+              onClick: () => {
+                this.closeModal();
+                this.goHome();
+              }
+            }
+          ]
+        );
+      }
+    }
+
+    /**
+     * ============================================================================
+     * 9. CONFETTI CELEBRATION EFFECT
+     * ============================================================================
+     */
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#58cc02', '#1cb0f6', '#ffc800', '#ff4b4b', '#ce82ff'];
+      const pieces = Array.from({ length: 90 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: Math.random() * 10 + 6,
+        h: Math.random() * 6 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: Math.random() * 3 + 2,
+        vx: (Math.random() - 0.5) * 2,
+        rot: Math.random() * 360,
+        vRot: (Math.random() - 0.5) * 10
+      }));
+
+      let frames = 0;
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.vy;
+          p.x += p.vx;
+          p.rot += p.vRot;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        frames++;
+        if (frames < 160) requestAnimationFrame(loop);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      loop();
+    }
+
+    // Initialize Application
+    const app = new English9Game();
+  </script>
+</body>
+</html>
