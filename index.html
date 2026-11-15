@@ -272,34 +272,37 @@
 
     /**
      * ============================================================================
-     * 3. CURRICULUM DATA: TIẾNG ANH 9 - GLOBAL SUCCESS (UNITS 1 - 6)
+     * 3. CURRICULUM DATA: TIẾNG ANH 9 - GLOBAL SUCCESS (FULL 12 UNITS)
      * ============================================================================
      */
     const UNITS_DATA = [
       {
         id: 1,
+        semester: 1,
         code: "UNIT 1",
         title: "Local Community",
         viTitle: "Cộng đồng địa phương",
-        themeColor: "emerald",
+        grammarTag: "Wh-word + to-V & Phrasal Verbs",
         gradient: "from-emerald-400 to-teal-600",
         icon: "🏘️",
         bossName: "Bậc Thầy Làng Nghề",
         bossIcon: "🏺",
-        badge: { id: "u1_master", name: "Sứ Giả Cộng Đồng", icon: "🏅", desc: "Hoàn thành xuất sắc Unit 1: Local Community" },
+        badge: { id: "u1_master", name: "Sứ Giả Cộng Đồng", icon: "🏅", desc: "Chinh phục Unit 1: Local Community" },
         vocab: [
-          { word: "artisan", ipa: "/ˌɑːtɪˈzæn/", type: "(n)", meaning: "thợ làm nghề thủ công", example: "The artisans in Bat Trang village make beautiful pottery." },
+          { word: "artisan", ipa: "/ˌɑːtɪˈzæn/", type: "(n)", meaning: "nghệ nhân, thợ thủ công", example: "The artisans in Bat Trang village make beautiful pottery." },
           { word: "handicraft", ipa: "/ˈhændikrɑːft/", type: "(n)", meaning: "sản phẩm thủ công", example: "Tourists love buying local handicrafts as souvenirs." },
-          { word: "community helper", ipa: "/kəˈmjuːnəti ˈhelpə/", type: "(n)", meaning: "người phục vụ cộng đồng", example: "Firefighters and police officers are important community helpers." },
-          { word: "pass down", ipa: "/pɑːs daʊn/", type: "(phr.v)", meaning: "truyền lại (cho thế hệ sau)", example: "Traditional weaving skills are passed down from generation to generation." },
+          { word: "pottery", ipa: "/ˈpɒtəri/", type: "(n)", meaning: "đồ gốm", example: "This village is famous for its traditional pottery." },
+          { word: "speciality", ipa: "/ˌspeʃiˈæləti/", type: "(n)", meaning: "đặc sản", example: "Com Vong is a famous speciality of Hanoi." },
+          { word: "tourist attraction", ipa: "/ˈtʊərɪst əˈtrækʃn/", type: "(n)", meaning: "điểm thu hút khách du lịch", example: "Hoi An Ancient Town is a popular tourist attraction." },
           { word: "preserve", ipa: "/prɪˈzɜːv/", type: "(v)", meaning: "bảo tồn, giữ gìn", example: "We need to preserve our traditional craft villages." },
-          { word: "facility", ipa: "/fəˈsɪləti/", type: "(n)", meaning: "cơ sở vật chất, tiện nghi", example: "Our neighbourhood has great sports facilities." }
+          { word: "suburb", ipa: "/ˈsʌbɜːb/", type: "(n)", meaning: "vùng ngoại ô", example: "They moved from the city centre to a quiet suburb." },
+          { word: "facility", ipa: "/fəˈsɪləti/", type: "(n)", meaning: "cơ sở vật chất, tiện nghi", example: "Our neighbourhood has modern sports facilities." }
         ],
         grammarNote: {
           title: "Từ để hỏi trước To-infinitive & Phrasal Verbs",
           points: [
-            "<b>Wh-word + to-V:</b> Dùng sau các động từ như <i>ask, wonder, decide, tell, know</i> để diễn tả câu hỏi gián tiếp về việc nên làm gì. (VD: <i>I don't know <b>where to buy</b> traditional lanterns.</i>)",
-            "<b>Cụm động từ (Phrasal Verbs) phổ biến:</b><br>• <b>pass down:</b> truyền lại<br>• <b>find out:</b> tìm ra thông tin<br>• <b>look around:</b> đi ngắm nghía xung quanh<br>• <b>cut down on:</b> cắt giảm<br>• <b>get on with:</b> hòa thuận với"
+            "<b>1. Wh-word + to-V:</b> Dùng sau các động từ <i>ask, wonder, decide, tell, know, explain</i> để diễn tả câu hỏi gián tiếp về việc nên làm gì.<br>(VD: <i>I don't know <b>where to buy</b> traditional lanterns.</i>)",
+            "<b>2. Cụm động từ (Phrasal Verbs) Unit 1:</b><br>• <b>pass down:</b> truyền lại (cho thế hệ sau)<br>• <b>live on:</b> sống nhờ vào (nghề gì/khoản thu gì)<br>• <b>deal with:</b> giải quyết, xử lý<br>• <b>look around:</b> đi ngắm nghía xung quanh<br>• <b>find out:</b> tìm ra thông tin<br>• <b>cut down on:</b> cắt giảm"
           ]
         },
         grammarQuiz: [
@@ -316,16 +319,22 @@
             explain: "'pass down' có nghĩa là truyền lại từ thế hệ này sang thế hệ khác."
           },
           {
-            q: "Could you tell me ______ to get to the nearest police station?",
+            q: "Many families in this village ______ making conical hats.",
+            options: ["live on", "pass down", "deal with", "find out"],
+            answer: 0,
+            explain: "'live on + V-ing/N' nghĩa là sống nhờ vào nghề gì hoặc nguồn thu nhập nào đó."
+          },
+          {
+            q: "Could you tell me ______ to get to the nearest community centre?",
             options: ["how", "what", "who", "whose"],
             answer: 0,
             explain: "'how to get to...' nghĩa là làm thế nào để đi đến đâu đó (hỏi đường)."
           },
           {
-            q: "To stay healthy, you should ______ on fast food and sugary drinks.",
-            options: ["cut down", "pass down", "come back", "run out"],
+            q: "Local authorities are trying to ______ the problem of waste in the neighbourhood.",
+            options: ["deal with", "look around", "pass down", "run out"],
             answer: 0,
-            explain: "'cut down on' nghĩa là cắt giảm tiêu thụ thứ gì đó."
+            explain: "'deal with' nghĩa là giải quyết, xử lý một vấn đề."
           }
         ],
         sentences: [
@@ -353,38 +362,40 @@
             explain: "'run out of' nghĩa là cạn kiệt, hết sạch nguyên liệu."
           },
           {
-            q: "Firefighters are brave ______ who save people from fires.",
-            options: ["community helpers", "handicrafts", "pottery", "suburbs"],
+            q: "Pho and Bun Cha are famous ______ of Hanoi that every visitor should try.",
+            options: ["specialities", "suburbs", "facilities", "potteries"],
             answer: 0,
-            explain: "Lính cứu hỏa là những người phục vụ cộng đồng (community helpers) dũng cảm."
+            explain: "Specialities: các món đặc sản địa phương."
           }
         ]
       },
       {
         id: 2,
+        semester: 1,
         code: "UNIT 2",
         title: "City Life",
         viTitle: "Cuộc sống đô thị",
-        themeColor: "sky",
+        grammarTag: "Double Comparatives & Phrasal Verbs",
         gradient: "from-sky-400 to-blue-600",
         icon: "🏙️",
         bossName: "Hộ Vệ Đô Thị",
         bossIcon: "🤖",
-        badge: { id: "u2_master", name: "Nhà Thám Hiểm Đô Thị", icon: "🌆", desc: "Chinh phục thành công Unit 2: City Life" },
+        badge: { id: "u2_master", name: "Nhà Thám Hiểm Đô Thị", icon: "🌆", desc: "Chinh phục Unit 2: City Life" },
         vocab: [
           { word: "bustling", ipa: "/ˈbʌslɪŋ/", type: "(adj)", meaning: "nhộn nhịp, hối hả", example: "Ho Chi Minh City is a bustling metropolis." },
-          { word: "traffic congestion", ipa: "/ˈtræfɪk kənˈdʒestʃən/", type: "(n)", meaning: "ùn tắc giao thông", example: "Traffic congestion is a major problem during rush hour." },
-          { word: "construction site", ipa: "/kənˈstrʌkʃn saɪt/", type: "(n)", meaning: "công trường xây dựng", example: "It's dusty and noisy near the construction site." },
-          { word: "liveable", ipa: "/ˈlɪvəbl/", type: "(adj)", meaning: "đáng sống", example: "Da Nang is known as one of the most liveable cities in Vietnam." },
+          { word: "congested", ipa: "/kənˈdʒestɪd/", type: "(adj)", meaning: "tắc nghẽn, đông đúc", example: "The streets are heavily congested during rush hour." },
           { word: "metro", ipa: "/ˈmetrəʊ/", type: "(n)", meaning: "tàu điện ngầm / đường sắt đô thị", example: "Taking the metro helps reduce air pollution." },
-          { word: "get around", ipa: "/ɡet əˈraʊnd/", type: "(phr.v)", meaning: "đi lại, di chuyển quanh", example: "It's easy to get around the city by public transport." }
+          { word: "skyscraper", ipa: "/ˈskaɪskreɪpə/", type: "(n)", meaning: "tòa nhà chọc trời", example: "Landmark 81 is a famous skyscraper in Vietnam." },
+          { word: "amenity", ipa: "/əˈmiːnəti/", type: "(n)", meaning: "tiện nghi công cộng", example: "The city offers great public amenities like parks and libraries." },
+          { word: "construction site", ipa: "/kənˈstrʌkʃn saɪt/", type: "(n)", meaning: "công trường xây dựng", example: "It's dusty and noisy near the construction site." },
+          { word: "hygiene", ipa: "/ˈhaɪdʒiːn/", type: "(n)", meaning: "vệ sinh", example: "Food hygiene is strictly checked in modern restaurants." },
+          { word: "commuter", ipa: "/kəˈmjuːtə/", type: "(n)", meaning: "người đi làm hàng ngày (từ xa)", example: "Thousands of commuters use the sky train every morning." }
         ],
         grammarNote: {
           title: "So sánh kép (Double Comparatives) & Phrasal Verbs",
           points: [
-            "<b>Cấu trúc Càng... càng...:</b><br><code>The + so sánh hơn + S + V, the + so sánh hơn + S + V</code>",
-            "<b>Ví dụ:</b><br>• <i><b>The bigger</b> the city is, <b>the more crowded</b> it becomes.</i> (Thành phố càng lớn thì càng đông đúc.)<br>• <i><b>The harder</b> you study, <b>the better</b> results you get.</i>",
-            "<b>Phrasal Verbs đô thị:</b> <i>get around</i> (đi lại), <i>carry out</i> (tiến hành), <i>come down with</i> (bị ốm/mắc bệnh), <i>hang out with</i> (đi chơi cùng)."
+            "<b>1. Cấu trúc Càng... càng...:</b><br><code>The + so sánh hơn + S + V, the + so sánh hơn + S + V</code><br>• Tính từ ngắn: <i>adj-er</i> (bigger, faster, earlier)<br>• Tính từ dài: <i>more + adj</i> (more crowded, more expensive)<br>• Bất quy tắc: <i>good → better, bad → worse, far → farther/further</i>",
+            "<b>2. Phrasal Verbs đô thị:</b><br>• <b>get around:</b> đi lại, di chuyển quanh<br>• <b>carry out:</b> tiến hành, thực hiện (dự án/khảo sát)<br>• <b>come down with:</b> bị ốm, mắc bệnh (cảm cúm...)<br>• <b>hang out with:</b> đi chơi cùng bạn bè<br>• <b>cut down on:</b> cắt giảm"
           ]
         },
         grammarQuiz: [
@@ -392,7 +403,7 @@
             q: "______ the city gets, ______ the air pollution becomes.",
             options: ["The more crowded / the worse", "The crowded / the bad", "More crowded / worse", "The most crowded / the worst"],
             answer: 0,
-            explain: "Cấu trúc so sánh kép: The + so sánh hơn (more crowded), the + so sánh hơn (worse - dạng so sánh hơn của bad)."
+            explain: "So sánh kép: The + so sánh hơn (more crowded), the + so sánh hơn (worse - dạng so sánh hơn của bad)."
           },
           {
             q: "The ______ the underground system is, the ______ people use private cars.",
@@ -411,12 +422,18 @@
             options: ["carry out", "get over", "cut down", "turn off"],
             answer: 0,
             explain: "'carry out a project' nghĩa là tiến hành, thực hiện một dự án."
+          },
+          {
+            q: "The ______ you live from the city centre, the ______ you spend on commuting.",
+            options: ["farther / more", "far / most", "farthest / more", "more far / less"],
+            answer: 0,
+            explain: "So sánh hơn của 'far' là 'farther/further'; 'more' (nhiều thời gian/tiền bạc hơn)."
           }
         ],
         sentences: [
           { hint: "Thành phố càng hiện đại, cuộc sống càng trở nên tiện lợi.", words: ["The", "more", "modern", "the", "city", "is,", "the", "more", "convenient", "life", "becomes."] },
           { hint: "Di chuyển quanh thành phố bằng xe buýt rất rẻ.", words: ["Getting", "around", "the", "city", "by", "bus", "is", "very", "cheap."] },
-          { hint: "Giờ cao điểm luôn gây ra ùn tắc giao thông nghiêm trọng.", words: ["Rush", "hour", "always", "causes", "serious", "traffic", "congestion."] }
+          { hint: "Các tòa nhà chọc trời mọc lên khắp trung tâm thành phố.", words: ["Skyscrapers", "are", "rising", "all", "over", "the", "city", "centre."] }
         ],
         bossQuestions: [
           {
@@ -429,13 +446,13 @@
             q: "There is a lot of noise and dust coming from the ______ next to our school.",
             options: ["construction site", "public amenity", "sky train", "green space"],
             answer: 0,
-            explain: "Construction site: công trường xây dựng (nơi phát ra tiếng ồn và bụi)."
+            explain: "Construction site: công trường xây dựng."
           },
           {
-            q: "A ______ city offers clean air, green parks, and safe neighbourhoods.",
-            options: ["liveable", "congested", "polluted", "packed"],
+            q: "Many ______ prefer taking the metro because it is faster than driving in traffic.",
+            options: ["commuters", "artisans", "counsellors", "immigrants"],
             answer: 0,
-            explain: "Liveable: đáng sống."
+            explain: "Commuters: những người đi làm hàng ngày."
           },
           {
             q: "Teenagers often ______ with their friends at shopping malls on weekends.",
@@ -447,29 +464,32 @@
       },
       {
         id: 3,
+        semester: 1,
         code: "UNIT 3",
         title: "Healthy Living for Teens",
         viTitle: "Sống khỏe cho tuổi teen",
-        themeColor: "rose",
+        grammarTag: "Modal Verbs in 1st Conditional",
         gradient: "from-rose-400 to-pink-600",
         icon: "💪",
         bossName: "Chiến Binh Sức Khỏe",
         bossIcon: "⚡",
-        badge: { id: "u3_master", name: "Bậc Thầy Cân Bằng", icon: "🧘", desc: "Hoàn thành xuất sắc Unit 3: Healthy Living" },
+        badge: { id: "u3_master", name: "Bậc Thầy Cân Bằng", icon: "🧘", desc: "Chinh phục Unit 3: Healthy Living" },
         vocab: [
-          { word: "well-balanced", ipa: "/ˌwel ˈbælənst/", type: "(adj)", meaning: "cân bằng, hợp lý", example: "A well-balanced diet keeps your body strong." },
           { word: "counsellor", ipa: "/ˈkaʊnsələ/", type: "(n)", meaning: "cố vấn, người tư vấn", example: "You can talk to the school counsellor about your stress." },
-          { word: "priority", ipa: "/praɪˈɒrəti/", type: "(n)", meaning: "sự ưu tiên", example: "Studying for the exam should be your top priority." },
+          { word: "mental health", ipa: "/ˌmentl ˈhelθ/", type: "(n)", meaning: "sức khỏe tinh thần", example: "Regular exercise is great for both physical and mental health." },
+          { word: "well-balanced", ipa: "/ˌwel ˈbælənst/", type: "(adj)", meaning: "cân bằng, hợp lý", example: "A well-balanced diet keeps your body strong." },
+          { word: "optimistic", ipa: "/ˌɒptɪˈmɪstɪk/", type: "(adj)", meaning: "lạc quan", example: "Try to stay optimistic even when facing difficult exams." },
           { word: "deadline", ipa: "/ˈdedlaɪn/", type: "(n)", meaning: "hạn chót", example: "I always finish my assignments before the deadline." },
-          { word: "stressed out", ipa: "/strest aʊt/", type: "(adj)", meaning: "căng thẳng, kiệt sức", example: "She feels stressed out because of too much homework." },
+          { word: "distraction", ipa: "/dɪˈstrækʃn/", type: "(n)", meaning: "sự xao nhãng", example: "Turn off phone notifications to avoid distractions while studying." },
+          { word: "priority", ipa: "/praɪˈɒrəti/", type: "(n)", meaning: "sự ưu tiên", example: "Studying for the exam should be your top priority." },
           { word: "accomplish", ipa: "/əˈkʌmplɪʃ/", type: "(v)", meaning: "hoàn thành, đạt được", example: "Good time management helps you accomplish your goals." }
         ],
         grammarNote: {
           title: "Động từ khuyết thiếu trong Câu điều kiện loại 1",
           points: [
-            "Thay vì chỉ dùng <i>will</i> ở mệnh đề chính của câu điều kiện loại 1, ta có thể dùng <b>can, must, may, might, should</b> để diễn tả khả năng, sự cần thiết hoặc lời khuyên.",
-            "<b>Cấu trúc:</b> <code>If + S + V(hiện tại đơn), S + can/must/should/may/might + V(nguyên thể)</code>",
-            "<b>Ví dụ:</b><br>• <i>If you want to stay healthy, you <b>should</b> eat more vegetables.</i> (Lời khuyên)<br>• <i>If you finish your homework early, you <b>can</b> play video games.</i> (Sự cho phép/khả năng)"
+            "Thay vì chỉ dùng <i>will</i> ở mệnh đề chính của câu điều kiện loại 1, ta có thể dùng <b>can, may, might, must, should</b> để diễn tả khả năng, sự cho phép, sự cần thiết hoặc lời khuyên.",
+            "<b>Công thức:</b> <code>If + S + V(hiện tại đơn), S + can/may/might/must/should + V(nguyên thể)</code>",
+            "<b>Ví dụ:</b><br>• <i>If you want to stay healthy, you <b>should</b> eat more vegetables.</i> (Lời khuyên)<br>• <i>If you finish your homework early, you <b>can</b> play video games.</i> (Sự cho phép/khả năng)<br>• <i>If you don't sleep enough, you <b>might</b> feel tired tomorrow.</i> (Khả năng có thể xảy ra)"
           ]
         },
         grammarQuiz: [
@@ -496,12 +516,18 @@
             options: ["might", "should", "must", "can't"],
             answer: 0,
             explain: "Dùng 'might' (có thể sẽ) để diễn tả một khả năng có thể xảy ra nếu không nhanh lên."
+          },
+          {
+            q: "If you ______ all your tasks early, you may go out with your friends.",
+            options: ["complete", "completed", "will complete", "completing"],
+            answer: 0,
+            explain: "Mệnh đề If chia hiện tại đơn với chủ ngữ 'you' -> động từ nguyên thể 'complete'."
           }
         ],
         sentences: [
           { hint: "Nếu bạn tập thể dục đều đặn, bạn có thể cải thiện sức khỏe.", words: ["If", "you", "exercise", "regularly,", "you", "can", "improve", "your", "health."] },
           { hint: "Việc học nên là ưu tiên hàng đầu của bạn.", words: ["Studying", "should", "be", "your", "top", "priority."] },
-          { hint: "Đừng thức quá khuya nếu bạn không muốn bị căng thẳng.", words: ["Don't", "stay", "up", "too", "late", "if", "you", "don't", "want", "to", "feel", "stressed", "out."] }
+          { hint: "Hãy tắt điện thoại để tránh sự xao nhãng khi học bài.", words: ["Turn", "off", "your", "phone", "to", "avoid", "distractions", "while", "studying."] }
         ],
         bossQuestions: [
           {
@@ -511,16 +537,16 @@
             explain: "Accomplish a goal: hoàn thành, đạt được mục tiêu."
           },
           {
-            q: "If you feel overwhelmed with schoolwork, you ______ talk to your parents or counsellor.",
+            q: "If you feel overwhelmed with schoolwork, you ______ talk to your school counsellor.",
             options: ["should", "mustn't", "would", "had to"],
             answer: 0,
             explain: "Lời khuyên trong câu điều kiện loại 1: If + hiện tại đơn, S + should + V."
           },
           {
-            q: "Eating a ______ diet with fruits, vegetables, and protein keeps teens energetic.",
-            options: ["well-balanced", "fattening", "stressed", "anxious"],
+            q: "Social media notifications are a major ______ when teenagers try to concentrate.",
+            options: ["distraction", "priority", "counsellor", "optimism"],
             answer: 0,
-            explain: "A well-balanced diet: chế độ ăn uống cân bằng dinh dưỡng."
+            explain: "Distraction: sự xao nhãng, gây mất tập trung."
           },
           {
             q: "If Nam ______ his assignment tonight, he can go to the cinema tomorrow.",
@@ -532,28 +558,31 @@
       },
       {
         id: 4,
+        semester: 1,
         code: "UNIT 4",
         title: "Remembering the Past",
-        viTitle: "Ký ức quá khứ",
-        themeColor: "amber",
+        viTitle: "Nhớ về quá khứ",
+        grammarTag: "Past Continuous & Wish + Past Simple",
         gradient: "from-amber-400 to-orange-600",
         icon: "🏛️",
         bossName: "Người Giữ Thời Gian",
         bossIcon: "⏳",
-        badge: { id: "u4_master", name: "Nhà Sử Học Trẻ", icon: "📜", desc: "Hoàn thành xuất sắc Unit 4: Remembering the Past" },
+        badge: { id: "u4_master", name: "Nhà Sử Học Trẻ", icon: "📜", desc: "Chinh phục Unit 4: Remembering the Past" },
         vocab: [
-          { word: "monument", ipa: "/ˈmɒnjumənt/", type: "(n)", meaning: "tượng đài, công trình kỷ niệm", example: "We visited an ancient monument in Hue." },
-          { word: "heritage", ipa: "/ˈherɪtɪdʒ/", type: "(n)", meaning: "di sản", example: "Ha Long Bay is a World Natural Heritage site." },
-          { word: "generation", ipa: "/ˌdʒenəˈreɪʃn/", type: "(n)", meaning: "thế hệ", example: "Older generations have many stories to tell." },
-          { word: "barefoot", ipa: "/ˈbeəfʊt/", type: "(adj/adv)", meaning: "chân trần", example: "Children in the past often walked barefoot to school." },
-          { word: "worship", ipa: "/ˈwɜːʃɪp/", type: "(v)", meaning: "thờ cúng, tôn kính", example: "Vietnamese people worship their ancestors." },
-          { word: "magnificence", ipa: "/mæɡˈnɪfɪsns/", type: "(n)", meaning: "sự tráng lệ, nguy nga", example: "Visitors were amazed by the magnificence of the royal palace." }
+          { word: "ancient", ipa: "/ˈeɪnʃənt/", type: "(adj)", meaning: "cổ đại, cổ xưa", example: "Hoi An is famous for its ancient houses and lanterns." },
+          { word: "castle", ipa: "/ˈkɑːsl/", type: "(n)", meaning: "lâu đài", example: "We explored a medieval castle during our trip to England." },
+          { word: "complex", ipa: "/ˈkɒmpleks/", type: "(n)", meaning: "quần thể, khu phức hợp", example: "The Complex of Hue Monuments is a UNESCO heritage site." },
+          { word: "monument", ipa: "/ˈmɒnjumənt/", type: "(n)", meaning: "tượng đài, công trình kỷ niệm", example: "We visited an ancient monument in the capital." },
+          { word: "religious", ipa: "/rɪˈlɪdʒəs/", type: "(adj)", meaning: "thuộc tôn giáo, tín ngưỡng", example: "Pagodas and temples are important religious buildings." },
+          { word: "takeaway", ipa: "/ˈteɪkəweɪ/", type: "(n)", meaning: "đồ ăn mang đi", example: "Fish and chips is a traditional British takeaway food." },
+          { word: "generation", ipa: "/ˌdʒenəˈreɪʃn/", type: "(n)", meaning: "thế hệ", example: "Older generations have many fascinating stories to tell." },
+          { word: "deep-rooted", ipa: "/ˌdiːp ˈruːtɪd/", type: "(adj)", meaning: "lâu đời, ăn sâu bén rễ", example: "Ancestor worship is a deep-rooted tradition in Vietnam." }
         ],
         grammarNote: {
           title: "Quá khứ tiếp diễn & Câu ước (Wish + Quá khứ đơn)",
           points: [
-            "<b>1. Thì Quá khứ tiếp diễn (Past Continuous):</b> Diễn tả hành động đang xảy ra tại một thời điểm cụ thể trong quá khứ hoặc đang xảy ra thì hành động khác xen vào.<br><code>S + was/were + V-ing</code> (VD: <i>At 8 PM yesterday, we <b>were watching</b> a documentary.</i>)",
-            "<b>2. Câu ước ở hiện tại (Wish):</b> Diễn tả mong ước trái với thực tế ở hiện tại.<br><code>S + wish(es) + S + V2/ed (to be -> were)</code><br>(VD: <i>I wish I <b>had</b> a time machine. / She wishes she <b>were</b> taller.</i>)"
+            "<b>1. Thì Quá khứ tiếp diễn (Past Continuous):</b> Diễn tả hành động đang xảy ra tại một thời điểm cụ thể trong quá khứ hoặc đang xảy ra thì hành động khác xen vào (thường dùng với <i>while / when</i>).<br><code>S + was/were + V-ing</code><br>(VD: <i>At 8 PM yesterday, we <b>were watching</b> a historical film.</i>)",
+            "<b>2. Câu ước ở hiện tại (Wish):</b> Diễn tả mong ước trái với thực tế ở hiện tại.<br><code>S + wish(es) + S + V2/ed (to be → were)</code><br>(VD: <i>I wish I <b>had</b> a time machine. / She wishes she <b>were</b> taller.</i>)"
           ]
         },
         grammarQuiz: [
@@ -580,19 +609,25 @@
             options: ["were / doing", "did / do", "are / doing", "was / doing"],
             answer: 0,
             explain: "Có mốc thời gian cụ thể trong quá khứ (at 9 o'clock last Sunday morning) -> dùng quá khứ tiếp diễn 'were you doing'."
+          },
+          {
+            q: "I wish there ______ no traffic jams in our city during rush hour.",
+            options: ["were", "are", "is", "will be"],
+            answer: 0,
+            explain: "Trong câu ước hiện tại, động từ 'to be' luôn chia là 'were' cho mọi ngôi."
           }
         ],
         sentences: [
           { hint: "Tôi ước gì tôi có thể du hành ngược thời gian.", words: ["I", "wish", "I", "could", "travel", "back", "in", "time."] },
-          { hint: "Trẻ em ngày xưa thường đi chân trần tới trường.", words: ["Children", "in", "the", "past", "often", "walked", "barefoot", "to", "school."] },
-          { hint: "Chúng ta phải bảo vệ di sản văn hóa của mình.", words: ["We", "must", "protect", "our", "cultural", "heritage."] }
+          { hint: "Quần thể di tích Cố đô Huế rất tráng lệ.", words: ["The", "Complex", "of", "Hue", "Monuments", "is", "very", "magnificent."] },
+          { hint: "Tôn trọng người lớn tuổi là một truyền thống lâu đời.", words: ["Respecting", "the", "elderly", "is", "a", "deep-rooted", "tradition."] }
         ],
         bossQuestions: [
           {
             q: "At this time yesterday, the students ______ about Vietnamese historical monuments.",
             options: ["were learning", "learned", "are learning", "learn"],
             answer: 0,
-            explain: "'At this time yesterday' (vào giờ này hôm qua) là dấu hiệu của thì Quá khứ tiếp diễn."
+            explain: "'At this time yesterday' là dấu hiệu của thì Quá khứ tiếp diễn."
           },
           {
             q: "Phong wishes he ______ speak English as fluently as a native speaker.",
@@ -601,10 +636,10 @@
             explain: "Trong câu ước hiện tại, 'can' lùi thì thành 'could'."
           },
           {
-            q: "In Vietnam, almost every family has an altar to ______ their ancestors.",
-            options: ["worship", "preserve", "occupy", "promote"],
+            q: "Drinking tea with family is a ______ habit in many Vietnamese households.",
+            options: ["deep-rooted", "portable", "ruinous", "concentric"],
             answer: 0,
-            explain: "Worship ancestors: thờ cúng tổ tiên."
+            explain: "Deep-rooted: lâu đời, ăn sâu vào nếp sống."
           },
           {
             q: "My dad ______ the old photos when he found his childhood diary.",
@@ -616,34 +651,37 @@
       },
       {
         id: 5,
+        semester: 1,
         code: "UNIT 5",
         title: "Our Experiences",
         viTitle: "Những trải nghiệm của chúng ta",
-        themeColor: "purple",
+        grammarTag: "Present Perfect (ever, never, yet, already...)",
         gradient: "from-purple-500 to-indigo-600",
         icon: "🎒",
-        bossName: "Nhà Du Hành Vũ Trụ",
+        bossName: "Nhà Du Hành Kỳ Cựu",
         bossIcon: "🚀",
-        badge: { id: "u5_master", name: "Nhà Thám Hiểm Kỳ Cựu", icon: "🧭", desc: "Hoàn thành xuất sắc Unit 5: Our Experiences" },
+        badge: { id: "u5_master", name: "Nhà Thám Hiểm Kỳ Cựu", icon: "🧭", desc: "Chinh phục Unit 5: Our Experiences" },
         vocab: [
           { word: "exhilarating", ipa: "/ɪɡˈzɪləreɪtɪŋ/", type: "(adj)", meaning: "đầy phấn khích, sảng khoái", example: "Paragliding over the mountains was an exhilarating experience." },
-          { word: "unforgettable", ipa: "/ˌʌnfəˈɡetəbl/", type: "(adj)", meaning: "không thể nào quên", example: "Our summer camp in Da Lat was truly unforgettable." },
-          { word: "embarrassing", ipa: "/ɪmˈbærəsɪŋ/", type: "(adj)", meaning: "ngượng ngùng, xấu hổ", example: "Forgetting my lines on stage was the most embarrassing moment." },
+          { word: "embarrassing", ipa: "/ɪmˈbærəsɪŋ/", type: "(adj)", meaning: "ngượng ngùng, xấu hổ", example: "Forgetting my lines on stage was an embarrassing moment." },
+          { word: "unpleasant", ipa: "/ʌnˈpleznt/", type: "(adj)", meaning: "khó chịu, không vui vẻ", example: "Getting caught in the heavy rain was an unpleasant experience." },
           { word: "eco-tour", ipa: "/ˈiːkəʊ tʊə/", type: "(n)", meaning: "du lịch sinh thái", example: "We joined an eco-tour to explore the national park." },
-          { word: "snorkelling", ipa: "/ˈsnɔːkəlɪŋ/", type: "(n)", meaning: "lặn với ống thở", example: "Have you ever tried snorkelling to see coral reefs?" },
-          { word: "by rote", ipa: "/baɪ rəʊt/", type: "(idm)", meaning: "học vẹt, học thuộc lòng máy móc", example: "Learning vocabulary by rote is not very effective." }
+          { word: "fauna", ipa: "/ˈfɔːnə/", type: "(n)", meaning: "hệ động vật", example: "Cuc Phuong National Park has rich flora and fauna." },
+          { word: "flora", ipa: "/ˈflɔːrə/", type: "(n)", meaning: "hệ thực vật", example: "Scientists are studying the rare flora in the rainforest." },
+          { word: "seabed", ipa: "/ˈsiːbed/", type: "(n)", meaning: "đáy biển", example: "Divers saw colorful corals on the seabed." },
+          { word: "brilliant", ipa: "/ˈbrɪliənt/", type: "(adj)", meaning: "tuyệt vời, xuất sắc", example: "We had a brilliant time at the summer camp." }
         ],
         grammarNote: {
           title: "Thì Hiện tại hoàn thành (Present Perfect)",
           points: [
-            "<b>Công thức:</b> <code>S + have/has + V3/ed (Past Participle)</code>",
-            "<b>Cách dùng chính trong Unit 5:</b> Diễn tả một trải nghiệm, kinh nghiệm tính đến thời điểm hiện tại (thường đi với <b>ever, never, before, once, twice, several times</b>).",
-            "<b>Ví dụ:</b><br>• <i><b>Have</b> you <b>ever ridden</b> a jeep?</i> (Bạn đã bao giờ đi xe jeep chưa?)<br>• <i>I <b>have never seen</b> such a beautiful sunset before.</i>"
+            "<b>1. Công thức:</b> <code>S + have/has + V3/ed (Past Participle)</code>",
+            "<b>2. Cách dùng trong Unit 5:</b> Diễn tả một trải nghiệm, kinh nghiệm trong đời tính đến hiện tại (không rõ thời điểm cụ thể) hoặc hành động vừa mới xảy ra / chưa xảy ra.",
+            "<b>3. Dấu hiệu nhận biết:</b><br>• <b>ever</b> (đã từng - trong câu hỏi), <b>never</b> (chưa từng)<br>• <b>already</b> (rồi), <b>yet</b> (chưa - cuối câu phủ định/nghi vấn)<br>• <b>for + khoảng thời gian</b> (for 3 years), <b>since + mốc thời gian</b> (since 2022)"
           ]
         },
         grammarQuiz: [
           {
-            q: "______ you ever ______ snorkelling in Nha Trang?",
+            q: "______ you ever ______ snorkelling to see the seabed in Nha Trang?",
             options: ["Have / tried", "Did / try", "Are / trying", "Has / tried"],
             answer: 0,
             explain: "Hỏi về trải nghiệm trong đời với 'ever' -> dùng Hiện tại hoàn thành: Have you ever + V3/ed (tried)."
@@ -655,22 +693,28 @@
             explain: "Diễn tả số lần trải nghiệm tính đến hiện tại (three times) -> dùng Hiện tại hoàn thành 'has been'."
           },
           {
-            q: "This is the most ______ performance I have ever watched!",
-            options: ["amazing", "amazed", "embarrassed", "bored"],
-            answer: 0,
-            explain: "Tính từ đuôi -ing (amazing) dùng để miêu tả tính chất của sự vật/màn trình diễn."
-          },
-          {
             q: "We haven't ______ our tent yet because it started raining heavily.",
             options: ["put up", "putting up", "puts up", "putted up"],
             answer: 0,
             explain: "Sau 'haven't' là V3/ed. Quá khứ phân từ của 'put' vẫn là 'put' (put up: dựng lều)."
+          },
+          {
+            q: "They have studied the local flora and fauna in this forest ______ 2020.",
+            options: ["since", "for", "yet", "ever"],
+            answer: 0,
+            explain: "2020 là một mốc thời gian cụ thể nên ta dùng 'since'."
+          },
+          {
+            q: "This is the most ______ performance I have ever watched!",
+            options: ["brilliant", "embarrassed", "bored", "amazed"],
+            answer: 0,
+            explain: "'brilliant' (tuyệt vời) dùng để miêu tả tính chất của màn trình diễn."
           }
         ],
         sentences: [
           { hint: "Bạn đã bao giờ tham gia một chuyến du lịch sinh thái chưa?", words: ["Have", "you", "ever", "joined", "an", "eco-tour?"] },
-          { hint: "Đó là trải nghiệm khó quên nhất trong đời tôi.", words: ["That", "was", "the", "most", "unforgettable", "experience", "in", "my", "life."] },
-          { hint: "Tôi chưa từng đi xe jeep trên đồi cát trước đây.", words: ["I", "have", "never", "ridden", "a", "jeep", "on", "sand", "dunes", "before."] }
+          { hint: "Tôi chưa từng nhìn thấy rạn san hô dưới đáy biển trước đây.", words: ["I", "have", "never", "seen", "coral", "reefs", "on", "the", "seabed", "before."] },
+          { hint: "Đó là trải nghiệm đầy phấn khích nhất trong đời tôi.", words: ["That", "was", "the", "most", "exhilarating", "experience", "in", "my", "life."] }
         ],
         bossQuestions: [
           {
@@ -680,50 +724,53 @@
             explain: "Chủ ngữ 'Nam' số ít + never + V3/ed (seen) trong thì Hiện tại hoàn thành."
           },
           {
-            q: "Going down the river on a bamboo raft was a(n) ______ adventure!",
-            options: ["exhilarating", "embarrassed", "helpless", "unpleasant"],
+            q: "Going down the river on a bamboo raft was an ______ adventure!",
+            options: ["exhilarating", "embarrassed", "unpleasant", "ruinous"],
             answer: 0,
             explain: "Exhilarating: đầy hứng khởi, sảng khoái."
           },
           {
-            q: "Instead of learning ______, you should understand the meaning of new words.",
-            options: ["by rote", "by heart", "by mistake", "by chance"],
+            q: "Have you finished packing your backpack for the camping trip ______?",
+            options: ["yet", "already", "never", "since"],
             answer: 0,
-            explain: "Learn by rote: học vẹt."
+            explain: "'yet' đứng ở cuối câu nghi vấn trong thì Hiện tại hoàn thành (đã xong chưa?)."
           },
           {
-            q: "How many times ______ your class ______ a camping trip this year?",
-            options: ["has / organized", "did / organize", "have / organized", "does / organize"],
+            q: "The national park is home to diverse ______ and ______, including rare orchids and tigers.",
+            options: ["flora / fauna", "seabed / coral", "brochure / homestay", "castle / complex"],
             answer: 0,
-            explain: "'your class' là danh từ tập hợp số ít -> dùng 'has organized'."
+            explain: "Flora and fauna: hệ thực vật và động vật."
           }
         ]
       },
       {
         id: 6,
+        semester: 1,
         code: "UNIT 6",
         title: "Vietnamese Lifestyle: Then and Now",
-        viTitle: "Lối sống Việt Nam xưa và nay",
-        themeColor: "teal",
+        viTitle: "Lối sống Việt Nam: Xưa và Nay",
+        grammarTag: "Verbs + To-infinitive & Verbs + V-ing",
         gradient: "from-teal-400 to-cyan-600",
         icon: "🚲",
         bossName: "Đại Sứ Văn Hóa Việt",
         bossIcon: "🐉",
-        badge: { id: "u6_master", name: "Huyền Thoại Tiếng Anh 9", icon: "👑", desc: "Chinh phục toàn bộ hành trình Tiếng Anh 9!" },
+        badge: { id: "u6_master", name: "Tinh Hoa Văn Hóa Việt", icon: "🏮", desc: "Chinh phục Unit 6 & Hoàn thành Học kỳ I!" },
         vocab: [
           { word: "extended family", ipa: "/ɪkˌstendɪd ˈfæməli/", type: "(n)", meaning: "gia đình nhiều thế hệ", example: "In the past, most Vietnamese people lived in extended families." },
           { word: "nuclear family", ipa: "/ˌnjuːkliə ˈfæməli/", type: "(n)", meaning: "gia đình hạt nhân (bố mẹ và con)", example: "Nuclear families are very common in modern cities today." },
-          { word: "generation gap", ipa: "/ˌdʒenəˈreɪʃn ɡæp/", type: "(n)", meaning: "khoảng cách thế hệ", example: "Open communication helps bridge the generation gap." },
+          { word: "privacy", ipa: "/ˈprɪvəsi/", type: "(n)", meaning: "sự riêng tư", example: "Teenagers today value their personal privacy." },
           { word: "pursue", ipa: "/pəˈsjuː/", type: "(v)", meaning: "theo đuổi (ước mơ, sự nghiệp)", example: "Young people today have more freedom to pursue their passions." },
           { word: "democratic", ipa: "/ˌdeməˈkrætɪk/", type: "(adj)", meaning: "dân chủ, bình đẳng", example: "Family relationships have become more democratic nowadays." },
-          { word: "depend on", ipa: "/dɪˈpend ɒn/", type: "(phr.v)", meaning: "phụ thuộc vào", example: "Students today depend less on printed books thanks to the internet." }
+          { word: "various", ipa: "/ˈveəriəs/", type: "(adj)", meaning: "đa dạng, nhiều loại", example: "Students have various sources of information on the internet." },
+          { word: "depend on", ipa: "/dɪˈpend ɒn/", type: "(phr.v)", meaning: "phụ thuộc vào", example: "Students today depend less on printed books." },
+          { word: "replace", ipa: "/rɪˈpleɪs/", type: "(v)", meaning: "thay thế", example: "Emails and messages have largely replaced handwritten letters." }
         ],
         grammarNote: {
           title: "Động từ theo sau bởi To-V hoặc V-ing",
           points: [
-            "<b>1. Động từ + To-V:</b> <i>want, decide, plan, hope, promise, agree, learn, afford...</i><br>(VD: <i>She decided <b>to pursue</b> a career in medicine.</i>)",
-            "<b>2. Động từ + V-ing:</b> <i>enjoy, fancy, mind, avoid, suggest, finish, practise...</i><br>(VD: <i>Grandparents enjoy <b>telling</b> folk tales to their grandchildren.</i>)",
-            "<b>3. Lưu ý đặc biệt:</b><br>• <b>remember/forget + to-V:</b> nhớ/quên phải làm gì (chưa làm)<br>• <b>remember/forget + V-ing:</b> nhớ/quên đã làm gì (trong quá khứ)"
+            "<b>1. Động từ + To-infinitive (to-V):</b><br><i>want, promise, decide, agree, learn, plan, hope, afford, refuse</i><br>(VD: <i>She decided <b>to pursue</b> a career in medicine.</i>)",
+            "<b>2. Động từ + V-ing (Gerund):</b><br><i>enjoy, fancy, finish, mind, avoid, suggest, practise, keep</i><br>(VD: <i>Grandparents enjoy <b>telling</b> folk tales to their grandchildren.</i>)",
+            "<b>3. Lưu ý đặc biệt:</b><br>• <b>remember/forget + to-V:</b> nhớ/quên phải làm gì (ở hiện tại/tương lai)<br>• <b>remember/forget + V-ing:</b> nhớ/quên đã làm gì (trong quá khứ)"
           ]
         },
         grammarQuiz: [
@@ -750,6 +797,12 @@
             options: ["to study", "studying", "study", "studied"],
             answer: 0,
             explain: "Sau 'plan' (lên kế hoạch) dùng 'to-V' -> 'to study'."
+          },
+          {
+            q: "Would you mind ______ the volume down? I'm trying to concentrate.",
+            options: ["turning", "to turn", "turn", "turned"],
+            answer: 0,
+            explain: "Sau 'mind' luôn dùng V-ing -> 'turning'."
           }
         ],
         sentences: [
@@ -765,10 +818,10 @@
             explain: "Extended family: đại gia đình (nhiều thế hệ cùng chung sống)."
           },
           {
-            q: "Would you mind ______ me how people travelled in Hanoi 50 years ago?",
-            options: ["telling", "to tell", "tell", "told"],
+            q: "Smartphones and laptops have ______ traditional oil lamps and black-and-white TVs.",
+            options: ["replaced", "pursued", "depended", "admired"],
             answer: 0,
-            explain: "Sau 'Would you mind' luôn dùng động từ đuôi -ing -> 'telling'."
+            explain: "Replace: thay thế."
           },
           {
             q: "My brother decided ______ a bicycle instead of asking for a motorbike.",
@@ -777,10 +830,575 @@
             explain: "Sau 'decide' (quyết định) dùng 'to-V' -> 'to ride'."
           },
           {
-            q: "Parents and teens should talk openly to reduce the ______.",
-            options: ["generation gap", "traffic jam", "living standard", "craft village"],
+            q: "Children today have more ______ because they often have their own bedrooms.",
+            options: ["privacy", "facility", "pottery", "itinerary"],
             answer: 0,
-            explain: "Generation gap: khoảng cách thế hệ."
+            explain: "Privacy: sự riêng tư."
+          }
+        ]
+      },
+      {
+        id: 7,
+        semester: 2,
+        code: "UNIT 7",
+        title: "Natural Wonders of the World",
+        viTitle: "Kỳ quan thiên nhiên thế giới",
+        grammarTag: "Reported Speech (Yes/No Questions)",
+        gradient: "from-green-500 to-emerald-700",
+        icon: "🏔️",
+        bossName: "Thần Núi Everest",
+        bossIcon: "🗻",
+        badge: { id: "u7_master", name: "Nhà Chinh Phục Kỳ Quan", icon: "⛰️", desc: "Chinh phục Unit 7: Natural Wonders" },
+        vocab: [
+          { word: "majestic", ipa: "/məˈdʒestɪk/", type: "(adj)", meaning: "uy nghi, hùng vĩ", example: "Mount Everest is the most majestic peak in the world." },
+          { word: "peak", ipa: "/piːk/", type: "(n)", meaning: "đỉnh núi", example: "Climbers reached the snowy peak after five days." },
+          { word: "paradise", ipa: "/ˈpærədaɪs/", type: "(n)", meaning: "thiên đường", example: "Phu Quoc Island is a tropical paradise for beach lovers." },
+          { word: "sustainable", ipa: "/səˈsteɪnəbl/", type: "(adj)", meaning: "bền vững", example: "Sustainable tourism helps protect natural wonders." },
+          { word: "biodiversity", ipa: "/ˌbaɪəʊdaɪˈvɜːsəti/", type: "(n)", meaning: "đa dạng sinh học", example: "The Amazon rainforest has incredible biodiversity." },
+          { word: "possess", ipa: "/pəˈzes/", type: "(v)", meaning: "sở hữu", example: "Vietnam possesses many breathtaking caves and beaches." },
+          { word: "admire", ipa: "/ədˈmaɪə/", type: "(v)", meaning: "chiêm ngưỡng, ngưỡng mộ", example: "Tourists stopped to admire the beauty of Ha Long Bay." },
+          { word: "hesitation", ipa: "/ˌhezɪˈteɪʃn/", type: "(n)", meaning: "sự do dự, lưỡng lự", example: "She accepted the invitation to explore Son Doong without hesitation." }
+        ],
+        grammarNote: {
+          title: "Câu tường thuật dạng câu hỏi Yes/No (Reported Speech)",
+          points: [
+            "<b>1. Công thức:</b><br><code>S + asked (+ O) / wanted to know + if / whether + S + V(lùi thì)</code>",
+            "<b>2. Quy tắc chuyển đổi bắt buộc:</b><br>• Bỏ trợ động từ <i>do/does/did</i> và dấu chấm hỏi <i>(?)</i>.<br>• Đưa chủ ngữ lên trước động từ (trật tự câu trần thuật).<br>• <b>Lùi thì:</b> Hiện tại đơn → Quá khứ đơn; Hiện tại tiếp diễn → Quá khứ tiếp diễn; <i>will → would, can → could</i>.<br>• Đổi đại từ & trạng từ: <i>you → I/he/she, now → then, today → that day, tomorrow → the next day</i>.",
+            "<b>Ví dụ:</b> <i>\"Do you like Ha Long Bay?\" Tom asked me.<br>→ Tom asked me <b>if/whether I liked</b> Ha Long Bay.</i>"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "The tourist asked the guide ______ Ha Long Bay was a UNESCO World Heritage Site.",
+            options: ["if", "that", "what", "which"],
+            answer: 0,
+            explain: "Trong câu tường thuật dạng câu hỏi Yes/No, ta dùng 'if' hoặc 'whether' ngay sau động từ tường thuật 'asked'."
+          },
+          {
+            q: "\"Can we climb Fansipan in winter?\" → Lan asked me whether we ______ climb Fansipan in winter.",
+            options: ["could", "can", "will", "may"],
+            answer: 0,
+            explain: "Lùi thì trong câu tường thuật: 'can' chuyển thành 'could'."
+          },
+          {
+            q: "He wanted to know if I ______ to visit the Grand Canyon the following year.",
+            options: ["planned", "plan", "will plan", "am planning"],
+            answer: 0,
+            explain: "Động từ tường thuật ở quá khứ (wanted to know) -> động từ chính lùi về quá khứ đơn 'planned'."
+          },
+          {
+            q: "\"Are you taking photos of the waterfall now?\" → Mom asked if I ______ photos of the waterfall then.",
+            options: ["was taking", "am taking", "took", "take"],
+            answer: 0,
+            explain: "Hiện tại tiếp diễn (are taking) lùi thì thành Quá khứ tiếp diễn (was taking)."
+          },
+          {
+            q: "She asked me ______ I had ever seen snow on the mountain peak.",
+            options: ["whether", "who", "where", "why"],
+            answer: 0,
+            explain: "Dùng 'whether' (hoặc 'if') để tường thuật câu hỏi Yes/No ('Have you ever seen...?')."
+          }
+        ],
+        sentences: [
+          { hint: "Cô ấy hỏi tôi liệu tôi có thích khám phá các hang động tự nhiên không.", words: ["She", "asked", "me", "if", "I", "liked", "exploring", "natural", "caves."] },
+          { hint: "Du lịch bền vững giúp bảo vệ sự đa dạng sinh học.", words: ["Sustainable", "tourism", "helps", "protect", "biodiversity."] },
+          { hint: "Chúng tôi dừng lại để chiêm ngưỡng đỉnh núi hùng vĩ.", words: ["We", "stopped", "to", "admire", "the", "majestic", "mountain", "peak."] }
+        ],
+        bossQuestions: [
+          {
+            q: "\"Do many tourists visit Son Doong Cave every year?\" → Nam asked the ranger ______.",
+            options: ["if many tourists visited Son Doong Cave every year", "if did many tourists visit Son Doong Cave every year", "whether many tourists visit Son Doong Cave every year", "that many tourists visited Son Doong Cave every year"],
+            answer: 0,
+            explain: "Dùng 'if', bỏ trợ động từ 'did' và lùi thì 'visit' -> 'visited'."
+          },
+          {
+            q: "With its crystal-clear water and white sand, the island looks like a tropical ______.",
+            options: ["paradise", "hesitation", "commuter", "brochure"],
+            answer: 0,
+            explain: "Paradise: thiên đường."
+          },
+          {
+            q: "Australia ______ some of the most unique wildlife and natural wonders on Earth.",
+            options: ["possesses", "replaces", "accomplishes", "browses"],
+            answer: 0,
+            explain: "Possess: sở hữu."
+          },
+          {
+            q: "They wanted to know whether the local people ______ the forest.",
+            options: ["were protecting", "are protecting", "will protect", "protect"],
+            answer: 0,
+            explain: "Động từ trong câu tường thuật phải lùi về quá khứ ('were protecting')."
+          }
+        ]
+      },
+      {
+        id: 8,
+        semester: 2,
+        code: "UNIT 8",
+        title: "Tourism",
+        viTitle: "Du lịch",
+        grammarTag: "Relative Pronouns (who, which, whose)",
+        gradient: "from-cyan-500 to-blue-600",
+        icon: "✈️",
+        bossName: "Thuyền Trưởng Đại Dương",
+        bossIcon: "🧭",
+        badge: { id: "u8_master", name: "Du Khách Toàn Cầu", icon: "🌍", desc: "Chinh phục Unit 8: Tourism" },
+        vocab: [
+          { word: "package holiday", ipa: "/ˈpækɪdʒ ˈhɒlədeɪ/", type: "(n)", meaning: "kỳ nghỉ trọn gói", example: "A package holiday includes flights, hotels, and meals." },
+          { word: "self-guided", ipa: "/ˌself ˈɡaɪdɪd/", type: "(adj)", meaning: "tự túc, tự hướng dẫn", example: "Young travellers often prefer self-guided tours." },
+          { word: "itinerary", ipa: "/aɪˈtɪnərəri/", type: "(n)", meaning: "lịch trình chuyến đi", example: "We planned a detailed itinerary for our 5-day trip to Da Lat." },
+          { word: "homestay", ipa: "/ˈhəʊmsteɪ/", type: "(n)", meaning: "nhà dân cho khách du lịch thuê", example: "Staying at a homestay helps you learn about local culture." },
+          { word: "ruinous", ipa: "/ˈruːɪnəs/", type: "(adj)", meaning: "đổ nát, tàn tích", example: "Tourists visited the ruinous castle on the hill." },
+          { word: "smooth", ipa: "/smuːð/", type: "(adj)", meaning: "suôn sẻ, êm ả", example: "Thanks to good preparation, we had a smooth journey." },
+          { word: "domestic", ipa: "/dəˈmestɪk/", type: "(adj)", meaning: "nội địa, trong nước", example: "Domestic tourism has grown rapidly in Vietnam." },
+          { word: "brochure", ipa: "/ˈbrəʊʃə/", type: "(n)", meaning: "tờ rơi / cuốn sách nhỏ quảng cáo", example: "I picked up a travel brochure at the airport." }
+        ],
+        grammarNote: {
+          title: "Đại từ quan hệ (Relative Pronouns: who, which, whose)",
+          points: [
+            "Dùng để nối hai mệnh đề và bổ sung ý nghĩa cho danh từ đứng trước nó (Mệnh đề quan hệ xác định):",
+            "• <b>who:</b> thay thế cho danh từ chỉ <b>người</b> (làm chủ ngữ hoặc tân ngữ).<br>(VD: <i>The tour guide <b>who</b> showed us around was very friendly.</i>)",
+            "• <b>which:</b> thay thế cho danh từ chỉ <b>vật, sự việc, địa điểm</b>.<br>(VD: <i>The brochure <b>which</b> is on the table gives info about Hoi An.</i>)",
+            "• <b>whose:</b> chỉ <b>sự sở hữu</b> cho cả người và vật (theo sau luôn là một danh từ: <i>whose + N</i>).<br>(VD: <i>That is the tourist <b>whose</b> passport was lost yesterday.</i>)"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "The travel agent ______ helped us book the package holiday was very helpful.",
+            options: ["who", "which", "whose", "where"],
+            answer: 0,
+            explain: "'The travel agent' (nhân viên đại lý du lịch) là danh từ chỉ người làm chủ ngữ -> dùng 'who'."
+          },
+          {
+            q: "We stayed at a cosy homestay ______ overlooks a green tea valley.",
+            options: ["which", "who", "whose", "whom"],
+            answer: 0,
+            explain: "'a cosy homestay' là danh từ chỉ vật/nơi chốn đóng vai trò chủ ngữ của mệnh đề quan hệ -> dùng 'which'."
+          },
+          {
+            q: "I met a backpacker ______ luggage was lost at the international airport.",
+            options: ["whose", "who", "which", "that"],
+            answer: 0,
+            explain: "Phía sau chỗ trống là danh từ 'luggage' (hành lý của người du lịch ba lô đó) -> chỉ sở hữu nên dùng 'whose'."
+          },
+          {
+            q: "The itinerary ______ our group prepared includes three famous museums.",
+            options: ["which", "who", "whose", "where"],
+            answer: 0,
+            explain: "'The itinerary' (lịch trình) là danh từ chỉ vật -> dùng 'which'."
+          },
+          {
+            q: "Do you know the family ______ homestay we rented in Sapa last summer?",
+            options: ["whose", "who", "which", "whom"],
+            answer: 0,
+            explain: "'whose homestay' = homestay của gia đình đó (chỉ sự sở hữu)."
+          }
+        ],
+        sentences: [
+          { hint: "Tôi thích đi du lịch tự túc hơn là kỳ nghỉ trọn gói.", words: ["I", "prefer", "self-guided", "tours", "to", "package", "holidays."] },
+          { hint: "Người hướng dẫn viên du lịch nói tiếng Anh rất trôi chảy.", words: ["The", "tour", "guide", "who", "led", "us", "spoke", "English", "fluently."] },
+          { hint: "Chúng tôi đã có một chuyến đi nội địa rất suôn sẻ.", words: ["We", "had", "a", "very", "smooth", "domestic", "trip."] }
+        ],
+        bossQuestions: [
+          {
+            q: "A ______ is a small book or magazine containing pictures and information about a holiday.",
+            options: ["brochure", "homestay", "seabed", "deadline"],
+            answer: 0,
+            explain: "Brochure: ấn phẩm/cuốn sách mỏng quảng cáo du lịch."
+          },
+          {
+            q: "The ancient temple ______ roof was damaged by the storm is being restored.",
+            options: ["whose", "which", "who", "that"],
+            answer: 0,
+            explain: "'whose roof' (mái của ngôi đền cổ đó) -> chỉ sở hữu cho vật vẫn dùng 'whose'."
+          },
+          {
+            q: "If you don't want to plan everything yourself, you should book a ______.",
+            options: ["package holiday", "self-guided tour", "construction site", "food chain"],
+            answer: 0,
+            explain: "Package holiday: kỳ nghỉ trọn gói đã được công ty du lịch lo từ A-Z."
+          },
+          {
+            q: "The tourists ______ arrived late missed the bus to the ruinous castle.",
+            options: ["who", "which", "whose", "whom"],
+            answer: 0,
+            explain: "'The tourists' chỉ người làm chủ ngữ -> dùng 'who'."
+          }
+        ]
+      },
+      {
+        id: 9,
+        semester: 2,
+        code: "UNIT 9",
+        title: "World Englishes",
+        viTitle: "Tiếng Anh trên thế giới",
+        grammarTag: "Defining Relative Clauses (Omitting Pronouns)",
+        gradient: "from-indigo-500 to-violet-600",
+        icon: "🌐",
+        bossName: "Học Giả Đa Ngôn Ngữ",
+        bossIcon: "📚",
+        badge: { id: "u9_master", name: "Bậc Thầy Ngôn Ngữ", icon: "🗣️", desc: "Chinh phục Unit 9: World Englishes" },
+        vocab: [
+          { word: "bilingual", ipa: "/ˌbaɪˈlɪŋɡwəl/", type: "(adj)", meaning: "sử dụng được hai thứ tiếng", example: "Children raised in two cultures often become bilingual." },
+          { word: "fluent", ipa: "/ˈfluːənt/", type: "(adj)", meaning: "trôi chảy, lưu loát", example: "She is fluent in both English and French." },
+          { word: "concentric", ipa: "/kənˈsentrɪk/", type: "(adj)", meaning: "đồng tâm (cùng chung một tâm)", example: "Kachru's model has three concentric circles of English." },
+          { word: "immigrant", ipa: "/ˈɪmɪɡrənt/", type: "(n)", meaning: "người nhập cư", example: "Immigrants bring their own accents and vocabulary to English." },
+          { word: "official language", ipa: "/əˈfɪʃl ˈlæŋɡwɪdʒ/", type: "(n)", meaning: "ngôn ngữ chính thức", example: "English is an official language in Singapore and India." },
+          { word: "look up", ipa: "/lʊk ʌp/", type: "(phr.v)", meaning: "tra cứu (từ điển, thông tin)", example: "You can look up new words in an online dictionary." },
+          { word: "pick up", ipa: "/pɪk ʌp/", type: "(phr.v)", meaning: "học lỏm, tiếp thu tự nhiên", example: "He picked up Australian English while living in Sydney." },
+          { word: "go over", ipa: "/ɡəʊ ˈəʊvə/", type: "(phr.v)", meaning: "ôn tập lại, xem kỹ lại", example: "Always go over your grammar notes before the test." }
+        ],
+        grammarNote: {
+          title: "Mệnh đề quan hệ xác định & Lược bỏ đại từ quan hệ",
+          points: [
+            "<b>1. Mệnh đề quan hệ xác định (Defining Relative Clauses):</b> Cung cấp thông tin thiết yếu để xác định danh từ đứng trước, <b>không dùng dấu phẩy</b>. Có thể dùng <i>who, which, that</i>.",
+            "<b>2. Khi nào được LƯỢC BỎ đại từ quan hệ (who/which/that)?</b><br>Khi đại từ quan hệ đóng vai trò làm <b>TÂN NGỮ (Object)</b> của mệnh đề quan hệ (tức là ngay sau <i>who/which/that</i> có một <b>Chủ ngữ + Động từ</b> khác).",
+            "<b>Ví dụ:</b><br>• <i>The dictionary <b>(which/that) I bought</b> yesterday is very useful.</i> → Được bỏ <i>which/that</i> vì sau nó có chủ ngữ <i>I</i>.<br>• <i>The student <b>who speaks</b> fluent English is my friend.</i> → <b>Không</b> được bỏ <i>who</i> vì nó làm chủ ngữ của <i>speaks</i>."
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "In which sentence can we OMIT (lược bỏ) the relative pronoun?",
+            options: ["The English accent (that) she has is easy to understand.", "The teacher who teaches us English is from New Zealand.", "Singapore is a country which has four official languages.", "People who are bilingual often have better memory."],
+            answer: 0,
+            explain: "Trong câu A, sau 'that' là chủ ngữ 'she' + động từ 'has', nên 'that' làm tân ngữ và có thể lược bỏ."
+          },
+          {
+            q: "If you don't know the meaning of a word, you should ______ it ______ in a dictionary.",
+            options: ["look / up", "go / over", "pick / up", "pass / down"],
+            answer: 0,
+            explain: "'look up a word' nghĩa là tra cứu nghĩa của từ trong từ điển."
+          },
+          {
+            q: "She ______ a lot of British slang while she was studying in London.",
+            options: ["picked up", "went over", "looked up", "carried out"],
+            answer: 0,
+            explain: "'pick up a language/slang' nghĩa là học tiếp thu ngôn ngữ một cách tự nhiên qua giao tiếp."
+          },
+          {
+            q: "The vocabulary list ______ our teacher gave us yesterday has 30 words.",
+            options: ["which", "who", "whose", "where"],
+            answer: 0,
+            explain: "'The vocabulary list' là vật -> dùng 'which' (hoặc 'that', hoặc lược bỏ)."
+          },
+          {
+            q: "Before submitting your essay, remember to ______ it carefully for spelling mistakes.",
+            options: ["go over", "pick up", "look around", "come down"],
+            answer: 0,
+            explain: "'go over' nghĩa là kiểm tra lại, rà soát lại kỹ lưỡng."
+          }
+        ],
+        sentences: [
+          { hint: "Tiếng Anh là ngôn ngữ chính thức ở nhiều quốc gia.", words: ["English", "is", "an", "official", "language", "in", "many", "countries."] },
+          { hint: "Cuốn từ điển tôi mua hôm qua rất hữu ích.", words: ["The", "dictionary", "I", "bought", "yesterday", "is", "very", "useful."] },
+          { hint: "Cô ấy có thể nói trôi chảy hai thứ tiếng.", words: ["She", "is", "bilingual", "and", "fluent", "in", "two", "languages."] }
+        ],
+        bossQuestions: [
+          {
+            q: "Braj Kachru proposed the model of three ______ circles of World Englishes.",
+            options: ["concentric", "domestic", "portable", "volcanic"],
+            answer: 0,
+            explain: "Three concentric circles: ba vòng tròn đồng tâm mô tả các nhóm quốc gia sử dụng tiếng Anh."
+          },
+          {
+            q: "The grammar rules ______ we are revising today belong to Unit 9.",
+            options: ["that", "who", "whose", "whom"],
+            answer: 0,
+            explain: "'The grammar rules' là vật -> dùng 'that' hoặc 'which'."
+          },
+          {
+            q: "A person who can speak two languages equally well is ______.",
+            options: ["bilingual", "ruinous", "demanding", "majestic"],
+            answer: 0,
+            explain: "Bilingual: song ngữ (nói được 2 ngôn ngữ)."
+          },
+          {
+            q: "In which sentence is the relative pronoun REQUIRED (không thể lược bỏ)?",
+            options: ["The man who invented this dictionary was a great scholar.", "The book which you lent me is fascinating.", "The accent that he speaks with sounds Australian.", "The words that we learned yesterday are easy."],
+            answer: 0,
+            explain: "Câu A: 'who' đứng ngay trước động từ 'invented' (làm chủ ngữ) nên bắt buộc phải giữ lại."
+          }
+        ]
+      },
+      {
+        id: 10,
+        semester: 2,
+        code: "UNIT 10",
+        title: "Planet Earth",
+        viTitle: "Hành tinh Trái Đất",
+        grammarTag: "Non-defining Relative Clauses",
+        gradient: "from-lime-500 to-green-700",
+        icon: "🌍",
+        bossName: "Vệ Thần Địa Cầu",
+        bossIcon: "🌿",
+        badge: { id: "u10_master", name: "Người Bảo Vệ Trái Đất", icon: "🌱", desc: "Chinh phục Unit 10: Planet Earth" },
+        vocab: [
+          { word: "habitat", ipa: "/ˈhæbɪtæt/", type: "(n)", meaning: "môi trường sống (của động thực vật)", example: "Deforestation destroys the natural habitat of many wild animals." },
+          { word: "ecosystem", ipa: "/ˈiːkəʊsɪstəm/", type: "(n)", meaning: "hệ sinh thái", example: "Coral reefs support a rich marine ecosystem." },
+          { word: "food chain", ipa: "/ˈfuːd tʃeɪn/", type: "(n)", meaning: "chuỗi thức ăn", example: "Every species plays an important role in the food chain." },
+          { word: "flora and fauna", ipa: "/ˌflɔːrə ənd ˈfɔːnə/", type: "(n)", meaning: "hệ thực vật và động vật", example: "We must protect the unique flora and fauna of our planet." },
+          { word: "nature reserve", ipa: "/ˈneɪtʃə rɪzɜːv/", type: "(n)", meaning: "khu bảo tồn thiên nhiên", example: "Endangered animals are kept safe in a nature reserve." },
+          { word: "ecological balance", ipa: "/ˌiːkəˈlɒdʒɪkl ˈbæləns/", type: "(n)", meaning: "cân bằng sinh thái", example: "Human activities are threatening the ecological balance." },
+          { word: "liquid water", ipa: "/ˈlɪkwɪd ˈwɔːtə/", type: "(n)", meaning: "nước ở thể lỏng", example: "Earth is the only known planet with liquid water on its surface." },
+          { word: "outer space", ipa: "/ˌaʊtə ˈspeɪs/", type: "(n)", meaning: "vũ trụ, không gian bên ngoài", example: "Astronauts can see Earth's blue oceans from outer space." }
+        ],
+        grammarNote: {
+          title: "Mệnh đề quan hệ không xác định (Non-defining Relative Clauses)",
+          points: [
+            "<b>1. Chức năng & Dấu câu:</b> Dùng để cung cấp thêm thông tin phụ cho danh từ đã xác định rõ (tên riêng, hoặc có <i>this, that, these, those, my, his...</i>).<br>⚠️ <b>BẮT BUỘC có dấu phẩy (,)</b> ngăn cách mệnh đề này với mệnh đề chính.",
+            "<b>2. Quy tắc vàng cần nhớ:</b><br>• Dùng <b>who</b> (cho người), <b>which</b> (cho vật), <b>whose</b> (sở hữu).<br>• ❌ <b>TUYỆT ĐỐI KHÔNG DÙNG 'THAT'</b> trong mệnh đề quan hệ không xác định.<br>• ❌ <b>KHÔNG ĐƯỢC LƯỢC BỎ</b> đại từ quan hệ dù nó làm tân ngữ.",
+            "<b>Ví dụ:</b> <i>Earth<b>, which</b> is the third planet from the Sun<b>,</b> supports millions of species.</i>"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "Mount Everest, ______ is located in the Himalayas, is the highest peak on Earth.",
+            options: ["which", "that", "who", "whose"],
+            answer: 0,
+            explain: "Sau tên riêng 'Mount Everest' có dấu phẩy -> Mệnh đề quan hệ không xác định -> dùng 'which' (cấm dùng 'that')."
+          },
+          {
+            q: "Mr. Minh, ______ is an environmental scientist, gave a talk about ecological balance.",
+            options: ["who", "that", "which", "whom"],
+            answer: 0,
+            explain: "'Mr. Minh' là tên riêng chỉ người + có dấu phẩy -> dùng 'who' (không dùng 'that')."
+          },
+          {
+            q: "The Amazon Rainforest, ______ trees produce much of the world's oxygen, is in danger.",
+            options: ["whose", "which", "that", "who"],
+            answer: 0,
+            explain: "'whose trees' = cây cối của rừng nhiệt đới Amazon (chỉ sự sở hữu)."
+          },
+          {
+            q: "Planet Earth, ______ has liquid water on its surface, is home to diverse ecosystems.",
+            options: ["which", "that", "where", "who"],
+            answer: 0,
+            explain: "Danh từ riêng 'Planet Earth' + dấu phẩy -> dùng 'which'."
+          },
+          {
+            q: "Which sentence is GRAMMATICALLY CORRECT?",
+            options: ["The Pacific Ocean, which is the largest ocean, covers a third of Earth.", "The Pacific Ocean, that is the largest ocean, covers a third of Earth.", "The Pacific Ocean which is the largest ocean covers a third of Earth.", "The Pacific Ocean, who is the largest ocean, covers a third of Earth."],
+            answer: 0,
+            explain: "Tên riêng 'The Pacific Ocean' cần có dấu phẩy và dùng 'which' (không dùng 'that' hay 'who')."
+          }
+        ],
+        sentences: [
+          { hint: "Trái Đất, hành tinh duy nhất có nước lỏng, cần được bảo vệ.", words: ["Earth,", "which", "has", "liquid", "water,", "needs", "to", "be", "protected."] },
+          { hint: "Nạn phá rừng phá hủy môi trường sống tự nhiên của động vật.", words: ["Deforestation", "destroys", "the", "natural", "habitat", "of", "animals."] },
+          { hint: "Mỗi loài đều quan trọng đối với sự cân bằng sinh thái.", words: ["Every", "species", "is", "important", "to", "ecological", "balance."] }
+        ],
+        bossQuestions: [
+          {
+            q: "A ______ is a protected area of land where wild animals and plants can live safely.",
+            options: ["nature reserve", "food chain", "outer space", "construction site"],
+            answer: 0,
+            explain: "Nature reserve: khu bảo tồn thiên nhiên."
+          },
+          {
+            q: "Neil Armstrong, ______ was the first human to walk on the Moon, saw Earth from outer space.",
+            options: ["who", "that", "which", "whose"],
+            answer: 0,
+            explain: "Tên riêng chỉ người + có dấu phẩy -> dùng 'who'."
+          },
+          {
+            q: "When one animal disappears from the ______, other species are affected too.",
+            options: ["food chain", "brochure", "touchscreen", "suburb"],
+            answer: 0,
+            explain: "Food chain: chuỗi thức ăn trong tự nhiên."
+          },
+          {
+            q: "Cuc Phuong National Park, ______ we visited last month, has rich flora and fauna.",
+            options: ["which", "that", "where", "who"],
+            answer: 0,
+            explain: "Sau dấu phẩy của mệnh đề quan hệ không xác định, dùng 'which' làm tân ngữ của 'visited' (không được dùng 'that' và không được lược bỏ)."
+          }
+        ]
+      },
+      {
+        id: 11,
+        semester: 2,
+        code: "UNIT 11",
+        title: "Electronic Devices",
+        viTitle: "Thiết bị điện tử",
+        grammarTag: "Suggest / Advise / Recommend + V-ing / Clause",
+        gradient: "from-blue-500 to-indigo-700",
+        icon: "📱",
+        bossName: "Siêu Trí Tuệ AI",
+        bossIcon: "🦾",
+        badge: { id: "u11_master", name: "Chuyên Gia Công Nghệ", icon: "💻", desc: "Chinh phục Unit 11: Electronic Devices" },
+        vocab: [
+          { word: "portable", ipa: "/ˈpɔːtəbl/", type: "(adj)", meaning: "nhỏ gọn, dễ mang theo", example: "A tablet is lightweight and portable for students." },
+          { word: "touchscreen", ipa: "/ˈtʌtʃskriːn/", type: "(n)", meaning: "màn hình cảm ứng", example: "Most modern smartphones have a large touchscreen." },
+          { word: "robotic vacuum cleaner", ipa: "/rəʊˈbɒtɪk ˈvækjuːm kliːnə/", type: "(n)", meaning: "robot hút bụi", example: "A robotic vacuum cleaner helps clean the floor automatically." },
+          { word: "smartwatch", ipa: "/ˈsmɑːtwɒtʃ/", type: "(n)", meaning: "đồng hồ thông minh", example: "My smartwatch tracks my heart rate and daily steps." },
+          { word: "camcorder", ipa: "/ˈkæmkɔːdə/", type: "(n)", meaning: "máy quay phim cầm tay", example: "Dad used a camcorder to record our family vacation." },
+          { word: "e-reader", ipa: "/ˈiː riːdə/", type: "(n)", meaning: "máy đọc sách điện tử", example: "You can store thousands of books on a single e-reader." },
+          { word: "3D printer", ipa: "/ˌθriː diː ˈprɪntə/", type: "(n)", meaning: "máy in 3D", example: "Engineers use a 3D printer to create plastic models." },
+          { word: "aluminium", ipa: "/ˌæljəˈmɪniəm/", type: "(n)", meaning: "nhôm (kim loại nhẹ)", example: "The laptop case is made of durable aluminium." }
+        ],
+        grammarNote: {
+          title: "Cấu trúc Suggest / Advise / Recommend",
+          points: [
+            "Dùng để đưa ra lời gợi ý, khuyên bảo hoặc đề xuất làm gì:",
+            "<b>1. Cộng trực tiếp với V-ing (khi nói chung chung, không nhắc tới đối tượng cụ thể):</b><br><code>S + suggest / advise / recommend + V-ing</code><br>(VD: <i>I recommend <b>buying</b> an e-reader for reading books.</i>)",
+            "<b>2. Cộng với mệnh đề (that) + S + (should) + V(nguyên thể):</b><br><code>S + suggest / advise / recommend + (that) + S + (should) + V-inf</code><br>(VD: <i>The teacher advised that Nam <b>(should) use</b> a laptop for his project.</i>)<br>⚠️ <i>Lưu ý:</i> Động từ trong mệnh đề sau 'that' luôn ở dạng <b>nguyên thể không 'to'</b> (kể cả chủ ngữ là he/she/it)!"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "The shop assistant recommended ______ a laptop with an aluminium case.",
+            options: ["choosing", "to choose", "chose", "choose"],
+            answer: 0,
+            explain: "Sau 'recommend' không có chủ ngữ mới theo sau -> dùng V-ing ('choosing')."
+          },
+          {
+            q: "My doctor advised that I ______ reduce my screen time before bedtime.",
+            options: ["should", "mustn't", "am", "was"],
+            answer: 0,
+            explain: "Cấu trúc: advise + (that) + S + (should) + V-inf."
+          },
+          {
+            q: "I suggest that Lan ______ a smartwatch to monitor her daily exercise.",
+            options: ["buy", "buys", "bought", "buying"],
+            answer: 0,
+            explain: "Trong mệnh đề giả định sau 'suggest that', động từ luôn chia ở dạng nguyên thể ('buy'), không thêm 's' dù chủ ngữ là 'Lan'."
+          },
+          {
+            q: "Experts suggest ______ old electronic devices at proper e-waste centres.",
+            options: ["recycling", "to recycle", "recycled", "recycles"],
+            answer: 0,
+            explain: "Suggest + V-ing -> 'recycling'."
+          },
+          {
+            q: "Dad recommended that we ______ a robotic vacuum cleaner to save housework time.",
+            options: ["get", "getting", "got", "gets"],
+            answer: 0,
+            explain: "Recommend + that + S + (should) + V nguyên thể ('get')."
+          }
+        ],
+        sentences: [
+          { hint: "Tôi khuyên bạn nên mua một chiếc máy đọc sách điện tử nhỏ gọn.", words: ["I", "recommend", "buying", "a", "portable", "e-reader."] },
+          { hint: "Bác sĩ khuyên rằng chúng ta nên hạn chế dùng màn hình cảm ứng.", words: ["The", "doctor", "advised", "that", "we", "should", "limit", "touchscreen", "use."] },
+          { hint: "Vỏ của chiếc máy tính bảng này được làm bằng nhôm.", words: ["The", "case", "of", "this", "tablet", "is", "made", "of", "aluminium."] }
+        ],
+        bossQuestions: [
+          {
+            q: "An ______ has an anti-glare screen that feels like real paper when reading.",
+            options: ["e-reader", "camcorder", "3D printer", "aluminium"],
+            answer: 0,
+            explain: "E-reader: máy đọc sách điện tử."
+          },
+          {
+            q: "The IT teacher suggested that Minh ______ his files on the cloud.",
+            options: ["store", "stores", "storing", "to store"],
+            answer: 0,
+            explain: "Suggest + that + S + (should) + V-inf ('store')."
+          },
+          {
+            q: "Because a smartphone is lightweight and ______, you can carry it in your pocket.",
+            options: ["portable", "ruinous", "concentric", "democratic"],
+            answer: 0,
+            explain: "Portable: nhỏ gọn, dễ mang theo bên người."
+          },
+          {
+            q: "She recommended ______ a 3D printer to make models for the science club.",
+            options: ["using", "to use", "used", "uses"],
+            answer: 0,
+            explain: "Recommend + V-ing -> 'using'."
+          }
+        ]
+      },
+      {
+        id: 12,
+        semester: 2,
+        code: "UNIT 12",
+        title: "Career Choices",
+        viTitle: "Lựa chọn nghề nghiệp",
+        grammarTag: "Concession, Result & Reason Clauses",
+        gradient: "from-fuchsia-500 to-purple-700",
+        icon: "🎓",
+        bossName: "Chúa Tể Tương Lai",
+        bossIcon: "👑",
+        badge: { id: "u12_master", name: "Huyền Thoại Tiếng Anh 9", icon: "🏆", desc: "Chinh phục trọn vẹn 12 Unit Tiếng Anh 9!" },
+        vocab: [
+          { word: "vocational", ipa: "/vəʊˈkeɪʃənl/", type: "(adj)", meaning: "thuộc về nghề nghiệp, hướng nghiệp", example: "He attended a vocational college to become a skilled chef." },
+          { word: "bartender", ipa: "/ˈbɑːtendə/", type: "(n)", meaning: "nhân viên pha chế đồ uống", example: "A creative bartender can invent many delicious mocktails." },
+          { word: "mechanic", ipa: "/məˈkænɪk/", type: "(n)", meaning: "thợ sửa máy, thợ cơ khí", example: "The mechanic repaired our car engine in two hours." },
+          { word: "garment worker", ipa: "/ˈɡɑːmənt ˈwɜːkə/", type: "(n)", meaning: "công nhân may", example: "Thousands of garment workers produce clothes for export." },
+          { word: "software engineer", ipa: "/ˈsɒftweər endʒɪˈnɪə/", type: "(n)", meaning: "kỹ sư phần mềm", example: "She wants to become a software engineer at a tech company." },
+          { word: "decisive", ipa: "/dɪˈsaɪsɪv/", type: "(adj)", meaning: "quyết đoán", example: "A good manager needs to be calm and decisive." },
+          { word: "rewarding", ipa: "/rɪˈwɔːdɪŋ/", type: "(adj)", meaning: "xứng đáng, bổ ích (mang lại niềm vui)", example: "Teaching is a challenging but very rewarding career." },
+          { word: "demanding", ipa: "/dɪˈmɑːndɪŋ/", type: "(adj)", meaning: "đòi hỏi cao, vất vả", example: "Being a surgeon is a demanding job that requires focus." }
+        ],
+        grammarNote: {
+          title: "Mệnh đề trạng ngữ chỉ Sự nhượng bộ, Kết quả & Nguyên nhân",
+          points: [
+            "<b>1. Mệnh đề chỉ sự nhượng bộ (Concession):</b><br><code>Although / Though + S + V, S + V</code> (Mặc dù... nhưng...)<br>(VD: <i><b>Although</b> the job is demanding, she loves it.</i>)",
+            "<b>2. Mệnh đề chỉ kết quả (Result):</b><br>• <code>S + V + so + adj/adv + that + S + V</code> (Quá... đến nỗi mà...)<br>• <code>S + V + such + (a/an) + adj + N + that + S + V</code><br>(VD: <i>He is <b>so decisive that</b> everyone trusts him. / It is <b>such a rewarding job that</b> many people apply.</i>)",
+            "<b>3. Mệnh đề chỉ nguyên nhân (Reason):</b><br><code>Because / Since + S + V, S + V</code> (Bởi vì... nên...)"
+          ]
+        },
+        grammarQuiz: [
+          {
+            q: "______ being a surgeon is very demanding, it is an extremely rewarding career.",
+            options: ["Although", "Because", "So", "Therefore"],
+            answer: 0,
+            explain: "Hai vế mang nghĩa tương phản (vất vả >< xứng đáng) -> dùng liên từ nhượng bộ 'Although' (Mặc dù)."
+          },
+          {
+            q: "Coding is ______ an interesting skill that many teens want to become software engineers.",
+            options: ["such", "so", "although", "because"],
+            answer: 0,
+            explain: "Phía sau có cụm danh từ 'an interesting skill' -> dùng cấu trúc 'such + a/an + adj + N + that'."
+          },
+          {
+            q: "The mechanic worked ______ skillfully that he fixed the motorbike in 15 minutes.",
+            options: ["so", "such", "though", "since"],
+            answer: 0,
+            explain: "Phía sau là trạng từ 'skillfully' -> dùng cấu trúc 'so + adv + that'."
+          },
+          {
+            q: "______ Nam loves working with machines, he decided to attend a vocational school.",
+            options: ["Since", "Although", "Though", "So"],
+            answer: 0,
+            explain: "'Since' ở đầu câu mang nghĩa 'Bởi vì' (chỉ nguyên nhân), tương đương với 'Because'."
+          },
+          {
+            q: "______ she was tired after a long shift, the garment worker still smiled warmly.",
+            options: ["Though", "Because", "Since", "Such"],
+            answer: 0,
+            explain: "'Though' = 'Although' (Mặc dù), diễn tả sự tương phản giữa hai mệnh đề."
+          }
+        ],
+        sentences: [
+          { hint: "Mặc dù công việc này đòi hỏi cao, nó rất bổ ích.", words: ["Although", "this", "job", "is", "demanding,", "it", "is", "very", "rewarding."] },
+          { hint: "Anh ấy quyết đoán đến nỗi mọi người đều tin tưởng anh ấy.", words: ["He", "is", "so", "decisive", "that", "everyone", "trusts", "him."] },
+          { hint: "Bởi vì cô ấy yêu thích công nghệ, cô ấy muốn làm kỹ sư phần mềm.", words: ["Since", "she", "loves", "technology,", "she", "wants", "to", "be", "a", "software", "engineer."] }
+        ],
+        bossQuestions: [
+          {
+            q: "A ______ is someone whose job is to repair engines and vehicles.",
+            options: ["mechanic", "bartender", "counsellor", "artisan"],
+            answer: 0,
+            explain: "Mechanic: thợ sửa chữa máy móc, ô tô, xe máy."
+          },
+          {
+            q: "It was ______ a demanding project that the software engineers worked all weekend.",
+            options: ["such", "so", "although", "since"],
+            answer: 0,
+            explain: "Cấu trúc: such + a + adj (demanding) + N (project) + that."
+          },
+          {
+            q: "______ vocational training focuses on practical skills, students can find jobs quickly.",
+            options: ["Because", "Although", "Though", "However"],
+            answer: 0,
+            explain: "'Because' diễn tả nguyên nhân – kết quả hợp logic."
+          },
+          {
+            q: "A job that gives you deep satisfaction because you are doing something useful is ______.",
+            options: ["rewarding", "ruinous", "congested", "embarrassing"],
+            answer: 0,
+            explain: "Rewarding: mang lại niềm vui, xứng đáng với công sức bỏ ra."
           }
         ]
       }
@@ -828,7 +1446,9 @@
 
     const EXTRA_BADGES = [
       { id: "first_step", name: "Khởi Đầu Hành Trình", icon: "🌱", desc: "Hoàn thành chặng thử thách đầu tiên." },
-      { id: "rich_scholar", name: "Triệu Phú Tri Thức", icon: "💰", desc: "Tích lũy được từ 150 Xu vàng trở lên." },
+      { id: "semester_1", name: "Chinh Phục Học Kỳ I", icon: "📘", desc: "Đánh bại toàn bộ Boss từ Unit 1 đến Unit 6." },
+      { id: "semester_2", name: "Chinh Phục Học Kỳ II", icon: "📕", desc: "Đánh bại toàn bộ Boss từ Unit 7 đến Unit 12." },
+      { id: "rich_scholar", name: "Triệu Phú Tri Thức", icon: "💰", desc: "Tích lũy được từ 200 Xu vàng trở lên." },
       { id: "level_5", name: "Chiến Binh Cấp 5", icon: "⚔️", desc: "Đạt đến Cấp độ 5 (Level 5)." }
     ];
 
@@ -837,25 +1457,26 @@
      * 5. MAIN GAME ENGINE & STATE MANAGEMENT
      * ============================================================================
      */
+    function createInitialUnitProgress() {
+      const prog = {};
+      for (let i = 1; i <= 12; i++) {
+        prog[i] = [false, false, false, false];
+      }
+      return prog;
+    }
+
     const DEFAULT_STATE = {
       xp: 0,
       level: 1,
-      coins: 60,
+      coins: 80,
       hearts: 5,
       maxHearts: 5,
-      hints: 2,
+      hints: 3,
       streak: 1,
       lastLogin: new Date().toDateString(),
       sound: true,
-      // unitProgress: { 1: [true, false, false, false], 2: ... } -> 4 stages per unit
-      unitProgress: {
-        1: [false, false, false, false],
-        2: [false, false, false, false],
-        3: [false, false, false, false],
-        4: [false, false, false, false],
-        5: [false, false, false, false],
-        6: [false, false, false, false]
-      },
+      freeMode: false, // Allows unlocking all 12 units immediately if desired
+      unitProgress: createInitialUnitProgress(),
       unlockedUnits: [1],
       badges: []
     };
@@ -864,6 +1485,7 @@
       constructor() {
         this.state = this.loadState();
         this.currentTab = 'map';
+        this.semesterFilter = 'all'; // 'all' | '1' | '2'
         this.activeSession = null; // Holds current stage game state
         this.timerInterval = null;
         this.init();
@@ -871,10 +1493,22 @@
 
       loadState() {
         try {
-          const saved = localStorage.getItem('eng9_adventure_save_v1');
+          const saved = localStorage.getItem('eng9_adventure_save_v2');
           if (saved) {
             const parsed = JSON.parse(saved);
-            return { ...DEFAULT_STATE, ...parsed };
+            const mergedProgress = createInitialUnitProgress();
+            if (parsed.unitProgress) {
+              for (let i = 1; i <= 12; i++) {
+                if (Array.isArray(parsed.unitProgress[i])) {
+                  mergedProgress[i] = parsed.unitProgress[i];
+                }
+              }
+            }
+            return {
+              ...DEFAULT_STATE,
+              ...parsed,
+              unitProgress: mergedProgress
+            };
           }
         } catch (e) {}
         return JSON.parse(JSON.stringify(DEFAULT_STATE));
@@ -882,7 +1516,7 @@
 
       saveState() {
         try {
-          localStorage.setItem('eng9_adventure_save_v1', JSON.stringify(this.state));
+          localStorage.setItem('eng9_adventure_save_v2', JSON.stringify(this.state));
         } catch (e) {}
         this.updateHUD();
       }
@@ -941,35 +1575,177 @@
 
       addCoins(amount) {
         this.state.coins += amount;
-        if (this.state.coins >= 150) this.unlockBadge('rich_scholar');
+        if (this.state.coins >= 200) this.unlockBadge('rich_scholar');
         this.saveState();
       }
-
-      loseHeart() {
-        if (this.state.hearts > 0) {
-          this.state.hearts -= 1;
-          this.saveState();
-        }
-        if (this.state.hearts <= 0) {
-          this.clearTimer();
-          this.showModal(
-            '💔',
-            'Hết Tim Rồi!',
-            'Bạn đã dùng hết số tim trong lượt này. Hãy vào Cửa hàng để hồi phục tim hoặc luyện tập lại nhé!',
-            [
-              { label: 'Về Bản Đồ', class: 'btn-white', onClick: () => { this.closeModal(); this.goHome(); } },
-              { label: 'Đến Cửa Hàng', class: 'btn-amber', onClick: () => { this.closeModal(); this.switchTab('shop'); } }
-            ]
-          );
-          return true;
-        }
-        return false;
+      setSemesterFilter(filter) {
+        sfx.click();
+        this.semesterFilter = filter;
+        this.render();
       }
 
-      unlockBadge(badgeId) {
-        if (!this.state.badges.includes(badgeId)) {
-          this.state.badges.push(badgeId);
-          this.saveState();
+      toggleFreeMode() {
+        sfx.click();
+        this.state.freeMode = !this.state.freeMode;
+        this.saveState();
+        this.showToast(
+          this.state.freeMode
+            ? '🔓 Đã bật Chế độ tự do: Mở khóa tất cả 12 Unit!'
+            : '🗺️ Đã chuyển về Chế độ phiêu lưu tuần tự!',
+          '✨'
+        );
+        this.render();
+      }
+
+      renderMap(container) {
+        const totalStages = UNITS_DATA.length * 4; // 48 stages
+        let completedStages = 0;
+        Object.values(this.state.unitProgress).forEach(arr => {
+          completedStages += arr.filter(Boolean).length;
+        });
+        const overallPct = Math.round((completedStages / totalStages) * 100);
+
+        const filteredUnits = UNITS_DATA.filter(u => {
+          if (this.semesterFilter === '1') return u.semester === 1;
+          if (this.semesterFilter === '2') return u.semester === 2;
+          return true;
+        });
+
+        let html = `
+          <!-- Adventure Banner -->
+          <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 rounded-3xl p-5 sm:p-6 text-white shadow-lg mb-5 relative overflow-hidden">
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="inline-block bg-white/20 backdrop-blur-sm text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+                  🗺️ TRỌN BỘ 12 UNIT • TIẾNG ANH 9 GLOBAL SUCCESS
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Bản Đồ Chinh Phục Tiếng Anh 9</h2>
+                <p class="text-white/90 text-sm font-semibold mt-1">Học từ vựng, ngữ pháp, ghép câu và đánh bại Boss qua đủ 12 Unit SGK!</p>
+              </div>
+              <div class="bg-white/15 backdrop-blur-md rounded-2xl p-3.5 min-w-[160px] border border-white/20">
+                <div class="flex justify-between text-xs font-extrabold mb-1">
+                  <span>Tiến độ 12 Unit</span>
+                  <span>${overallPct}%</span>
+                </div>
+                <div class="w-full h-2.5 bg-black/25 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-300 rounded-full transition-all duration-500" style="width: ${overallPct}%"></div>
+                </div>
+                <div class="text-[11px] font-bold text-white/80 mt-1.5">${completedStages}/${totalStages} chặng hoàn thành</div>
+              </div>
+            </div>
+            <div class="absolute -right-6 -bottom-8 text-8xl opacity-15 pointer-events-none">🧭</div>
+          </div>
+
+          <!-- Filter & Free Mode Bar -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-6 bg-white p-3 rounded-2xl border-2 border-slate-200 shadow-sm">
+            <div class="flex items-center gap-1.5 overflow-x-auto">
+              <button onclick="app.setSemesterFilter('all')" class="px-3.5 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${this.semesterFilter === 'all' ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                📚 Tất cả (12 Unit)
+              </button>
+              <button onclick="app.setSemesterFilter('1')" class="px-3.5 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${this.semesterFilter === '1' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                📘 Học kỳ I (Unit 1–6)
+              </button>
+              <button onclick="app.setSemesterFilter('2')" class="px-3.5 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${this.semesterFilter === '2' ? 'bg-sky-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                📕 Học kỳ II (Unit 7–12)
+              </button>
+            </div>
+
+            <button onclick="app.toggleFreeMode()" class="px-3.5 py-2 rounded-xl text-xs font-black border-2 transition flex items-center justify-center gap-1.5 ${this.state.freeMode ? 'bg-amber-100 border-amber-400 text-amber-900' : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'}" title="Bật để học ngay bất kỳ Unit nào mà không cần mở khóa tuần tự">
+              <span>${this.state.freeMode ? '🔓 Đang mở tự do 12 Unit' : '🔒 Mở khóa tất cả Unit'}</span>
+            </button>
+          </div>
+
+          <!-- Units Adventure Path -->
+          <div class="space-y-6">
+        `;
+
+        filteredUnits.forEach((unit) => {
+          const isUnlocked = this.state.freeMode || this.state.unlockedUnits.includes(unit.id);
+          const progress = this.state.unitProgress[unit.id] || [false, false, false, false];
+          const doneCount = progress.filter(Boolean).length;
+          const isUnitComplete = doneCount === 4;
+
+          // Star rating: 0 to 3 stars based on completed stages
+          const stars = doneCount === 4 ? 3 : doneCount >= 2 ? 2 : doneCount >= 1 ? 1 : 0;
+          const starsHtml = [1, 2, 3].map(n => `<span class="${n <= stars ? 'text-amber-300' : 'text-white/30'}">★</span>`).join('');
+
+          const stageMeta = [
+            { idx: 0, title: "Kho Báu Từ Vựng", sub: `${unit.vocab.length} từ & Ghép cặp`, icon: "💎", unlocked: isUnlocked },
+            { idx: 1, title: "Đấu Trường Ngữ Pháp", sub: "Lý thuyết & 5 câu hỏi", icon: "⚔️", unlocked: isUnlocked && (this.state.freeMode || progress[0]) },
+            { idx: 2, title: "Thử Thách Ghép Câu", sub: "Sắp xếp câu chuẩn SGK", icon: "🧩", unlocked: isUnlocked && (this.state.freeMode || progress[1]) },
+            { idx: 3, title: `Boss: ${unit.bossName}`, sub: "Đấu Boss tổng hợp", icon: unit.bossIcon, unlocked: isUnlocked && (this.state.freeMode || progress[2]) }
+          ];
+
+          html += `
+            <div class="bg-white rounded-3xl border-2 ${isUnlocked ? 'border-slate-200 shadow-md' : 'border-slate-200/70 opacity-75'} overflow-hidden transition-all">
+              <!-- Unit Header -->
+              <div class="bg-gradient-to-r ${isUnlocked ? unit.gradient : 'from-slate-400 to-slate-500'} p-4 sm:p-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-2xl sm:text-3xl shadow-inner shrink-0">
+                    ${isUnlocked ? unit.icon : '🔒'}
+                  </div>
+                  <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="text-xs font-black uppercase tracking-wider bg-black/25 px-2.5 py-0.5 rounded-lg">${unit.code} • HK${unit.semester}</span>
+                      <span class="text-xs font-bold bg-white/20 px-2.5 py-0.5 rounded-lg">🎯 ${unit.grammarTag}</span>
+                      ${isUnitComplete ? '<span class="text-xs font-black bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded-lg">✔ HOÀN THÀNH</span>' : ''}
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-black mt-1">${unit.title} <span class="font-bold text-white/85 text-sm sm:text-base">— ${unit.viTitle}</span></h3>
+                  </div>
+                </div>
+                <div class="flex sm:flex-col items-center sm:items-end justify-between gap-1 shrink-0">
+                  <div class="text-lg tracking-widest leading-none">${starsHtml}</div>
+                  <div class="text-xs font-extrabold bg-black/20 px-3 py-1 rounded-xl">
+                    ${doneCount}/4 Chặng
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 Stages Grid -->
+              <div class="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                ${stageMeta.map(st => {
+                  const isDone = progress[st.idx];
+                  const canPlay = st.unlocked;
+                  let cardStyle = "bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed";
+                  let badgeHtml = `<span class="text-xs font-extrabold text-slate-400">🔒 Khóa</span>`;
+
+                  if (isDone) {
+                    cardStyle = "bg-emerald-50/70 border-emerald-300 text-slate-800 hover:bg-emerald-50 cursor-pointer";
+                    badgeHtml = `<span class="text-xs font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-lg">✔ Hoàn thành</span>`;
+                  } else if (canPlay) {
+                    cardStyle = "bg-white border-sky-300 text-slate-800 hover:border-sky-400 hover:shadow-md cursor-pointer ring-2 ring-sky-100";
+                    badgeHtml = `<span class="text-xs font-black text-sky-600 bg-sky-100 px-2 py-0.5 rounded-lg">▶ Chơi ngay</span>`;
+                  }
+
+                  return `
+                    <div onclick="${canPlay ? `app.startStage(${unit.id}, ${st.idx})` : `app.showLockedHint(${isUnlocked})`}"
+                         class="rounded-2xl border-2 p-3.5 flex flex-col justify-between transition-all ${cardStyle}">
+                      <div class="flex items-start justify-between gap-2 mb-2">
+                        <span class="text-2xl ${canPlay ? '' : 'grayscale opacity-50'}">${st.icon}</span>
+                        ${badgeHtml}
+                      </div>
+                      <div>
+                        <div class="font-extrabold text-sm leading-snug">${st.idx + 1}. ${st.title}</div>
+                        <div class="text-xs font-semibold text-slate-500 mt-0.5">${st.sub}</div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+        container.innerHTML = html;
+      }
+
+      showLockedHint(unitUnlocked) {
+        sfx.wrong();
+        if (!unitUnlocked) {
+          this.showToast('Đánh bại Boss Unit trước hoặc bật "Mở khóa tất cả Unit" ở phía trên!', '🔒');
+        } else {
+          this.showToast('Hoàn thành chặng trước hoặc bật "Mở khóa tất cả Unit" để vào thẳng!', '🔒');
         }
       }
 
@@ -1360,7 +2136,7 @@
               label: 'Đồng ý đặt lại',
               class: 'btn-red',
               onClick: () => {
-                localStorage.removeItem('eng9_adventure_save_v1');
+                localStorage.removeItem('eng9_adventure_save_v2');
                 this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
                 this.saveState();
                 this.closeModal();
@@ -1397,8 +2173,8 @@
         document.getElementById('bottom-nav').classList.add('hidden');
 
         if (stageIdx === 0) {
-          // Stage 1: Vocabulary Flashcards + Matching Mini-game
-          const pairs = [...unit.vocab].slice(0, 5);
+          // Stage 1: Vocabulary Flashcards + Matching Mini-game (6 random pairs from 8 words)
+          const pairs = [...unit.vocab].sort(() => Math.random() - 0.5).slice(0, 6);
           const leftItems = pairs.map((v, i) => ({ id: i, text: v.word })).sort(() => Math.random() - 0.5);
           const rightItems = pairs.map((v, i) => ({ id: i, text: v.meaning })).sort(() => Math.random() - 0.5);
 
@@ -1421,6 +2197,7 @@
             stageIdx: 1,
             phase: 'theory', // 'theory' -> 'quiz'
             qIdx: 0,
+            combo: 0,
             selectedOption: null,
             isAnswered: false,
             hiddenOptions: []
@@ -1441,12 +2218,13 @@
             isCorrect: false
           };
         } else if (stageIdx === 3) {
-          // Stage 4: Boss Challenge (Timed Quiz)
+          // Stage 4: Boss Challenge (Timed Quiz with Combo)
           this.activeSession = {
             unit,
             stageIdx: 3,
             qIdx: 0,
-            timeLeft: 60,
+            combo: 0,
+            timeLeft: 75,
             bossHp: 100,
             selectedOption: null,
             isAnswered: false,
@@ -1801,11 +2579,16 @@
 
         if (idx === q.answer) {
           sfx.correct();
+          s.combo = (s.combo || 0) + 1;
+          if (s.combo >= 2) {
+            this.showToast(`🔥 Combo x${s.combo}! Trả lời liên tiếp cực đỉnh!`, '⚡');
+          }
           if (s.stageIdx === 3) {
             s.bossHp = Math.max(0, s.bossHp - Math.ceil(100 / questions.length));
           }
         } else {
           sfx.wrong();
+          s.combo = 0;
           if (this.loseHeart()) return;
         }
         this.render();
@@ -1823,11 +2606,12 @@
           s.hiddenOptions = [];
           this.render();
         } else {
+          const comboBonus = (s.combo || 0) * 5;
           if (s.stageIdx === 1) {
-            this.completeStage(40, 20);
+            this.completeStage(45 + comboBonus, 20);
           } else {
             this.clearTimer();
-            this.completeStage(80, 40, true);
+            this.completeStage(90 + comboBonus, 45, true);
           }
         }
       }
@@ -2041,6 +2825,12 @@
         // Mark stage complete
         this.state.unitProgress[unitId][stageIdx] = true;
         this.unlockBadge('first_step');
+
+        // Check Semester 1 (Units 1-6) & Semester 2 (Units 7-12) completion badges
+        const sem1Done = [1, 2, 3, 4, 5, 6].every(id => this.state.unitProgress[id]?.[3]);
+        const sem2Done = [7, 8, 9, 10, 11, 12].every(id => this.state.unitProgress[id]?.[3]);
+        if (sem1Done) this.unlockBadge('semester_1');
+        if (sem2Done) this.unlockBadge('semester_2');
 
         let extraMsg = '';
         if (isBoss) {
