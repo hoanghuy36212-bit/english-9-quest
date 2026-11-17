@@ -77,9 +77,9 @@
             <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
                 <div>
                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Bản Đồ Chinh Phục THCS
+                        <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Bản Đồ Chinh Phục THCS (Global Success)
                     </h2>
-                    <p class="text-xs text-gray-400">Hoàn thành đủ 4 chặng (đến Đấu Boss) để mở khóa Unit tiếp theo</p>
+                    <p class="text-xs text-gray-400">Hoàn thành đủ 4 chặng để mở khóa Unit tiếp theo</p>
                 </div>
                 <div class="flex flex-wrap gap-1.5 bg-gray-900/60 p-1.5 rounded-xl border border-gray-700 justify-center">
                     <button onclick="switchGrade(6)" id="btn-grade-6" class="px-3 py-1 text-xs font-bold rounded-lg bg-gray-800 text-gray-300 transition">Lớp 6</button>
@@ -215,11 +215,12 @@
     </nav>
 
     <script>
-        const generateUnits = (gradeName) => {
-            return Array.from({length: 12}, (_, i) => ({
+        // HỆ THỐNG DỮ LIỆU CHUẨN SGK GLOBAL SUCCESS CHO CÁC KHỐI LỚP 6, 7, 8, 9
+        const generateUnits = (gradeName, titles) => {
+            return titles.map((titleData, i) => ({
                 id: i + 1,
-                title: `Unit ${i + 1} (${gradeName})`,
-                vietnamese: `Chủ đề trọng tâm bài ${i + 1}`,
+                title: `Unit ${i + 1}: ${titleData.en}`,
+                vietnamese: titleData.vi,
                 semester: i < 6 ? 1 : 2,
                 vocab: [
                     { en: "school", vi: "trường học", phonetic: "/skuːl/", example: "My school is large." },
@@ -227,13 +228,13 @@
                     { en: "teacher", vi: "giáo viên", phonetic: "/ˈtiːtʃə(r)/", example: "Our teacher is helpful." },
                     { en: "friend", vi: "bạn bè", phonetic: "/frend/", example: "Make new friends." }
                 ],
-                grammar: { title: `Ngữ pháp trọng tâm Unit ${i + 1}`, content: "Hệ thống lý thuyết và cấu trúc ngữ pháp quan trọng theo chương trình Global Success." },
+                grammar: { title: `Ngữ pháp trọng tâm Unit ${i + 1}`, content: `Hệ thống cấu trúc ngữ pháp quan trọng trong chương trình ${gradeName} Global Success.` },
                 quiz: [
-                    { q: `Câu hỏi 1 (${gradeName} - U${i+1}): Choose the correct form.`, options: ["Option A", "Option B", "Option C", "Correct Answer"], correct: 3, explain: "Giải thích chi tiết đáp án đúng." },
-                    { q: `Câu hỏi 2 (${gradeName} - U${i+1}): Select the right word.`, options: ["Right Choice", "Wrong 1", "Wrong 2", "Wrong 3"], correct: 0, explain: "Giải thích chi tiết đáp án đúng." },
-                    { q: `Câu hỏi 3 (${gradeName} - U${i+1}): Find the correct grammar structure.`, options: ["Bad", "Wrong", "Correct Structure", "Poor"], correct: 2, explain: "Giải thích chi tiết đáp án đúng." },
-                    { q: `Câu hỏi 4 (${gradeName} - U${i+1}): Complete the sentence.`, options: ["Err", "Flaw", "Valid Option", "Mistake"], correct: 2, explain: "Giải thích chi tiết đáp án đúng." },
-                    { q: `Câu hỏi 5 (${gradeName} - U${i+1}): Final boss challenge question.`, options: ["Error", "Wrong choice", "Incorrect", "Ultimate Correct Answer"], correct: 3, explain: "Giải thích chi tiết đáp án đúng." }
+                    { q: `Chọn dạng đúng của động từ: She _____ to school every day.`, options: ["go", "goes", "going", "is go"], correct: 1, explain: "Chủ ngữ ngôi thứ 3 số ít (She) ở thì hiện tại đơn phải thêm s/es vào động từ." },
+                    { q: `Chọn từ loại phù hợp: My brother is very _____ and helpful.`, options: ["kind", "lazily", "slow", "noise"], correct: 0, explain: "'kind' là tính từ dùng để miêu tả tính cách tốt bụng." },
+                    { q: `Chọn giới từ đúng: There is a picture _____ the wall.`, options: ["in", "at", "on", "under"], correct: 0, explain: "Đối với bề mặt tường, ta dùng giới từ 'on'." },
+                    { q: `Chọn đáp án đúng điền vào chỗ trống: They _____ English at the moment.`, options: ["study", "studies", "are studying", "studied"], correct: 2, explain: "Dấu hiệu 'at the moment' diễn tả hành động đang xảy ra dùng thì hiện tại tiếp diễn." },
+                    { q: `Chọn cấu trúc so sánh đúng: This house is _____ than that one.`, options: ["big", "bigger", "biggest", "more big"], correct: 1, explain: "Tính từ ngắn 'big' khi chuyển sang so sánh hơn thêm '-er' và gấp đôi phụ âm thành 'bigger'." }
                 ],
                 sentences: [
                     { scrambled: ["English", "learn", "We", "today"], correct: "We learn English today." },
@@ -243,19 +244,56 @@
             }));
         };
 
-        const dataGrade6 = generateUnits("Lớp 6");
-        const dataGrade7 = generateUnits("Lớp 7");
-        const dataGrade8 = generateUnits("Lớp 8");
-        const dataGrade9 = generateUnits("Lớp 9");
+        const titles6 = [
+            { en: "My New School", vi: "Trường mới của tôi" }, { en: "My House", vi: "Ngôi nhà của tôi" },
+            { en: "My Friends", vi: "Những người bạn" }, { en: "My Neighbourhood", vi: "Khu xóm của tôi" },
+            { en: "Natural Wonders", vi: "Kỳ quan thiên nhiên" }, { en: "Tet Holiday", vi: "Ngày Tết nguyên đán" },
+            { en: "Television", vi: "Truyền hình" }, { en: "Sports and Games", vi: "Thể thao và trò chơi" },
+            { en: "Cities of the World", vi: "Các thành phố trên thế giới" }, { en: "Our Houses in the Future", vi: "Nhà ở tương lai" },
+            { en: "Our Greener World", vi: "Thế giới xanh hơn" }, { en: "Robots", vi: "Người máy" }
+        ];
 
-        let gameState = JSON.parse(localStorage.getItem('english69_strict_state')) || {
+        const titles7 = [
+            { en: "Hobby", vi: "Sở thích" }, { en: "Healthy Living", vi: "Sống khỏe mạnh" },
+            { en: "Community Service", vi: "Hoạt động cộng đồng" }, { en: "Music and Arts", vi: "Âm nhạc và nghệ thuật" },
+            { en: "Food and Drink", vi: "Đồ ăn và thức uống" }, { en: "A Visit to a School", vi: "Thăm trường học" },
+            { en: "Saving Energy", vi: "Tiết kiệm năng lượng" }, { en: "Festivals Around", vi: "Lễ hội xung quanh" },
+            { en: "English in the World", vi: "Tiếng Anh trên thế giới" }, { en: "Energy Sources", vi: "Nguồn năng lượng" },
+            { en: "Travelling in the Future", vi: "Du lịch tương lai" }, { en: "English Speaking Countries", vi: "Các nước nói tiếng Anh" }
+        ];
+
+        const titles8 = [
+            { en: "Leisure Time", vi: "Thời gian rảnh rỗi" }, { en: "Life in the Countryside", vi: "Cuộc sống nông thôn" },
+            { en: "Teenagers", vi: "Thiếu niên" }, { en: "Ethnic Groups", vi: "Các dân tộc thiểu số" },
+            { en: "Our Customs and Traditions", vi: "Phong tục và truyền thống" }, { en: "Lifestyles", vi: "Lối sống" },
+            { en: "Environmental Protection", vi: "Bảo vệ môi trường" }, { en: "Shopping", vi: "Mua sắm" },
+            { en: "Natural Disasters", vi: "Thảm họa thiên nhiên" }, { en: "Communication in the Future", vi: "Giao tiếp tương lai" },
+            { en: "Science and Technology", vi: "Khoa học và công nghệ" }, { en: "Life on Other Planets", vi: "Sự sống hành tinh khác" }
+        ];
+
+        const titles9 = [
+            { en: "Local Community", vi: "Cộng đồng địa phương" }, { en: "City Life", vi: "Cuộc sống thành phố" },
+            { en: "Teenagers", vi: "Giới trẻ" }, { en: "Remembering the Past", vi: "Nhớ về quá khứ" },
+            { en: "Our Experiences", vi: "Những trải nghiệm" }, { en: "Vietnamese Lifestyle", vi: "Lối sống Việt Nam" },
+            { en: "Recipes for Life", vi: "Công thức cuộc sống" }, { en: "Tourism", vi: "Du lịch" },
+            { en: "English in the World", vi: "Tiếng Anh trên thế giới" }, { en: "Space Travel", vi: "Du hành vũ trụ" }
+        ];
+
+        const dataGrade6 = generateUnits("Lớp 6", titles6);
+        const dataGrade7 = generateUnits("Lớp 7", titles7);
+        const dataGrade8 = generateUnits("Lớp 8", titles8);
+        const dataGrade9 = generateUnits("Lớp 9", titles9.concat([
+            { en: "The Environment", vi: "Môi trường" }, { en: "Electronic Devices", vi: "Thiết bị điện tử" }
+        ]));
+
+        let gameState = JSON.parse(localStorage.getItem('english69_fixed_full_state')) || {
             currentGrade: 9, level: 1, xp: 0, streak: 1, coins: 60, hearts: 10, maxHearts: 10, shield: false,
             completedUnits: { 6: [], 7: [], 8: [], 9: [] },
             audioEnabled: true
         };
 
         function saveState() {
-            localStorage.setItem('english69_strict_state', JSON.stringify(gameState));
+            localStorage.setItem('english69_fixed_full_state', JSON.stringify(gameState));
             updateHUD();
         }
 
@@ -319,7 +357,6 @@
             filtered.forEach(unit => {
                 const completedArr = gameState.completedUnits[gameState.currentGrade];
 
-                // CHỈ MỞ KHÓA KHI UNIT TRƯỚC ĐÃ ĐƯỢC HOÀN THÀNH HOẶC LÀ UNIT 1
                 const isPreviousCompleted = unit.id === 1 || completedArr.includes(unit.id - 1);
                 const isUnlocked = isPreviousCompleted;
                 const isCompleted = completedArr.includes(unit.id);
@@ -335,13 +372,13 @@
                                 ${isCompleted ? '<i class="fa-solid fa-check"></i>' : (isUnlocked ? unit.id : '<i class="fa-solid fa-lock"></i>')}
                             </div>
                             <div>
-                                <span class="text-xs font-bold ${isUnlocked ? 'text-emerald-400' : 'text-gray-400'}">LỚP ${gameState.currentGrade} • UNIT ${unit.id} • HK${unit.semester}</span>
-                                <h3 class="text-lg font-black text-white">${unit.title}</h3>
+                                <span class="text-xs font-bold ${isUnlocked ? 'text-emerald-400' : 'text-gray-400'}">LỚP ${gameState.currentGrade} • HK${unit.semester}</span>
+                                <h3 class="text-base sm:text-lg font-black text-white">${unit.title}</h3>
                                 <p class="text-xs text-gray-400">${unit.vietnamese}</p>
                             </div>
                         </div>
                         <span class="text-xs font-bold px-2.5 py-1 rounded-full ${isCompleted ? 'bg-emerald-500/20 text-emerald-400' : 'bg-gray-800 text-gray-300'}">
-                            ${isCompleted ? '⭐ Đã chinh phục' : `${progressCount}/4 Chặng`}
+                            ${isCompleted ? '⭐ Đã xong' : `${progressCount}/4 Chặng`}
                         </span>
                     </div>
 
@@ -551,7 +588,7 @@
             } else {
                 loseHeart(); if (gameState.hearts <= 0) return;
                 buttons[selectedIdx].className = "btn-duolingo w-full text-left p-4 rounded-2xl bg-red-600/50 font-bold text-white opacity-50 pointer-events-none";
-                alert(`❌ Sai rồi! Trừ 1 tim. Giải thích: ${explanation}`);
+                alert(`❌ Chưa đúng! Hãy suy nghĩ kỹ lại nhé.`);
             }
         }
 
@@ -563,7 +600,7 @@
             } else {
                 loseHeart(); if (gameState.hearts <= 0) return;
                 buttons[selectedIdx].className = "btn-duolingo w-full text-left p-4 rounded-2xl bg-red-600/50 font-bold text-white opacity-50 pointer-events-none";
-                alert(`❌ Boss phản công! Trừ 1 tim. Giải thích: ${explanation}`);
+                alert(`❌ Boss phản công! Chưa đúng, hãy thử lại.`);
             }
         }
 
@@ -609,12 +646,15 @@
         }
 
         function checkSentenceResult(correctSentence) {
-            const userSentence = userSelectedWords.map(i => i.word).join(' ');
-            if (userSentence === correctSentence) {
+            const userSentence = userSelectedWords.map(i => i.word).join(' ').trim();
+            const cleanUser = userSentence.replace(/\.$/, "").toLowerCase();
+            const cleanCorrect = correctSentence.replace(/\.$/, "").toLowerCase();
+
+            if (cleanUser === cleanCorrect) {
                 alert("Chính xác! 🎉"); lessonStep++; loadStageContent();
             } else {
                 loseHeart(); if (gameState.hearts <= 0) return;
-                alert(`❌ Chưa đúng! Câu chuẩn: "${correctSentence}"`);
+                alert("❌ Chưa đúng! Hãy suy nghĩ và sắp xếp lại nhé.");
             }
         }
 
@@ -634,7 +674,6 @@
             const grade = gameState.currentGrade;
             if(!gameState.completedUnits[grade]) gameState.completedUnits[grade] = [];
 
-            // CHỈ GHI NHẬN HOÀN THÀNH KHI HOÀN THÀNH CHẶNG 4 (ĐẤU BOSS)
             if (currentStageIdx === 4 && !gameState.completedUnits[grade].includes(currentUnitObj.id)) {
                 gameState.completedUnits[grade].push(currentUnitObj.id);
             }
