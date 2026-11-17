@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English 6-9 Quest - Full Exercises Edition</title>
+    <title>English 6-9 Quest - Global Success Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -77,9 +77,9 @@
             <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
                 <div>
                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Bản Đồ Chinh Phục THCS (Đầy đủ 5+ bài tập mỗi Unit)
+                        <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Bản Đồ Chinh Phục THCS
                     </h2>
-                    <p class="text-xs text-gray-400">Chọn khối lớp để bắt đầu học tập</p>
+                    <p class="text-xs text-gray-400">Hoàn thành đủ 4 chặng (đến Đấu Boss) để mở khóa Unit tiếp theo</p>
                 </div>
                 <div class="flex flex-wrap gap-1.5 bg-gray-900/60 p-1.5 rounded-xl border border-gray-700 justify-center">
                     <button onclick="switchGrade(6)" id="btn-grade-6" class="px-3 py-1 text-xs font-bold rounded-lg bg-gray-800 text-gray-300 transition">Lớp 6</button>
@@ -94,9 +94,6 @@
                     <button onclick="filterSemester(1)" id="btn-sem-1" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white transition">Học kỳ I</button>
                     <button onclick="filterSemester(2)" id="btn-sem-2" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-gray-700 text-gray-300 transition">Học kỳ II</button>
                 </div>
-                <button onclick="unlockAllUnits()" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition flex items-center gap-1">
-                    <i class="fa-solid fa-unlock"></i> Mở khóa tất cả
-                </button>
             </div>
         </div>
 
@@ -218,7 +215,6 @@
     </nav>
 
     <script>
-        // HỆ THỐNG DỮ LIỆU ĐẢM BẢO MỖI UNIT CÓ ĐỦ 5+ BÀI TẬP VÀ TỪ VỰNG CHUẨN SGK
         const generateUnits = (gradeName) => {
             return Array.from({length: 12}, (_, i) => ({
                 id: i + 1,
@@ -252,15 +248,14 @@
         const dataGrade8 = generateUnits("Lớp 8");
         const dataGrade9 = generateUnits("Lớp 9");
 
-        let gameState = JSON.parse(localStorage.getItem('english69_complete_state')) || {
+        let gameState = JSON.parse(localStorage.getItem('english69_strict_state')) || {
             currentGrade: 9, level: 1, xp: 0, streak: 1, coins: 60, hearts: 10, maxHearts: 10, shield: false,
             completedUnits: { 6: [], 7: [], 8: [], 9: [] },
-            unlockedUnits: { 6: [1], 7: [1], 8: [1], 9: [1] },
             audioEnabled: true
         };
 
         function saveState() {
-            localStorage.setItem('english69_complete_state', JSON.stringify(gameState));
+            localStorage.setItem('english69_strict_state', JSON.stringify(gameState));
             updateHUD();
         }
 
@@ -312,14 +307,6 @@
             return dataGrade9;
         }
 
-        function unlockAllUnits() {
-            const units = getUnitsByGrade(gameState.currentGrade);
-            gameState.unlockedUnits[gameState.currentGrade] = units.map(u => u.id);
-            saveState();
-            renderMap();
-            alert(`Đã mở khóa toàn bộ Tiếng Anh lớp ${gameState.currentGrade}!`);
-        }
-
         function renderMap() {
             const mapContainer = document.getElementById('view-map');
             mapContainer.innerHTML = '';
@@ -328,18 +315,13 @@
             const filtered = units.filter(u => u.semester === currentSemesterFilter);
 
             if(!gameState.completedUnits[gameState.currentGrade]) gameState.completedUnits[gameState.currentGrade] = [];
-            if(!gameState.unlockedUnits[gameState.currentGrade]) gameState.unlockedUnits[gameState.currentGrade] = [1];
 
             filtered.forEach(unit => {
                 const completedArr = gameState.completedUnits[gameState.currentGrade];
-                const unlockedArr = gameState.unlockedUnits[gameState.currentGrade];
 
+                // CHỈ MỞ KHÓA KHI UNIT TRƯỚC ĐÃ ĐƯỢC HOÀN THÀNH HOẶC LÀ UNIT 1
                 const isPreviousCompleted = unit.id === 1 || completedArr.includes(unit.id - 1);
-                const isUnlocked = isPreviousCompleted || unlockedArr.includes(unit.id);
-                if (isUnlocked && !unlockedArr.includes(unit.id)) {
-                    unlockedArr.push(unit.id);
-                }
-
+                const isUnlocked = isPreviousCompleted;
                 const isCompleted = completedArr.includes(unit.id);
                 const progressCount = isCompleted ? 4 : 0;
 
@@ -399,7 +381,7 @@
         }
 
         function lockedAlert() {
-            alert("Bạn cần hoàn thành các Unit trước để mở khóa thử thách này!");
+            alert("🔒 Unit này đang bị khóa! Bạn cần hoàn thành chiến thắng Boss của Unit trước đó.");
         }
 
         function switchTab(tab) {
@@ -524,7 +506,7 @@
                                 <h3 class="text-lg font-black text-white">${currentUnitObj.grammar.title}</h3>
                                 <p class="text-sm text-gray-300">${currentUnitObj.grammar.content}</p>
                             </div>
-                            <button onclick="lessonStep++; loadStageContent();" class="btn-duolingo w-full bg-emerald-600 text-white font-black py-3.5 rounded-2xl text-lg">Vào 5 bài tập trắc nghiệm ➔</button>
+                            <button onclick="lessonStep++; loadStageContent();" class="btn-duolingo w-full bg-emerald-600 text-white font-black py-3.5 rounded-2xl text-lg">Vào bài tập trắc nghiệm ➔</button>
                         </div>`;
                 } else {
                     const qIdx = lessonStep - 1;
@@ -648,14 +630,14 @@
                 gameState.level++;
                 bonusText += `<br><span class='text-purple-400 font-bold'>🚀 Lên Cấp độ ${gameState.level}!</span>`;
             }
+
             const grade = gameState.currentGrade;
             if(!gameState.completedUnits[grade]) gameState.completedUnits[grade] = [];
-            if(!gameState.completedUnits[grade].includes(currentUnitObj.id)) gameState.completedUnits[grade].push(currentUnitObj.id);
 
-            const nextUnitId = currentUnitObj.id + 1;
-            const units = getUnitsByGrade(grade);
-            if(!gameState.unlockedUnits[grade]) gameState.unlockedUnits[grade] = [1];
-            if (nextUnitId <= units.length && !gameState.unlockedUnits[grade].includes(nextUnitId)) gameState.unlockedUnits[grade].push(nextUnitId);
+            // CHỈ GHI NHẬN HOÀN THÀNH KHI HOÀN THÀNH CHẶNG 4 (ĐẤU BOSS)
+            if (currentStageIdx === 4 && !gameState.completedUnits[grade].includes(currentUnitObj.id)) {
+                gameState.completedUnits[grade].push(currentUnitObj.id);
+            }
 
             saveState(); confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 
@@ -665,7 +647,7 @@
                         <i class="fa-solid fa-trophy"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-black text-white">Hoàn Thành Xuất Sắc!</h2>
+                        <h2 class="text-2xl font-black text-white">Hoàn Thành Xuất Sắc Chặng Này!</h2>
                         <p class="text-sm text-emerald-400 mt-1">Lớp ${grade} - Unit ${currentUnitObj.id}</p>
                         <p class="text-xs text-gray-400 mt-2">+25 XP | +10 Vàng ${bonusText}</p>
                     </div>
