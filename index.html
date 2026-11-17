@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English 9 Quest - Global Success Edition</title>
+    <title>English 8 & 9 Quest - Global Success Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -31,43 +31,38 @@
         <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="bg-emerald-500 text-white font-black px-3 py-1 rounded-xl text-lg shadow-lg flex items-center gap-1">
-                    <i class="fa-solid fa-graduation-cap"></i> E9
+                    <i class="fa-solid fa-graduation-cap"></i> E8-9
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-sm sm:text-base text-gray-200">English 9 Quest</h1>
+                    <h1 class="font-extrabold text-sm sm:text-base text-gray-200">English Quest</h1>
                     <span class="text-xs text-emerald-400 font-bold">Global Success Edition</span>
                 </div>
             </div>
 
             <!-- Stats -->
-            <div class="flex items-center space-x-3 sm:space-x-6 text-sm font-bold">
-                <!-- Level / XP -->
+            <div class="flex items-center space-x-3 sm:space-x-5 text-sm font-bold">
                 <div class="flex items-center gap-2 bg-gray-800/80 px-3 py-1.5 rounded-full border border-gray-700">
                     <span id="level-badge" class="bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">Lv.1</span>
-                    <div class="w-16 sm:w-24 bg-gray-700 h-2 rounded-full overflow-hidden">
+                    <div class="w-12 sm:w-20 bg-gray-700 h-2 rounded-full overflow-hidden">
                         <div id="xp-bar" class="bg-purple-500 h-full w-0 transition-all duration-300"></div>
                     </div>
                 </div>
 
-                <!-- Streak -->
                 <div class="flex items-center gap-1 text-orange-400" title="Chuỗi ngày học">
-                    <i class="fa-solid fa-fire text-lg animate-pulse"></i>
+                    <i class="fa-solid fa-fire"></i>
                     <span id="streak-count">1</span>
                 </div>
 
-                <!-- Coins -->
                 <div class="flex items-center gap-1 text-yellow-400" title="Xu vàng">
-                    <i class="fa-solid fa-coins text-lg"></i>
+                    <i class="fa-solid fa-coins"></i>
                     <span id="coins-count">60</span>
                 </div>
 
-                <!-- Hearts -->
                 <div class="flex items-center gap-1 text-red-500" title="Tim">
-                    <i class="fa-solid fa-heart text-lg"></i>
+                    <i class="fa-solid fa-heart"></i>
                     <span id="hearts-count">10</span>
                 </div>
 
-                <!-- Mute Audio -->
                 <button onclick="toggleAudio()" id="audio-btn" class="text-gray-400 hover:text-white transition">
                     <i class="fa-solid fa-volume-high text-lg"></i>
                 </button>
@@ -78,27 +73,35 @@
     <!-- MAIN CONTAINER -->
     <main class="max-w-4xl mx-auto px-4 mt-6">
         
-        <!-- BANNER HỌC KỲ -->
-        <div class="flex justify-between items-center mb-6 bg-[#202f36] p-4 rounded-2xl border border-gray-800">
-            <div>
-                <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Bản Đồ Chinh Phục 12 Unit
-                </h2>
-                <p class="text-xs text-gray-400">Hoàn thành thử thách từng Unit để mở khóa bài tiếp theo!</p>
+        <!-- CHỌN KHỐI LỚP & HỌC KỲ -->
+        <div class="bg-[#202f36] p-4 rounded-2xl border border-gray-800 mb-6 space-y-3">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Bản Đồ Chinh Phục
+                    </h2>
+                    <p class="text-xs text-gray-400">Chọn khối lớp và học kỳ để bắt đầu luyện tập</p>
+                </div>
+                <!-- Nút chọn Lớp -->
+                <div class="flex gap-2 bg-gray-900/60 p-1.5 rounded-xl border border-gray-700">
+                    <button onclick="switchGrade(8)" id="btn-grade-8" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-gray-800 text-gray-300 transition">Tiếng Anh 8</button>
+                    <button onclick="switchGrade(9)" id="btn-grade-9" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-emerald-600 text-white transition">Tiếng Anh 9</button>
+                </div>
             </div>
-            <div class="flex gap-2">
-                <button onclick="filterSemester(1)" id="btn-sem-1" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white transition">Học kỳ I</button>
-                <button onclick="filterSemester(2)" id="btn-sem-2" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-gray-700 text-gray-300 transition">Học kỳ II</button>
-                <button onclick="unlockAllUnits()" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition flex items-center gap-1" title="Mở khóa ngay tất cả các Unit để học tự do">
+
+            <div class="flex justify-between items-center pt-2 border-t border-gray-800">
+                <div class="flex gap-2">
+                    <button onclick="filterSemester(1)" id="btn-sem-1" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white transition">Học kỳ I</button>
+                    <button onclick="filterSemester(2)" id="btn-sem-2" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-gray-700 text-gray-300 transition">Học kỳ II</button>
+                </div>
+                <button onclick="unlockAllUnits()" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition flex items-center gap-1">
                     <i class="fa-solid fa-unlock"></i> Mở khóa tất cả
                 </button>
             </div>
         </div>
 
         <!-- VIEWS -->
-        <div id="view-map" class="space-y-6">
-            <!-- Danh sách Unit được render bằng JS -->
-        </div>
+        <div id="view-map" class="space-y-6"></div>
 
         <!-- SHOP VIEW -->
         <div id="view-shop" class="hidden space-y-6">
@@ -142,28 +145,22 @@
         <div id="view-badges" class="hidden space-y-6">
             <div class="bg-[#202f36] p-6 rounded-2xl border border-gray-800 text-center">
                 <h2 class="text-2xl font-black text-white mb-2"><i class="fa-solid fa-trophy text-yellow-400"></i> Phòng Trưng bày Huy Hiệu</h2>
-                <p class="text-sm text-gray-400">Chinh phục các Unit để sưu tầm trọn bộ huy hiệu danh giá lớp 9.</p>
+                <p class="text-sm text-gray-400">Chinh phục các Unit để sưu tầm huy hiệu danh giá.</p>
             </div>
-            <div id="badges-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <!-- Render bằng JS -->
-            </div>
+            <div id="badges-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
         </div>
 
         <!-- PROFILE VIEW -->
         <div id="view-profile" class="hidden space-y-6">
             <div class="game-card p-6 text-center space-y-4">
                 <div class="w-20 h-20 bg-emerald-500 rounded-full mx-auto flex items-center justify-center text-3xl font-black text-white shadow-xl">
-                    E9
+                    E89
                 </div>
                 <div>
-                    <h2 class="text-xl font-black text-white">Học Sinh Lớp 9</h2>
-                    <p class="text-xs text-emerald-400 font-bold">Chương trình Tiếng Anh 9 Global Success</p>
+                    <h2 class="text-xl font-black text-white">Học Sinh Chăm Chỉ</h2>
+                    <p class="text-xs text-emerald-400 font-bold">Chương trình Tiếng Anh Global Success</p>
                 </div>
                 <div class="grid grid-cols-3 gap-3 pt-4 border-t border-gray-800 text-center">
-                    <div class="bg-gray-800/50 p-3 rounded-xl">
-                        <span id="prof-units" class="block text-xl font-black text-white">0/12</span>
-                        <span class="text-xs text-gray-400">Unit hoàn thành</span>
-                    </div>
                     <div class="bg-gray-800/50 p-3 rounded-xl">
                         <span id="prof-score" class="block text-xl font-black text-yellow-400">0</span>
                         <span class="text-xs text-gray-400">Tổng XP</span>
@@ -172,6 +169,10 @@
                         <span id="prof-hearts" class="block text-xl font-black text-red-500">10</span>
                         <span class="text-xs text-gray-400">Tim hiện tại</span>
                     </div>
+                    <div class="bg-gray-800/50 p-3 rounded-xl">
+                        <span id="prof-streak" class="block text-xl font-black text-orange-400">1</span>
+                        <span class="text-xs text-gray-400">Chuỗi ngày</span>
+                    </div>
                 </div>
                 <button onclick="resetData()" class="text-xs text-red-400 hover:text-red-300 underline pt-2">Đặt lại toàn bộ tiến trình học</button>
             </div>
@@ -179,7 +180,7 @@
 
     </main>
 
-    <!-- LESSON MODAL / GAME ARENA -->
+    <!-- LESSON MODAL -->
     <div id="lesson-modal" class="fixed inset-0 z-50 bg-[#131f24] hidden flex flex-col">
         <header class="bg-[#202f36] px-4 py-3 border-b border-gray-800 flex items-center justify-between">
             <button onclick="closeLesson()" class="text-gray-400 hover:text-white text-lg px-2 py-1">
@@ -192,9 +193,7 @@
                 <i class="fa-solid fa-heart"></i> <span id="modal-hearts">10</span>
             </div>
         </header>
-        <div id="lesson-content" class="flex-1 max-w-2xl w-full mx-auto p-4 flex flex-col justify-center overflow-y-auto">
-            <!-- Nội dung bài tập -->
-        </div>
+        <div id="lesson-content" class="flex-1 max-w-2xl w-full mx-auto p-4 flex flex-col justify-center overflow-y-auto"></div>
     </div>
 
     <!-- BOTTOM NAVIGATION -->
@@ -219,290 +218,478 @@
         </div>
     </nav>
 
-    <!-- SCRIPT DỮ LIỆU VÀ LOGIC GAME -->
+    <!-- SCRIPT DỮ LIỆU & LOGIC -->
     <script>
-        // --- DỮ LIỆU 12 UNIT TIẾNG ANH 9 GLOBAL SUCCESS ---
-        const unitsData = [
+        // --- DỮ LIỆU TIẾNG ANH 8 & 9 GLOBAL SUCCESS ---
+        const dataGrade8 = [
+            {
+                id: 1, title: "Leisure Activities", vietnamese: "Các hoạt động giải trí", semester: 1,
+                vocab: [
+                    { en: "leisure", vi: "thời gian rảnh rỗi", phonetic: "/ˈleʒə(r)/", example: "What do you do in your leisure time?" },
+                    { en: "socialise", vi: "giao lưu", phonetic: "/ˈsəʊʃəlaɪz/", example: "Teens like to socialise online." },
+                    { en: "craft", vi: "đồ thủ công", phonetic: "/krɑːft/", example: "She enjoys making crafts." },
+                    { en: "surf", vi: "lướt (web/sóng)", phonetic: "/sɜːf/", example: "He surfs the net every evening." },
+                    { en: "melody", vi: "giai điệu", phonetic: "/ˈmelədi/", example: "The song has a sweet melody." },
+                    { en: "relax", vi: "thư giãn", phonetic: "/rɪˈlæks/", example: "Listening to music helps me relax." },
+                    { en: "diy", vi: "tự làm", phonetic: "/ˌdiː aɪ ˈwaɪ/", example: "DIY projects are fun." },
+                    { en: "hanging out", vi: "đi chơi", phonetic: "/ˈhæŋɪŋ aʊt/", example: "They love hanging out with friends." }
+                ],
+                grammar: { title: "Verbs of liking/disliking + V-ing", content: "Dùng love, like, enjoy, hate, detest + V-ing để diễn tả sở thích hoặc sự ghét bỏ." },
+                quiz: [
+                    { q: "Choose the correct form: She enjoys _____ books in her free time.", options: ["read", "reading", "to read", "readed"], correct: 1, explain: "Sau 'enjoy' dùng động từ thêm đuôi -ing." },
+                    { q: "Activities you do when you are free are called _____ activities.", options: ["leisure", "working", "school", "office"], correct: 0, explain: "'leisure' là rảnh rỗi." }
+                ],
+                sentences: [
+                    { scrambled: ["enjoy", "I", "reading", "books", "comic"], correct: "I enjoy reading comic books." },
+                    { scrambled: ["surfing", "likes", "He", "net", "the"], correct: "He likes surfing the net." }
+                ],
+                boss: { name: "Trùm Giải Trí", hp: 100, questions: 2 }
+            },
+            {
+                id: 2, title: "Life in the Countryside", vietnamese: "Cuộc sống ở vùng nông thôn", semester: 1,
+                vocab: [
+                    { en: "paddy field", vi: "cánh đồng lúa", phonetic: "/ˈpædi fiːld/", example: "Farmers work in paddy fields." },
+                    { en: "cattle", vi: "gia súc", phonetic: "/ˈkætl/", example: "The boy is grazing cattle." },
+                    { en: "harvest", vi: "mùa gặt, thu hoạch", phonetic: "/ˈhɑːvɪst/", example: "Harvest time is very busy." },
+                    { en: "vast", vi: "rộng lớn, bao la", phonetic: "/vɑːst/", example: "The sky is vast and blue." },
+                    { en: "nomadic", vi: "du mục", phonetic: "/nəʊˈmædɪk/", example: "Nomadic life is interesting." },
+                    { en: "generous", vi: "hào phóng, rộng lượng", phonetic: "/ˈdʒenərəs/", example: "Country people are very generous." },
+                    { en: "peaceful", vi: "yên bình", phonetic: "/ˈpiːsfl/", example: "Life here is quiet and peaceful." },
+                    { en: "picturesque", vi: "đẹp như tranh", phonetic: "/ˌpɪktʃəˈresk/", example: "The village is picturesque." }
+                ],
+                grammar: { title: "Comparative forms of adverbs", content: "Trạng từ ngắn: S + V + adv-er + than. Trạng từ dài: S + V + more + adv + than." },
+                quiz: [
+                    { q: "Choose the correct form: He runs _____ than his brother.", options: ["fast", "faster", "more fast", "fastest"], correct: 1, explain: "'fast' là trạng từ ngắn, dạng so sánh hơn là 'faster'." },
+                    { q: "A large farm animal kept for meat or milk is _____.", options: ["cattle", "poultry", "fish", "bird"], correct: 0, explain: "'cattle' là gia súc." }
+                ],
+                sentences: [
+                    { scrambled: ["live", "People", "peacefully", "countryside", "in"], correct: "People live peacefully in countryside." },
+                    { scrambled: ["runs", "He", "faster", "me", "than"], correct: "He runs faster than me." }
+                ],
+                boss: { name: "Trùm Đồng Quê", hp: 100, questions: 2 }
+            },
+            {
+                id: 3, title: "Teenagers", vietnamese: "Thiếu niên", semester: 1,
+                vocab: [
+                    { en: "pressure", vi: "áp lực", phonetic: "/ˈpreʃə(r)/", example: "Teens face exam pressure." },
+                    { en: "stress", vi: "căng thẳng", phonetic: "/stres/", example: "Relax to reduce stress." },
+                    { en: "bully", vi: "bắt nạt", phonetic: "/ˈbʊli/", example: "Say no to school bullying." },
+                    { en: "forum", vi: "diễn đàn trực tuyến", phonetic: "/ˈfɔːrəm/", example: "Join our teen forum." },
+                    { en: "relax", vi: "thư giãn", phonetic: "/rɪˈlæks/", example: "Listen to music to relax." },
+                    { en: "confident", vi: "tự tin", phonetic: "/ˈkɒnfɪdənt/", example: "Be confident in exams." },
+                    { en: "distracted", vi: "bị sao nhãng", phonetic: "/dɪˈstræktɪd/", example: "Don't get distracted by phones." },
+                    { en: "balance", vi: "cân bằng", phonetic: "/ˈbæləns/", example: "Balance study and play." }
+                ],
+                grammar: { title: "Simple sentences vs Compound sentences", content: "Câu đơn chứa 1 mệnh đề độc lập. Câu ghép nối 2 mệnh đề bằng các liên từ: and, but, so, or." },
+                quiz: [
+                    { q: "Choose the correct conjunction: She was tired, _____ she went to bed early.", options: ["so", "but", "because", "or"], correct: 0, explain: "Dùng 'so' để chỉ kết quả." },
+                    { q: "Mental tension caused by difficult situations is called _____.", options: ["stress", "joy", "peace", "calm"], correct: 0, explain: "'stress' là căng thẳng." }
+                ],
+                sentences: [
+                    { scrambled: ["exams", "Teens", "stressful", "have", "many"], correct: "Teens have many stressful exams." },
+                    { scrambled: ["relax", "should", "You", "more"], correct: "You should relax more." }
+                ],
+                boss: { name: "Thần Áp Lực", hp: 100, questions: 2 }
+            },
+            {
+                id: 4, title: "Our Customs and Traditions", vietnamese: "Phong tục và truyền thống", semester: 1,
+                vocab: [
+                    { en: "custom", vi: "phong tục", phonetic: "/ˈkʌstəm/", example: "Follow family customs." },
+                    { en: "tradition", vi: "truyền thống", phonetic: "/trəˈdɪʃn/", example: "Preserve traditions." },
+                    { en: "worship", vi: "thờ cúng", phonetic: "/ˈwɜːʃɪp/", example: "Worship ancestors." },
+                    { en: "generation", vi: "thế hệ", phonetic: "/ˌdʒenəˈreɪʃn/", example: "Passed down through generations." },
+                    { en: "offerings", vi: "đồ cúng, lễ vật", phonetic: "/ˈɒfərɪŋz/", example: "Prepare offerings for Tet." },
+                    { en: "sharp", vi: "nhọn / đúng giờ", phonetic: "/ʃɑːp/", example: "Come at 7 o'clock sharp." },
+                    { en: "occasion", vi: "dịp, sự kiện", phonetic: "/əˈkeɪʒn/", example: "Tet is a joyful occasion." },
+                    { en: "respect", vi: "sự kính trọng", phonetic: "/rɪˈspekt/", example: "Show respect to elders." }
+                ],
+                grammar: { title: "Should / Shouldn't để chỉ lời khuyên", content: "Cấu trúc: S + should / shouldn't + V-infinitive." },
+                quiz: [
+                    { q: "Choose the correct modal verb: You _____ break tradition on New Year's Day.", options: ["should", "shouldn't", "must", "can"], correct: 1, explain: "Không nên phá vỡ truyền thống nên dùng 'shouldn't'." },
+                    { q: "An accepted way of behaving in a society is a _____.", options: ["custom", "trend", "game", "rule"], correct: 0, explain: "'custom' là phong tục." }
+                ],
+                sentences: [
+                    { scrambled: ["respect", "We", "customs", "our", "should"], correct: "We should respect our customs." },
+                    { scrambled: ["passed", "are", "Traditions", "down"], correct: "Traditions are passed down." }
+                ],
+                boss: { name: "Trưởng Lão Phong Tục", hp: 100, questions: 2 }
+            },
+            {
+                id: 5, title: "Vietnamese Lifestyles", vietnamese: "Lối sống người Việt", semester: 1,
+                vocab: [
+                    { en: "diversity", vi: "sự đa dạng", phonetic: "/daɪˈvɜːsəti/", example: "Cultural diversity is rich." },
+                    { en: "minority", vi: "dân tộc thiểu số", phonetic: "/maɪˈnɒrəti/", example: "Ethnic minority groups." },
+                    { en: "stilt house", vi: "nhà sàn", phonetic: "/stɪlt haʊs/", example: "Tay people live in stilt houses." },
+                    { en: "costume", vi: "trang phục truyền thống", phonetic: "/ˈkɒstjuːm/", example: "Colorful traditional costumes." },
+                    { en: "open-air", vi: "ngoài trời", phonetic: "/ˌəʊpən ˈeə(r)/", example: "Open-air market." },
+                    { en: "festive", vi: "thuộc lễ hội", phonetic: "/ˈfestɪv/", example: "Festive atmosphere." },
+                    { en: "heritage", vi: "di sản", phonetic: "/ˈherɪtɪdʒ/", example: "National heritage." },
+                    { en: "unique", vi: "độc đáo", phonetic: "/juˈniːk/", example: "Unique culture." }
+                ],
+                grammar: { title: "Articles (Mạo từ a, an, the)", content: "Dùng a/an cho danh từ đếm được số ít lần đầu nhắc đến. Dùng the khi danh từ đã xác định." },
+                quiz: [
+                    { q: "Choose the correct article: She bought _____ traditional costume yesterday.", options: ["a", "an", "the", "zero article"], correct: 0, explain: "Danh từ đếm được số ít bắt đầu bằng phụ âm dùng 'a'." },
+                    { q: "A house built on posts above the ground is a _____.", options: ["stilt house", "villa", "skyscraper", "flat"], correct: 0, explain: "'stilt house' là nhà sàn." }
+                ],
+                sentences: [
+                    { scrambled: ["live", "groups", "Ethnic", "mountains", "in"], correct: "Ethnic groups live in mountains." },
+                    { scrambled: ["has", "Vietnam", "culture", "rich", "a"], correct: "Vietnam has a rich culture." }
+                ],
+                boss: { name: "Thủ Lĩnh Dân Tộc", hp: 100, questions: 2 }
+            },
+            {
+                id: 6, title: "The First Vietnamese University", vietnamese: "Trường Đại học đầu tiên của Việt Nam", semester: 1,
+                vocab: [
+                    { en: "university", vi: "trường đại học", phonetic: "/ˌjuːnɪˈvɜːsəti/", example: "Van Mieu is a famous university." },
+                    { en: "emperor", vi: "hoàng đế", phonetic: "/ˈempərə(r)/", example: "Kings and emperors." },
+                    { en: "doctorate", vi: "học vị tiến sĩ", phonetic: "/ˈdɒktərət/", example: "Doctorate statues." },
+                    { en: "statue", vi: "bức tượng", phonetic: "/ˈstætʃuː/", example: "Bronze statues." },
+                    { en: "recognise", vi: "công nhận", phonetic: "/ˈrekəɡnaɪz/", example: "Recognised as heritage." },
+                    { en: "candidate", vi: "thí sinh, sĩ tử", phonetic: "/ˈkændɪdeɪt/", example: "Exam candidates." },
+                    { en: "pavilion", vi: "tòa nhà trưng bày, gác", phonetic: "/pəˈvɪliən/", example: "Khue Van pavilion." },
+                    { en: "historic", vi: "mang tính lịch sử", phonetic: "/hɪˈstɒrɪk/", example: "Historic site." }
+                ],
+                grammar: { title: "Passive voice (Câu bị động với các thì)", content: "Cấu trúc: S + be + V3/ed." },
+                quiz: [
+                    { q: "Choose the correct passive form: Emperor Ly Thanh Tong _____ Van Mieu in 1070.", options: ["built", "was built", "is built", "building"], correct: 0, explain: "Câu chủ động trong quá khứ đơn." },
+                    { q: "The Temple of Literature is considered the first _____ university of VN.", options: ["national", "international", "private", "modern"], correct: 0, explain: "'national' là quốc gia / quốc học." }
+                ],
+                sentences: [
+                    { scrambled: ["built", "was", "Van", "Mieu", "long", "ago"], correct: "Van Mieu was built long ago." },
+                    { scrambled: ["visited", "is", "It", "tourists", "by"], correct: "It is visited by tourists." }
+                ],
+                boss: { name: "Tiến Sĩ Nho Học", hp: 100, questions: 2 }
+            },
+            {
+                id: 7, title: "Environmental Protection", vietnamese: "Bảo vệ môi trường", semester: 2,
+                vocab: [
+                    { en: "pollution", vi: "sự ô nhiễm", phonetic: "/pəˈluːʃn/", example: "Air pollution is harmful." },
+                    { en: "recycle", vi: "tái chế", phonetic: "/ˌriːˈsaɪkl/", example: "Recycle plastic bottles." },
+                    { en: "environment", vi: "môi trường", phonetic: "/ɪnˈvaɪrənmənt/", example: "Protect our environment." },
+                    { en: "deforestation", vi: "nạn phá rừng", phonetic: "/ˌdiːfɒrɪˈsteɪʃn/", example: "Stop deforestation." },
+                    { en: "ecosystem", vi: "hệ sinh thái", phonetic: "/ˈiːkəʊsɪstəm/", example: "Marine ecosystem." },
+                    { en: "organic", vi: "hữu cơ", phonetic: "/ɔːˈɡænɪk/", example: "Organic food." },
+                    { en: "threat", vi: "mối đe dọa", phonetic: "/θret/", example: "Global threat." },
+                    { en: "clean", vi: "sạch sẽ", phonetic: "/kliːn/", example: "Clean energy." }
+                ],
+                grammar: { title: "First Conditional (Câu điều kiện loại 1)", content: "Cấu trúc: If + S + present simple, S + will + V-infinitive." },
+                quiz: [
+                    { q: "Choose the correct form: If we plant more trees, our air _____ cleaner.", options: ["will be", "is", "was", "would be"], correct: 0, explain: "Mệnh đề chính của câu điều kiện loại 1 dùng 'will + V'." },
+                    { q: "The process of treating used objects so they can be used again is _____.", options: ["recycle", "pollute", "destroy", "waste"], correct: 0, explain: "'recycle' là tái chế." }
+                ],
+                sentences: [
+                    { scrambled: ["we", "recycle", "If", "we", "save", "trees"], correct: "If we recycle we save trees." },
+                    { scrambled: ["protect", "must", "We", "earth", "the"], correct: "We must protect the earth." }
+                ],
+                boss: { name: "Thần Xanh Sạch", hp: 100, questions: 2 }
+            },
+            {
+                id: 8, title: "Shopping", vietnamese: "Mua sắm", semester: 2,
+                vocab: [
+                    { en: "customer", vi: "khách hàng", phonetic: "/ˈkʌstəmə(r)/", example: "Satisfied customers." },
+                    { en: "discount", vi: "giảm giá", phonetic: "/ˈdɪskaʊnt/", example: "Special discount." },
+                    { en: "supermarket", vi: "siêu thị", phonetic: "/ˈsuːpəmɑːkɪt/", example: "Go to the supermarket." },
+                    { en: "bargain", vi: "mặc cả", phonetic: "/ˈbɑːɡən/", example: "Bargain at the market." },
+                    { en: "convenient", vi: "tiện lợi", phonetic: "/kənˈviːniənt/", example: "Online shopping is convenient." },
+                    { en: "purchase", vi: "mua hàng", phonetic: "/ˈpɜːtʃəs/", example: "Make a purchase." },
+                    { en: "display", vi: "trưng bày", phonetic: "/dɪˈspleɪ/", example: "Store display." },
+                    { en: "brand", vi: "thương hiệu", phonetic: "/brænd/", example: "Famous brand." }
+                ],
+                grammar: { title: "Present Simple for future schedules", content: "Dùng thì hiện tại đơn để chỉ lịch trình, thời gian biểu, giờ mở cửa cửa hàng." },
+                quiz: [
+                    { q: "Choose the correct form: The supermarket _____ at 8 AM every day.", options: ["opens", "open", "opened", "will open"], correct: 0, explain: "Lịch trình mở cửa hàng ngày dùng thì hiện tại đơn." },
+                    { q: "A person who buys goods or services is a _____.", options: ["customer", "seller", "boss", "driver"], correct: 0, explain: "'customer' là khách hàng." }
+                ],
+                sentences: [
+                    { scrambled: ["opens", "shop", "The", "early"], correct: "The shop opens early." },
+                    { scrambled: ["love", "Women", "shopping", "online"], correct: "Women love shopping online." }
+                ],
+                boss: { name: "Chủ Tịch Siêu Thị", hp: 100, questions: 2 }
+            }
+        ];
+
+        const dataGrade9 = [
             {
                 id: 1, title: "Local Community", vietnamese: "Cộng đồng địa phương", semester: 1,
                 vocab: [
-                    { en: "artisanal", vi: "thuộc thủ công", phonetic: "/ˌɑːtɪˈzænl/", example: "They sell artisanal products." },
-                    { en: "craft village", vi: "làng nghề thủ công", phonetic: "/krɑːft ˈvɪlɪdʒ/", example: "Bat Trang is a famous craft village." },
-                    { en: "gather", vi: "tụ họp, tập trung", phonetic: "/ˈɡæðə(r)/", example: "Villagers gather at the communal house." },
-                    { en: "pottery", vi: "đồ gốm", phonetic: "/ˈpɒtəri/", example: "She loves making pottery." },
-                    { en: "speciality", vi: "đặc sản", phonetic: "/ˌspeʃiˈæləti/", example: "Pho is a local speciality." },
-                    { en: "conical hat", vi: "nón lá", phonetic: "/ˈkɒnɪkl hæt/", example: "The conical hat is a symbol of VN." },
-                    { en: "workshop", vi: "xưởng, hội thảo", phonetic: "/ˈwɜːkʃɒp/", example: "We visited a silk workshop." },
-                    { en: "preserve", vi: "bảo tồn, gìn giữ", phonetic: "/prɪˈzɜːv/", example: "We should preserve traditional customs." }
+                    { en: "artisanal", vi: "thủ công", phonetic: "/ˌɑːtɪˈzænl/", example: "Artisanal products." },
+                    { en: "craft village", vi: "làng nghề", phonetic: "/krɑːft ˈvɪlɪdʒ/", example: "Famous craft village." },
+                    { en: "gather", vi: "tụ họp", phonetic: "/ˈɡæðə(r)/", example: "Villagers gather." },
+                    { en: "pottery", vi: "đồ gốm", phonetic: "/ˈpɒtəri/", example: "Making pottery." },
+                    { en: "speciality", vi: "đặc sản", phonetic: "/ˌspeʃiˈæləti/", example: "Local speciality." },
+                    { en: "conical hat", vi: "nón lá", phonetic: "/ˈkɒnɪkl hæt/", example: "Conical hat." },
+                    { en: "workshop", vi: "xưởng", phonetic: "/ˈwɜːkʃɒp/", example: "Silk workshop." },
+                    { en: "preserve", vi: "bảo tồn", phonetic: "/prɪˈzɜːv/", example: "Preserve traditions." }
                 ],
-                grammar: { title: "Phrasal Verbs (Cụm động từ)", content: "Các cụm động từ thông dụng trong đời sống cộng đồng như: 'hang out', 'turn down', 'pass down', 'live on'." },
+                grammar: { title: "Phrasal Verbs (Cụm động từ)", content: "Các cụm động từ như pass down, turn down, live on." },
                 quiz: [
-                    { q: "Choose the correct phrasal verb: Traditional customs are _____ from generation to generation.", options: ["passed down", "turned down", "looked after", "taken off"], correct: 0, explain: "'pass down' nghĩa là truyền lại từ thế hệ này sang thế hệ khác." },
-                    { q: "What do we call a village where people make traditional crafts?", options: ["craft village", "urban area", "industrial zone", "capital"], correct: 0, explain: "'craft village' là làng nghề thủ công." }
+                    { q: "Traditional customs are _____ from generation to generation.", options: ["passed down", "turned down", "taken off", "looked after"], correct: 0, explain: "'pass down' là truyền lại." },
+                    { q: "What do we call a village making traditional crafts?", options: ["craft village", "urban area", "capital", "port"], correct: 0, explain: "'craft village' là làng nghề." }
                 ],
                 sentences: [
-                    { scrambled: ["passed", "are", "Customs", "down", "traditionally"], correct: "Customs are traditionally passed down." },
-                    { scrambled: ["visit", "We", "will", "craft", "village", "the"], correct: "We will visit the craft village." }
+                    { scrambled: ["passed", "are", "Customs", "down"], correct: "Customs are passed down." },
+                    { scrambled: ["visit", "We", "craft", "village"], correct: "We visit craft village." }
                 ],
                 boss: { name: "Bậc Thầy Làng Nghề", hp: 100, questions: 2 }
             },
             {
                 id: 2, title: "City Life", vietnamese: "Cuộc sống thành thị", semester: 1,
                 vocab: [
-                    { en: "metro", vi: "tàu điện ngầm", phonetic: "/ˈmetrəʊ/", example: "The metro is fast and convenient." },
-                    { en: "urban", vi: "thuộc đô thị", phonetic: "/ˈɜːbən/", example: "Urban areas attract many workers." },
-                    { en: "traffic jam", vi: "nút thắt giao thông, kẹt xe", phonetic: "/ˈtræfɪk dʒæm/", example: "I was stuck in a traffic jam." },
-                    { en: "skyscraper", vi: "tòa nhà chọc trời", phonetic: "/ˈskaɪskreɪpə(r)/", example: "Hanoi has many tall skyscrapers." },
-                    { en: "neighborhood", vi: "vùng lân cận, khu xóm", phonetic: "/ˈneɪbəhʊd/", example: "Our neighborhood is very peaceful." },
-                    { en: "facade", vi: "mặt tiền", phonetic: "/fəˈsɑːd/", example: "The building has a modern facade." },
-                    { en: "rush hour", vi: "giờ cao điểm", phonetic: "/rʌʃ ˈaʊə(r)/", example: "Avoid traveling during rush hour." },
-                    { en: "facinating", vi: "hấp dẫn, tuyệt vời", phonetic: "/ˈfæsɪneɪtɪŋ/", example: "City nightlife is fascinating." }
+                    { en: "metro", vi: "tàu điện ngầm", phonetic: "/ˈmetrəʊ/", example: "Fast metro." },
+                    { en: "urban", vi: "đô thị", phonetic: "/ˈɜːbən/", example: "Urban area." },
+                    { en: "traffic jam", vi: "kẹt xe", phonetic: "/ˈtræfɪk dʒæm/", example: "Traffic jam." },
+                    { en: "skyscraper", vi: "tòa nhà chọc trời", phonetic: "/ˈskaɪskreɪpə(r)/", example: "Tall skyscraper." },
+                    { en: "neighborhood", vi: "khu xóm", phonetic: "/ˈneɪbəhʊd/", example: "Quiet neighborhood." },
+                    { en: "facade", vi: "mặt tiền", phonetic: "/fəˈsɑːd/", example: "Modern facade." },
+                    { en: "rush hour", vi: "giờ cao điểm", phonetic: "/rʌʃ ˈaʊə(r)/", example: "Rush hour traffic." },
+                    { en: "fascinating", vi: "hấp dẫn", phonetic: "/ˈfæsɪneɪtɪŋ/", example: "Fascinating city." }
                 ],
-                grammar: { title: "Câu hỏi gián tiếp (Wh- questions)", content: "Khi chuyển câu hỏi có từ để hỏi (what, where, how) sang gián tiếp, lùi thì và giữ nguyên từ để hỏi trước chủ ngữ." },
+                grammar: { title: "Reported Speech (Wh- questions)", content: "Câu hỏi gián tiếp lùi thì và giữ từ để hỏi." },
                 quiz: [
-                    { q: "Choose the correct reported question: 'Where is the nearest metro station?'", options: ["He asked me where the nearest metro station was.", "He asked me where was the nearest metro station.", "He asked me where is the nearest metro station.", "He asked me where did the metro station."], correct: 0, explain: "Giữ từ để hỏi 'where' và đổi động từ 'was' ra sau chủ ngữ." },
-                    { q: "During _____, the streets are crowded with vehicles.", options: ["rush hour", "midnight", "breakfast", "weekend"], correct: 0, explain: "'rush hour' là giờ cao điểm." }
+                    { q: "He asked me _____ the nearest metro station was.", options: ["where", "what", "how", "if"], correct: 0, explain: "Dùng 'where' làm từ nối trong câu hỏi gián tiếp." },
+                    { q: "Streets are crowded with vehicles during _____.", options: ["rush hour", "midnight", "morning", "noon"], correct: 0, explain: "'rush hour' là giờ cao điểm." }
                 ],
                 sentences: [
-                    { scrambled: ["city", "life", "exciting", "is", "very"], correct: "City life is very exciting." },
-                    { scrambled: ["avoid", "We", "should", "traffic", "jams"], correct: "We should avoid traffic jams." }
+                    { scrambled: ["city", "life", "exciting", "is"], correct: "City life is exciting." },
+                    { scrambled: ["avoid", "We", "traffic", "jams"], correct: "We avoid traffic jams." }
                 ],
                 boss: { name: "Hộ Vệ Đô Thị", hp: 100, questions: 2 }
             },
             {
                 id: 3, title: "Healthy Living for Teens", vietnamese: "Sống khỏe mạnh cho tuổi teen", semester: 1,
                 vocab: [
-                    { en: "balanced diet", vi: "chế độ ăn cân đối", phonetic: "/ˈbælənst ˈdaɪət/", example: "A balanced diet keeps you fit." },
-                    { en: "mental health", vi: "sức khỏe tinh thần", phonetic: "/ˈmentl helθ/", example: "Teens need good mental health." },
-                    { en: "stress", vi: "sự căng thẳng", phonetic: "/stres/", example: "Yoga helps reduce exam stress." },
-                    { en: "physical", vi: "thuộc thể chất", phonetic: "/ˈfɪzɪkl/", example: "Regular physical activity is vital." },
-                    { en: "obesity", vi: "bệnh béo phì", phonetic: "/əʊˈbiːsəti/", example: "Fast food can lead to obesity." },
-                    { en: "sleep-deprived", vi: "thiếu ngủ", phonetic: "/sliːp dɪˈpraɪvd/", example: "Don't stay up late or you'll be sleep-deprived." },
-                    { en: "well-being", vi: "sự khỏe mạnh, hạnh phúc", phonetic: "/ˈwel biːɪŋ/", example: "Health and well-being are top priorities." },
-                    { en: "nutrient", vi: "chất dinh dưỡng", phonetic: "/ˈnjuːtriənt/", example: "Vegetables provide essential nutrients." }
+                    { en: "balanced diet", vi: "chế độ ăn cân đối", phonetic: "/ˈbælənst ˈdaɪət/", example: "Balanced diet." },
+                    { en: "mental health", vi: "sức khỏe tinh thần", phonetic: "/ˈmentl helθ/", example: "Mental health." },
+                    { en: "stress", vi: "căng thẳng", phonetic: "/stres/", example: "Exam stress." },
+                    { en: "physical", vi: "thể chất", phonetic: "/ˈfɪzɪkl/", example: "Physical health." },
+                    { en: "obesity", vi: "béo phì", phonetic: "/əʊˈbiːsəti/", example: "Prevent obesity." },
+                    { en: "sleep-deprived", vi: "thiếu ngủ", phonetic: "/sliːp dɪˈpraɪvd/", example: "Sleep-deprived teen." },
+                    { en: "well-being", vi: "sự khỏe mạnh", phonetic: "/ˈwel biːɪŋ/", example: "General well-being." },
+                    { en: "nutrient", vi: "chất dinh dưỡng", phonetic: "/ˈnjuːtriənt/", example: "Essential nutrients." }
                 ],
-                grammar: { title: "Complex Sentences with Adverb Clauses", content: "Mệnh đề trạng ngữ chỉ lý do (because, since, as) hoặc thời gian (when, while, before, after)." },
+                grammar: { title: "Complex Sentences with Adverb Clauses", content: "Mệnh đề trạng ngữ chỉ lý do hoặc thời gian." },
                 quiz: [
-                    { q: "Choose the correct connector: He was tired _____ he stayed up late playing games.", options: ["because", "although", "despite", "however"], correct: 0, explain: "Dùng 'because' để chỉ nguyên nhân." },
-                    { q: "Eating too much junk food can cause _____.", options: ["obesity", "fitness", "energy", "strength"], correct: 0, explain: "Ăn đồ ăn vặt nhiều dễ gây béo phì (obesity)." }
+                    { q: "He was tired _____ he stayed up late.", options: ["because", "although", "despite", "however"], correct: 0, explain: "Dùng 'because' chỉ nguyên nhân." },
+                    { q: "Eating too much junk food can cause _____.", options: ["obesity", "energy", "fitness", "strength"], correct: 0, explain: "'obesity' là béo phì." }
                 ],
                 sentences: [
-                    { scrambled: ["eat", "should", "You", "vegetables", "green"], correct: "You should eat green vegetables." },
-                    { scrambled: ["stay", "Active", "healthy", "to", "fit"], correct: "Stay active to keep healthy." }
+                    { scrambled: ["eat", "vegetables", "green", "should"], correct: "You should eat green vegetables." },
+                    { scrambled: ["stay", "active", "healthy", "Keep"], correct: "Keep active stay healthy." }
                 ],
                 boss: { name: "Bác Sĩ Thể Chất", hp: 100, questions: 2 }
             },
             {
                 id: 4, title: "Remembering the Past", vietnamese: "Nhớ về quá khứ", semester: 1,
                 vocab: [
-                    { en: "generation", vi: "thế hệ", phonetic: "/ˌdʒenəˈreɪʃn/", example: "Generation gap is common." },
-                    { en: "extended family", vi: "gia đình nhiều thế hệ", phonetic: "/ɪkˈstendɪd ˈfæməli/", example: "She lives in an extended family." },
-                    { en: "tradition", vi: "truyền thống", phonetic: "/trəˈdɪʃn/", example: "Tet holiday is our biggest tradition." },
-                    { en: "value", vi: "giá trị", phonetic: "/ˈvæljuː/", example: "Family values are important." },
-                    { en: "memoir", vi: "hồi ký", phonetic: "/ˈmemwɑː(r)/", example: "He wrote a memoir about his youth." },
-                    { en: "nostalgia", vi: "nỗi nhớ nhà, hoài niệm", phonetic: "/nɒˈstældʒə/", example: "Old songs bring back nostalgia." },
-                    { en: "ancestor", vi: "tổ tiên", phonetic: "/ˈænsestə(r)/", example: "We worship our ancestors." },
-                    { en: "respect", vi: "sự kính trọng", phonetic: "/rɪˈspekt/", example: "Show respect to older people." }
+                    { en: "generation", vi: "thế hệ", phonetic: "/ˌdʒenəˈreɪʃn/", example: "Older generation." },
+                    { en: "extended family", vi: "gia đình nhiều thế hệ", phonetic: "/ɪkˈstendɪd ˈfæməli/", example: "Extended family." },
+                    { en: "tradition", vi: "truyền thống", phonetic: "/trəˈdɪʃn/", example: "Family tradition." },
+                    { en: "value", vi: "giá trị", phonetic: "/ˈvæljuː/", example: "Moral values." },
+                    { en: "memoir", vi: "hồi ký", phonetic: "/ˈmemwɑː(r)/", example: "Writing memoir." },
+                    { en: "nostalgia", vi: "hoài niệm", phonetic: "/nɒˈstældʒə/", example: "Feeling nostalgia." },
+                    { en: "ancestor", vi: "tổ tiên", phonetic: "/ˈænsestə(r)/", example: "Worship ancestors." },
+                    { en: "respect", vi: "kính trọng", phonetic: "/rɪˈspekt/", example: "Show respect." }
                 ],
-                grammar: { title: "Wish sentences (Câu ước ở hiện tại)", content: "Cấu trúc: S + wish(es) + S + V-ed / Past Simple (Diễn tả mong ước trái ngược với hiện tại)." },
+                grammar: { title: "Wish sentences (Câu ước ở hiện tại)", content: "Cấu trúc: S + wish + S + V-ed / Past Simple." },
                 quiz: [
-                    { q: "Choose the correct form: I wish I _____ more free time now.", options: ["have", "had", "will have", "would have"], correct: 0, explain: "Dùng thì quá khứ đơn 'had' sau 'wish' cho ước muốn ở hiện tại." },
-                    { q: "People who lived before us in our family are called _____.", options: ["ancestors", "descendants", "strangers", "teens"], correct: 0, explain: "'ancestors' là tổ tiên." }
+                    { q: "I wish I _____ more free time now.", options: ["had", "have", "will have", "would have"], correct: 0, explain: "Ước muốn ở hiện tại dùng quá khứ đơn 'had'." },
+                    { q: "People in our family who lived before us are _____.", options: ["ancestors", "teens", "strangers", "friends"], correct: 0, explain: "'ancestors' là tổ tiên." }
                 ],
                 sentences: [
-                    { scrambled: ["wish", "I", "could", "time", "travel"], correct: "I wish I could time travel." },
-                    { scrambled: ["respect", "We", "our", "ancestors", "should"], correct: "We should respect our ancestors." }
+                    { scrambled: ["wish", "I", "could", "travel"], correct: "I wish I could travel." },
+                    { scrambled: ["respect", "We", "ancestors", "our"], correct: "We respect our ancestors." }
                 ],
                 boss: { name: "Thầy Đồ Quá Khứ", hp: 100, questions: 2 }
             },
             {
-                id: 5, title: "Our Experiences", vietnamese: "Những trải nghiệm của chúng ta", semester: 1,
+                id: 5, title: "Our Experiences", vietnamese: "Những trải nghiệm", semester: 1,
                 vocab: [
-                    { en: "adventure", vi: "cuộc phiêu lưu", phonetic: "/ədˈventʃə(r)/", example: "The jungle trip was an adventure." },
-                    { en: "challenge", vi: "thử thách", phonetic: "/ˈtʃælɪndʒ/", example: "Climbing the mountain is a big challenge." },
-                    { en: "memorable", vi: "đáng nhớ", phonetic: "/ˈmemərəbl/", example: "That was a memorable summer." },
-                    { en: "overcome", vi: "vượt qua", phonetic: "/ˌəʊvəˈkʌm/", example: "She overcame her fear of heights." },
-                    { en: "explore", vi: "khám phá", phonetic: "/ɪkˈsplɔː(r)/", example: "Let's explore the cave." },
-                    { en: "experience", vi: "kinh nghiệm", phonetic: "/ɪkˈspɪəriəns/", example: "Travel broadens our experience." },
-                    { en: "inspire", vi: "truyền cảm hứng", phonetic: "/ɪnˈspaɪə(r)/", example: "His story inspired us all." },
-                    { en: "confidence", vi: "sự tự tin", phonetic: "/ˈkɒnfɪdəns/", example: "Stage performance builds confidence." }
+                    { en: "adventure", vi: "phiêu lưu", phonetic: "/ədˈventʃə(r)/", example: "Great adventure." },
+                    { en: "challenge", vi: "thử thách", phonetic: "/ˈtʃælɪndʒ/", example: "Big challenge." },
+                    { en: "memorable", vi: "đáng nhớ", phonetic: "/ˈmemərəbl/", example: "Memorable trip." },
+                    { en: "overcome", vi: "vượt qua", phonetic: "/ˌəʊvəˈkʌm/", example: "Overcome fear." },
+                    { en: "explore", vi: "khám phá", phonetic: "/ɪkˈsplɔː(r)/", example: "Explore caves." },
+                    { en: "experience", vi: "kinh nghiệm", phonetic: "/ɪkˈspɪəriəns/", example: "Life experience." },
+                    { en: "inspire", vi: "truyền cảm hứng", phonetic: "/nˈspaɪə(r)/", example: "Inspire others." },
+                    { en: "confidence", vi: "tự tin", phonetic: "/ˈkɒnfɪdəns/", example: "Build confidence." }
                 ],
-                grammar: { title: "Present Perfect vs Past Simple", content: "Hiện tại hoàn thành nhấn mạnh kinh nghiệm tính đến hiện tại; Quá khứ đơn nhấn mạnh thời gian xác định trong quá khứ." },
+                grammar: { title: "Present Perfect vs Past Simple", content: "Hiện tại hoàn thành cho kinh nghiệm, quá khứ đơn cho thời gian xác định." },
                 quiz: [
-                    { q: "Choose the correct tense: I _____ to Hue three times.", options: ["have been", "went", "was", "had been"], correct: 0, explain: "Diễn tả kinh nghiệm tính đến nay dùng hiện tại hoàn thành 'have been'." },
-                    { q: "To face and deal with a difficulty successfully is to _____ it.", options: ["overcome", "ignore", "fail", "miss"], correct: 0, explain: "'overcome' nghĩa là vượt qua khó khăn." }
+                    { q: "I _____ to Hue three times.", options: ["have been", "went", "was", "had been"], correct: 0, explain: "Diễn tả kinh nghiệm dùng hiện tại hoàn thành." },
+                    { q: "To successfully deal with a difficulty is to _____ it.", options: ["overcome", "ignore", "miss", "fail"], correct: 0, explain: "'overcome' là vượt qua." }
                 ],
                 sentences: [
-                    { scrambled: ["ever", "Have", "you", "visited", "Hue?"], correct: "Have you ever visited Hue?" },
-                    { scrambled: ["had", "I", "wonderful", "a", "trip"], correct: "I had a wonderful trip." }
+                    { scrambled: ["Have", "you", "visited", "Hue"], correct: "Have you visited Hue?" },
+                    { scrambled: ["had", "I", "wonderful", "trip"], correct: "I had wonderful trip." }
                 ],
                 boss: { name: "Nhà Thám Hiểm", hp: 100, questions: 2 }
             },
             {
                 id: 6, title: "Vietnamese Lifestyle: Then and Now", vietnamese: "Lối sống Việt Nam xưa và nay", semester: 1,
                 vocab: [
-                    { en: "custom", vi: "tập quán, phong tục", phonetic: "/ˈkʌstəm/", example: "Lunar New Year customs are unique." },
-                    { en: "modern", vi: "hiện đại", phonetic: "/ˈmɒdn/", example: "Life today is much more modern." },
-                    { en: "lifestyle", vi: "lối sống", phonetic: "/ˈlaɪfstaɪl/", example: "Urban lifestyle is fast-paced." },
-                    { en: "nomadic", vi: "du mục", phonetic: "/nəʊˈmædɪk/", example: "Nomadic life involves moving around." },
-                    { en: "extended", vi: "mở rộng", phonetic: "/ɪkˈstendɪd/", example: "Family structures have changed." },
-                    { en: "digital", vi: "thuộc kỹ thuật số", phonetic: "/ˈdɪdʒɪtl/", example: "We live in a digital age." },
-                    { en: "traditional", vi: "truyền thống", phonetic: "/trəˈdɪʃənl/", example: "Ao dai is our traditional dress." },
-                    { en: "value", vi: "giá trị", phonetic: "/ˈvæljuː/", example: "Core values remain unchanged." }
+                    { en: "custom", vi: "tập quán", phonetic: "/ˈkʌstəm/", example: "Tet custom." },
+                    { en: "modern", vi: "hiện đại", phonetic: "/ˈmɒdn/", example: "Modern life." },
+                    { en: "lifestyle", vi: "lối sống", phonetic: "/ˈlaɪfstaɪl/", example: "Urban lifestyle." },
+                    { en: "nomadic", vi: "du mục", phonetic: "/nəʊˈmædɪk/", example: "Nomadic life." },
+                    { en: "extended", vi: "mở rộng", phonetic: "/ɪkˈstendɪd/", example: "Extended family." },
+                    { en: "digital", vi: "kỹ thuật số", phonetic: "/ˈdɪdʒɪtl/", example: "Digital age." },
+                    { en: "traditional", vi: "truyền thống", phonetic: "/trəˈdɪʃənl/", example: "Traditional dress." },
+                    { en: "value", vi: "giá trị", phonetic: "/ˈvæljuː/", example: "Core values." }
                 ],
-                grammar: { title: "Used to + V (Thói quen trong quá khứ)", content: "Diễn tả thói quen hoặc sự việc từng xảy ra thường xuyên trong quá khứ nay không còn nữa." },
+                grammar: { title: "Used to + V", content: "Thói quen trong quá khứ." },
                 quiz: [
-                    { q: "Choose the correct form: People _____ travel by horse-drawn carriages in the past.", options: ["used to", "use to", "are used to", "using"], correct: 0, explain: "Dùng 'used to + V' để chỉ thói quen quá khứ." },
-                    { q: "The lifestyle of Vietnamese people has become more _____ nowadays.", options: ["modern", "ancient", "backward", "primitive"], correct: 0, explain: "'modern' là hiện đại." }
+                    { q: "People _____ travel by horse-drawn carriages in the past.", options: ["used to", "use to", "are used to", "using"], correct: 0, explain: "Dùng 'used to + V'." },
+                    { q: "Lifestyle has become much more _____ nowadays.", options: ["modern", "ancient", "backward", "primitive"], correct: 0, explain: "'modern' là hiện đại." }
                 ],
                 sentences: [
-                    { scrambled: ["used", "to", "People", "live", "simply"], correct: "People used to live simply." },
-                    { scrambled: ["has", "Lifestyle", "changed", "drastically"], correct: "Lifestyle has changed drastically." }
+                    { scrambled: ["used", "to", "live", "simply"], correct: "People used to live simply." },
+                    { scrambled: ["changed", "Lifestyle", "has", "drastically"], correct: "Lifestyle has changed drastically." }
                 ],
                 boss: { name: "Đại Sứ Văn Hóa", hp: 100, questions: 2 }
             },
             {
                 id: 7, title: "Natural Wonders of the World", vietnamese: "Kỳ quan thiên nhiên thế giới", semester: 2,
                 vocab: [
-                    { en: "wonder", vi: "kỳ quan", phonetic: "/ˈwʌndə(r)/", example: "Ha Long Bay is a natural wonder." },
-                    { en: "cave", vi: "hang động", phonetic: "/keɪv/", example: "Son Doong is a massive cave." },
-                    { en: "waterfall", vi: "thác nước", phonetic: "/ˈwɔːtəfɔːl/", example: "Niagara waterfall is breathtaking." },
-                    { en: "landscape", vi: "phong cảnh", phonetic: "/ˈlændskeɪp/", example: "The natural landscape is pristine." },
-                    { en: "glacier", vi: "sông băng", phonetic: "/ˈɡlæsiə(r)/", example: "Global warming melts glaciers." },
-                    { en: "canyon", vi: "hẻm vực", phonetic: "/ˈkænjən/", example: "Grand Canyon is magnificent." },
-                    { en: "ecosystem", vi: "hệ sinh thái", phonetic: "/ˈiːkəʊsɪstəm/", example: "Coral reefs support marine ecosystems." },
-                    { en: "preserve", vi: "bảo tồn", phonetic: "/prɪˈzɜːv/", example: "Protect natural reserves." }
+                    { en: "wonder", vi: "kỳ quan", phonetic: "/ˈwʌndə(r)/", example: "Natural wonder." },
+                    { en: "cave", vi: "hang động", phonetic: "/keɪv/", example: "Son Doong cave." },
+                    { en: "waterfall", vi: "thác nước", phonetic: "/ˈwɔːtəfɔːl/", example: "Beautiful waterfall." },
+                    { en: "landscape", vi: "phong cảnh", phonetic: "/ˈlændskeɪp/", example: "Pristine landscape." },
+                    { en: "glacier", vi: "sông băng", phonetic: "/ˈglæsiə(r)/", example: "Melting glacier." },
+                    { en: "canyon", vi: "hẻm vực", phonetic: "/ˈkænjən/", example: "Grand canyon." },
+                    { en: "ecosystem", vi: "hệ sinh thái", phonetic: "/ˈiːkəʊsɪstəm/", example: "Marine ecosystem." },
+                    { en: "preserve", vi: "bảo tồn", phonetic: "/prɪˈzɜːv/", example: "Preserve nature." }
                 ],
-                grammar: { title: "Passive Voice (Câu bị động)", content: "Cấu trúc: S + be + V3/ed. Dùng khi nhấn mạnh vào đối tượng chịu tác động của hành động." },
+                grammar: { title: "Passive Voice", content: "Cấu trúc bị động S + be + V3/ed." },
                 quiz: [
-                    { q: "Choose the passive form: Ha Long Bay was recognized _____ UNESCO.", options: ["by", "with", "from", "at"], correct: 0, explain: "Trong câu bị động, tác nhân được giới thiệu bởi giới từ 'by'." },
-                    { q: "A large underground chamber in a mountain is called a _____.", options: ["cave", "mountain", "river", "desert"], correct: 0, explain: "'cave' là hang động." }
+                    { q: "Ha Long Bay was recognized _____ UNESCO.", options: ["by", "with", "from", "at"], correct: 0, explain: "Dùng giới từ 'by'." },
+                    { q: "A large underground chamber is called a _____.", options: ["cave", "mountain", "river", "desert"], correct: 0, explain: "'cave' là hang động." }
                 ],
                 sentences: [
-                    { scrambled: ["visited", "is", "Ha", "Bay", "Long", "millions"], correct: "Ha Long Bay is visited by millions." },
-                    { scrambled: ["protect", "must", "We", "wonders", "natural"], correct: "We must protect natural wonders." }
+                    { scrambled: ["visited", "is", "Ha", "Bay", "Long"], correct: "Ha Long Bay is visited." },
+                    { scrambled: ["protect", "wonders", "natural", "We"], correct: "We protect natural wonders." }
                 ],
                 boss: { name: "Hộ Sĩ Thiên Nhiên", hp: 100, questions: 2 }
             },
             {
                 id: 8, title: "Tourism", vietnamese: "Du lịch", semester: 2,
                 vocab: [
-                    { en: "destination", vi: "điểm đến", phonetic: "/ˌdestɪˈneɪʃn/", example: "Da Nang is a top tourist destination." },
-                    { en: "itinerary", vi: "lịch trình chuyến đi", phonetic: "/aɪˈtɪnərəri/", example: "Here is our tour itinerary." },
-                    { en: "souvenir", vi: "đồ lưu niệm", phonetic: "/ˌsuːvəˈnɪə(r)/", example: "I bought local souvenirs." },
-                    { en: "resort", vi: "khu nghỉ dưỡng", phonetic: "/rɪˈzɔːt/", example: "We stayed at a beach resort." },
-                    { en: "explore", vi: "khám phá", phonetic: "/ɪkˈsplɔː(r)/", example: "Tourists love to explore new places." },
-                    { en: "booking", vi: "việc đặt trước", phonetic: "/ˈbʊkɪŋ/", example: "Make your hotel booking early." },
-                    { en: "guideline", vi: "hướng dẫn", phonetic: "/ˈɡaɪdlaɪn/", example: "Follow travel guidelines." },
-                    { en: "luggage", vi: "hành lý", phonetic: "/ˈlʌɡɪdʒ/", example: "Pack your luggage carefully." }
+                    { en: "destination", vi: "điểm đến", phonetic: "/ˌdestɪˈneɪʃn/", example: "Tourist destination." },
+                    { en: "itinerary", vi: "lịch trình", phonetic: "/aɪˈtɪnərəri/", example: "Tour itinerary." },
+                    { en: "souvenir", vi: "đồ lưu niệm", phonetic: "/ˌsuːvəˈnɪə(r)/", example: "Buy souvenirs." },
+                    { en: "resort", vi: "khu nghỉ dưỡng", phonetic: "/rɪˈzɔːt/", example: "Beach resort." },
+                    { en: "explore", vi: "khám phá", phonetic: "/ɪkˈsplɔː(r)/", example: "Explore cities." },
+                    { en: "booking", vi: "đặt chỗ", phonetic: "/ˈbʊkɪŋ/", example: "Hotel booking." },
+                    { en: "guideline", vi: "hướng dẫn", phonetic: "/ˈɡaɪdlaɪn/", example: "Travel guideline." },
+                    { en: "luggage", vi: "hành lý", phonetic: "/ˈlʌɡɪdʒ/", example: "Heavy luggage." }
                 ],
-                grammar: { title: "Relative Clauses", content: "Dùng đại từ quan hệ who, which, that để nối mệnh đề phụ bổ nghĩa cho danh từ đứng trước." },
+                grammar: { title: "Relative Clauses", content: "Đại từ quan hệ who, which, that, where." },
                 quiz: [
-                    { q: "Choose the correct relative pronoun: The hotel _____ we stayed was luxurious.", options: ["where", "which", "who", "when"], correct: 0, explain: "Dùng 'where' thay thế cho trạng từ chỉ nơi chốn." },
-                    { q: "Things you buy to remember a trip are called _____.", options: ["souvenirs", "tickets", "luggage", "maps"], correct: 0, explain: "'souvenirs' là đồ lưu niệm." }
+                    { q: "The hotel _____ we stayed was luxurious.", options: ["where", "which", "who", "when"], correct: 0, explain: "Dùng 'where' cho chốn chốn." },
+                    { q: "Things you buy to remember a trip are _____.", options: ["souvenirs", "tickets", "luggage", "maps"], correct: 0, explain: "'souvenirs' là đồ lưu niệm." }
                 ],
                 sentences: [
-                    { scrambled: ["booked", "We", "hotel", "a", "luxurious"], correct: "We booked a luxurious hotel." },
-                    { scrambled: ["explore", "to", "love", "We", "cities", "new"], correct: "We love to explore new cities." }
+                    { scrambled: ["booked", "We", "hotel", "luxurious"], correct: "We booked luxurious hotel." },
+                    { scrambled: ["explore", "cities", "new", "We"], correct: "We explore new cities." }
                 ],
                 boss: { name: "Vua Du Lịch", hp: 100, questions: 2 }
             },
             {
                 id: 9, title: "World Englishes", vietnamese: "Tiếng Anh trên thế giới", semester: 2,
                 vocab: [
-                    { en: "dialect", vi: "phương ngữ", phonetic: "/ˈdaɪəlekt/", example: "Regional dialects can sound very different." },
-                    { en: "accent", vi: "giọng điệu", phonetic: "/ˈæksənt/", example: "She speaks with a British accent." },
-                    { en: "fluent", vi: "trôi chảy", phonetic: "/ˈfluːənt/", example: "He is fluent in English." },
-                    { en: "global", vi: "toàn cầu", phonetic: "/ˈgləʊbl/", example: "English is a global language." },
-                    { en: "native", vi: "bản xứ", phonetic: "/ˈneɪtɪv/", example: "English is her native tongue." },
-                    { en: "multilingual", vi: "đa ngôn ngữ", phonetic: "/ˌmʌltiˈlɪŋɡwəl/", example: "Living abroad helps you become multilingual." },
-                    { en: "slang", vi: "tiếng lóng", phonetic: "/slæŋ/", example: "Teens often use internet slang." },
-                    { en: "vocabulary", vi: "từ vựng", phonetic: "/vəˈkæbjuləri/", example: "Read books to expand your vocabulary." }
+                    { en: "dialect", vi: "phương ngữ", phonetic: "/ˈdaɪəlekt/", example: "Regional dialect." },
+                    { en: "accent", vi: "giọng điệu", phonetic: "/ˈæksənt/", example: "British accent." },
+                    { en: "fluent", vi: "trôi chảy", phonetic: "/ˈfluːənt/", example: "Fluent speaker." },
+                    { en: "global", vi: "toàn cầu", phonetic: "/ˈgləʊbl/", example: "Global language." },
+                    { en: "native", vi: "bản xứ", phonetic: "/ˈneɪtɪv/", example: "Native speaker." },
+                    { en: "multilingual", vi: "đa ngôn ngữ", phonetic: "/ˌmʌltiˈlɪŋɡwəl/", example: "Multilingual person." },
+                    { en: "slang", vi: "tiếng lóng", phonetic: "/slæŋ/", example: "Teen slang." },
+                    { en: "vocabulary", vi: "từ vựng", phonetic: "/vəˈkæbjuləri/", example: "Rich vocabulary." }
                 ],
-                grammar: { title: "Reported Speech", content: "Khi đổi sang gián tiếp, lùi một thì và thay đổi các đại từ nhân xưng." },
+                grammar: { title: "Reported Speech", content: "Lùi một thì trong câu kể gián tiếp." },
                 quiz: [
-                    { q: "Choose the correct reported speech: 'I am learning English,' she said.", options: ["She said she was learning English.", "She said she is learning English.", "She said she has been learning English.", "She said she learns English."], correct: 0, explain: "Lùi thì từ 'am learning' sang 'was learning'." },
-                    { q: "A person born in a specific country speaks that language as a _____ language.", options: ["native", "foreign", "second", "new"], correct: 0, explain: "'native' là tiếng bản xứ." }
+                    { q: "'I am learning English,' she said. -> She said she _____ English.", options: ["was learning", "is learning", "has learned", "learns"], correct: 0, explain: "Lùi thì 'am learning' sang 'was learning'." },
+                    { q: "A language spoken as a first language is a _____ language.", options: ["native", "foreign", "second", "new"], correct: 0, explain: "'native' là tiếng bản xứ." }
                 ],
                 sentences: [
-                    { scrambled: ["English", "global", "is", "a", "language"], correct: "English is a global language." },
-                    { scrambled: ["speak", "fluently", "can", "She", "English"], correct: "She can speak English fluently." }
+                    { scrambled: ["English", "global", "language", "is"], correct: "English is global language." },
+                    { scrambled: ["speak", "fluently", "She", "English"], correct: "She speak English fluently." }
                 ],
                 boss: { name: "Bậc Thầy Ngôn Ngữ", hp: 100, questions: 2 }
             },
             {
                 id: 10, title: "Planet Earth", vietnamese: "Trái Đất", semester: 2,
                 vocab: [
-                    { en: "biodiversity", vi: "sự đa dạng sinh học", phonetic: "/ˌbaɪəʊdaɪˈvɜːsəti/", example: "Protecting biodiversity is essential." },
-                    { en: "ecosystem", vi: "hệ sinh thái", phonetic: "/ˈiːkəʊsɪstəm/", example: "Forests form a complex ecosystem." },
-                    { en: "habitat", vi: "môi trường sống", phonetic: "/ˈhæbɪtæt/", example: "Pollution destroys natural habitats." },
-                    { en: "conservation", vi: "sự bảo tồn", phonetic: "/ˌkɒnsəˈveɪʃn/", example: "Wildlife conservation is important." },
-                    { en: "endangered", vi: "có nguy cơ tuyệt chủng", phonetic: "/ɪnˈdeɪndʒəd/", example: "Pandas are endangered animals." },
-                    { en: "extinction", vi: "sự tuyệt chủng", phonetic: "/ɪkˈstɪŋkʃn/", example: "Many species face extinction." },
-                    { en: "organic", vi: "hữu cơ", phonetic: "/ɔːˈɡænɪk/", example: "We buy organic vegetables." },
-                    { en: "sustainable", vi: "bền vững", phonetic: "/səˈsteɪnəbl/", example: "We need sustainable energy sources." }
+                    { en: "biodiversity", vi: "đa dạng sinh học", phonetic: "/ˌbaɪəʊdaɪˈvɜːsəti/", example: "Protect biodiversity." },
+                    { en: "ecosystem", vi: "hệ sinh thái", phonetic: "/ˈiːkəʊsɪstəm/", example: "Complex ecosystem." },
+                    { en: "habitat", vi: "môi trường sống", phonetic: "/ˈhæbɪtæt/", example: "Natural habitat." },
+                    { en: "conservation", vi: "bảo tồn", phonetic: "/ˌkɒnsəˈveɪʃn/", example: "Wildlife conservation." },
+                    { en: "endangered", vi: "nguy cơ tuyệt chủng", phonetic: "/ɪnˈdeɪndʒəd/", example: "Endangered animals." },
+                    { en: "extinction", vi: "tuyệt chủng", phonetic: "/ɪkˈstɪŋkʃn/", example: "Face extinction." },
+                    { en: "organic", vi: "hữu cơ", phonetic: "/ɔːˈɡænɪk/", example: "Organic vegetables." },
+                    { en: "sustainable", vi: "bền vững", phonetic: "/səˈsteɪnəbl/", example: "Sustainable energy." }
                 ],
-                grammar: { title: "Relative Clauses", content: "Dùng 'who', 'which', 'that', 'whose' để nối câu hoặc bổ nghĩa cho danh từ đứng trước." },
+                grammar: { title: "Relative Clauses", content: "Đại từ quan hệ who, which, that." },
                 quiz: [
-                    { q: "Choose the correct relative pronoun: The girl ___ won the prize is my friend.", options: ["which", "who", "whom", "whose"], correct: 1, explain: "'who' làm chủ ngữ thay thế cho người." },
-                    { q: "An ecosystem is a community of living organisms interacting with their ___.", options: ["habitat", "environment", "surroundings", "all are correct"], correct: 3, explain: "Cả 3 từ đều phù hợp ngữ cảnh hệ sinh thái." }
+                    { q: "The girl _____ won the prize is my friend.", options: ["who", "which", "whom", "whose"], correct: 0, explain: "Dùng 'who' cho người." },
+                    { q: "An ecosystem is a community of living organisms in their _____.", options: ["habitat", "factory", "office", "street"], correct: 0, explain: "'habitat' là môi trường sống." }
                 ],
                 sentences: [
-                    { scrambled: ["animals", "endangered", "protect", "We", "must"], correct: "We must protect endangered animals." },
-                    { scrambled: ["habitat", "is", "The", "destroyed", "being", "natural"], correct: "The natural habitat is being destroyed." }
+                    { scrambled: ["protect", "animals", "endangered", "We"], correct: "We protect endangered animals." },
+                    { scrambled: ["habitat", "destroyed", "is", "Natural"], correct: "Natural habitat is destroyed." }
                 ],
                 boss: { name: "Thần Trái Đất", hp: 100, questions: 2 }
             },
             {
-                id: 11, title: "Electronic Devices", vietnamese: "Các thiết bị điện tử", semester: 2,
+                id: 11, title: "Electronic Devices", vietnamese: "Thiết bị điện tử", semester: 2,
                 vocab: [
-                    { en: "device", vi: "thiết bị", phonetic: "/dɪˈvaɪs/", example: "A smartphone is a smart device." },
-                    { en: "gadget", vi: "tiện ích điện tử nhỏ", phonetic: "/ˈɡædʒɪt/", example: "He loves modern tech gadgets." },
-                    { en: "invent", vi: "phát minh", phonetic: "/ɪnˈvent/", example: "Who invented the telephone?" },
-                    { en: "innovation", vi: "sự đổi mới", phonetic: "/ˌɪnəˈveɪʃn/", example: "Tech innovation changes our lives." },
-                    { en: "convenient", vi: "tiện lợi", phonetic: "/kənˈviːniənt/", example: "Online learning is very convenient." },
-                    { en: "portable", vi: "di động", phonetic: "/ˈpɔːtəbl/", example: "A laptop is a portable computer." },
-                    { en: "reliable", vi: "đáng tin cậy", phonetic: "/rɪˈlaɪəbl/", example: "Is this internet connection reliable?" },
-                    { en: "software", vi: "phần mềm", phonetic: "/ˈsɒftweə(r)/", example: "Install this software on your PC." }
+                    { en: "device", vi: "thiết bị", phonetic: "/dɪˈvaɪs/", example: "Smart device." },
+                    { en: "gadget", vi: "đồ điện tử nhỏ", phonetic: "/ˈɡædʒɪt/", example: "Tech gadget." },
+                    { en: "invent", vi: "phát minh", phonetic: "/ɪnˈvent/", example: "Invent bulbs." },
+                    { en: "innovation", vi: "sổi mới", phonetic: "/ˌɪnəˈveɪʃn/", example: "Tech innovation." },
+                    { en: "convenient", vi: "tiện lợi", phonetic: "/kənˈviːniənt/", example: "Convenient tool." },
+                    { en: "portable", vi: "di động", phonetic: "/ˈpɔːtəbl/", example: "Portable laptop." },
+                    { en: "reliable", vi: "đáng tin cậy", phonetic: "/rɪˈlaɪəbl/", example: "Reliable network." },
+                    { en: "software", vi: "phần mềm", phonetic: "/ˈsɒftweə(r)/", example: "Install software." }
                 ],
-                grammar: { title: "Passive Voice", content: "Cấu trúc chung: S + be + V3/ed + (by O)." },
+                grammar: { title: "Passive Voice", content: "Câu bị động các thì." },
                 quiz: [
-                    { q: "Choose the passive form: People use smartphones everywhere.", options: ["Smartphones are used everywhere.", "Smartphones were used everywhere.", "Smartphones is used everywhere.", "Smartphones use everywhere."], correct: 0, explain: "Thì hiện tại đơn với chủ ngữ số nhiều dùng 'are used'." },
-                    { q: "Which device is used for typing documents?", options: ["Keyboard", "Speaker", "Monitor", "Printer"], correct: 0, explain: "Bàn phím dùng để gõ văn bản." }
+                    { q: "Smartphones _____ everywhere nowadays.", options: ["are used", "were used", "is used", "use"], correct: 0, explain: "Hiện tại đơn số nhiều dùng 'are used'." },
+                    { q: "Which device is used for typing documents?", options: ["Keyboard", "Speaker", "Monitor", "Printer"], correct: 0, explain: "Bàn phím dùng để gõ." }
                 ],
                 sentences: [
-                    { scrambled: ["invented", "Thomas Edison", "bulb", "light", "the"], correct: "Thomas Edison invented the light bulb." },
-                    { scrambled: ["are", "used", "Smartphones", "communication", "for"], correct: "Smartphones are used for communication." }
+                    { scrambled: ["invented", "Edison", "bulb", "light"], correct: "Edison invented light bulb." },
+                    { scrambled: ["used", "Smartphones", "communication", "for"], correct: "Smartphones used for communication." }
                 ],
                 boss: { name: "Trùm Mạch Điện", hp: 100, questions: 2 }
             },
             {
                 id: 12, title: "Career Choices", vietnamese: "Lựa chọn nghề nghiệp", semester: 2,
                 vocab: [
-                    { en: "career", vi: "nghề nghiệp", phonetic: "/kəˈrɪə(r)/", example: "She is pursuing a career in law." },
-                    { en: "profession", vi: "nghề chuyên môn cao", phonetic: "/prəˈfeʃn/", example: "Teaching is a noble profession." },
-                    { en: "salary", vi: "tiền lương", phonetic: "/ˈsæləri/", example: "He receives a monthly salary." },
-                    { en: "applicant", vi: "người nộp đơn xin việc", phonetic: "/ˈæplɪkənt/", example: "There are many applicants for this job." },
-                    { en: "interview", vi: "phỏng vấn", phonetic: "/ˈɪntəvjuː/", example: "I have a job interview tomorrow." },
-                    { en: "experience", vi: "kinh nghiệm", phonetic: "/kɪˈspɪəriəns/", example: "This job requires work experience." },
-                    { en: "qualification", vi: "trình độ bằng cấp", phonetic: "/ˌkwɒlɪfɪˈkeɪʃn/", example: "Check the entry qualifications." },
-                    { en: "skill", vi: "kỹ năng", phonetic: "/skɪl/", example: "Communication skills are crucial." }
+                    { en: "career", vi: "sự nghiệp", phonetic: "/kəˈrɪə(r)/", example: "Pursue career." },
+                    { en: "profession", vi: "nghề chuyên môn", phonetic: "/prəˈfeʃn/", example: "Teaching profession." },
+                    { en: "salary", vi: "tiền lương", phonetic: "/ˈsæləri/", example: "Monthly salary." },
+                    { en: "applicant", vi: "người ứng tuyển", phonetic: "/ˈæplɪkənt/", example: "Job applicant." },
+                    { en: "interview", vi: "phỏng vấn", phonetic: "/ˈɪntəvjuː/", example: "Job interview." },
+                    { en: "experience", vi: "kinh nghiệm", phonetic: "/ɪkˈspɪəriəns/", example: "Work experience." },
+                    { en: "qualification", vi: "bằng cấp", phonetic: "/ˌkwɒlɪfˈkeɪʃn/", example: "Entry qualifications." },
+                    { en: "skill", vi: "kỹ năng", phonetic: "/skɪl/", example: "Communication skills." }
                 ],
-                grammar: { title: "Reported Speech", content: "Khi chuyển câu hỏi trực tiếp sang gián tiếp, lùi một thì." },
+                grammar: { title: "Reported Speech (Questions)", content: "Câu hỏi gián tiếp đổi trật tự từ." },
                 quiz: [
-                    { q: "Choose the correct reported speech: 'Where do you live?' she asked me.", options: ["She asked me where I lived.", "She asked me where did I live.", "She asked me where do I live.", "She asked me where lived I."], correct: 0, explain: "Giữ trật tự khẳng định 'I lived'." },
-                    { q: "What do we call a person who applies for a job?", options: ["Employer", "Applicant", "Employee", "Manager"], correct: 1, explain: "'Applicant' là người ứng tuyển." }
+                    { q: "'Where do you live?' -> She asked me where I _____.", options: ["lived", "did live", "live", "living"], correct: 0, explain: "Lùi thì sang 'lived' và giữ trật tự khẳng định." },
+                    { q: "A person applying for a job is an _____.", options: ["applicant", "employer", "manager", "boss"], correct: 0, explain: "'applicant' là người ứng tuyển." }
                 ],
                 sentences: [
-                    { scrambled: ["asked", "She", "me", "what", "job", "I", "wanted"], correct: "She asked me what job I wanted." },
-                    { scrambled: ["experience", "needs", "This", "position", "good", "skills"], correct: "This position needs good skills." }
+                    { scrambled: ["asked", "She", "me", "what"], correct: "She asked me what." },
+                    { scrambled: ["needs", "position", "This", "skills"], correct: "This position needs skills." }
                 ],
                 boss: { name: "Chủ Tịch Tập Đoàn", hp: 100, questions: 2 }
             }
         ];
 
         // --- STATE GAME ---
-        let gameState = JSON.parse(localStorage.getItem('english9_state')) || {
+        let gameState = JSON.parse(localStorage.getItem('english89_state')) || {
+            currentGrade: 9,
             level: 1,
             xp: 0,
             streak: 1,
@@ -510,13 +697,13 @@
             hearts: 10,
             maxHearts: 10,
             shield: false,
-            completedUnits: [],
-            unlockedUnits: [1], // Mặc định mở unit 1
+            completedUnits: { 8: [], 9: [] },
+            unlockedUnits: { 8: [1], 9: [1] },
             audioEnabled: true
         };
 
         function saveState() {
-            localStorage.setItem('english9_state', JSON.stringify(gameState));
+            localStorage.setItem('english89_state', JSON.stringify(gameState));
             updateHUD();
         }
 
@@ -543,8 +730,16 @@
             btn.innerHTML = gameState.audioEnabled ? '<i class="fa-solid fa-volume-high text-lg"></i>' : '<i class="fa-solid fa-volume-xmark text-lg text-red-400"></i>';
         }
 
-        // --- RENDER BẢN ĐỒ ---
+        // --- CHUYỂN KHỐI LỚP & HỌC KỲ ---
         let currentSemesterFilter = 1;
+
+        function switchGrade(grade) {
+            gameState.currentGrade = grade;
+            document.getElementById('btn-grade-8').className = grade === 8 ? "px-4 py-1.5 text-xs font-bold rounded-lg bg-emerald-600 text-white transition" : "px-4 py-1.5 text-xs font-bold rounded-lg bg-gray-800 text-gray-300 transition";
+            document.getElementById('btn-grade-9').className = grade === 9 ? "px-4 py-1.5 text-xs font-bold rounded-lg bg-emerald-600 text-white transition" : "px-4 py-1.5 text-xs font-bold rounded-lg bg-gray-800 text-gray-300 transition";
+            saveState();
+            renderMap();
+        }
 
         function filterSemester(sem) {
             currentSemesterFilter = sem;
@@ -554,27 +749,35 @@
         }
 
         function unlockAllUnits() {
-            gameState.unlockedUnits = unitsData.map(u => u.id);
+            const units = gameState.currentGrade === 8 ? dataGrade8 : dataGrade9;
+            gameState.unlockedUnits[gameState.currentGrade] = units.map(u => u.id);
             saveState();
             renderMap();
-            alert("Đã mở khóa toàn bộ 12 Unit!");
+            alert(`Đã mở khóa toàn bộ Tiếng Anh lớp ${gameState.currentGrade}!`);
         }
 
         function renderMap() {
             const mapContainer = document.getElementById('view-map');
             mapContainer.innerHTML = '';
 
-            const filtered = unitsData.filter(u => u.semester === currentSemesterFilter);
+            const units = gameState.currentGrade === 8 ? dataGrade8 : dataGrade9;
+            const filtered = units.filter(u => u.semester === currentSemesterFilter);
+
+            // Đảm bảo khởi tạo mảng nếu chưa có
+            if(!gameState.completedUnits[gameState.currentGrade]) gameState.completedUnits[gameState.currentGrade] = [];
+            if(!gameState.unlockedUnits[gameState.currentGrade]) gameState.unlockedUnits[gameState.currentGrade] = [1];
 
             filtered.forEach(unit => {
-                // Tự động mở khóa Unit nếu Unit trước đã hoàn thành hoặc nằm trong unlockedUnits
-                const isPreviousCompleted = unit.id === 1 || gameState.completedUnits.includes(unit.id - 1);
-                const isUnlocked = isPreviousCompleted || gameState.unlockedUnits.includes(unit.id);
-                if (isUnlocked && !gameState.unlockedUnits.includes(unit.id)) {
-                    gameState.unlockedUnits.push(unit.id);
+                const completedArr = gameState.completedUnits[gameState.currentGrade];
+                const unlockedArr = gameState.unlockedUnits[gameState.currentGrade];
+
+                const isPreviousCompleted = unit.id === 1 || completedArr.includes(unit.id - 1);
+                const isUnlocked = isPreviousCompleted || unlockedArr.includes(unit.id);
+                if (isUnlocked && !unlockedArr.includes(unit.id)) {
+                    unlockedArr.push(unit.id);
                 }
 
-                const isCompleted = gameState.completedUnits.includes(unit.id);
+                const isCompleted = completedArr.includes(unit.id);
                 const progressCount = isCompleted ? 4 : 0;
 
                 const card = document.createElement('div');
@@ -587,7 +790,7 @@
                                 ${isCompleted ? '<i class="fa-solid fa-check"></i>' : (isUnlocked ? unit.id : '<i class="fa-solid fa-lock"></i>')}
                             </div>
                             <div>
-                                <span class="text-xs font-bold ${isUnlocked ? 'text-emerald-400' : 'text-gray-400'}">UNIT ${unit.id} • HỌC KỲ ${unit.semester}</span>
+                                <span class="text-xs font-bold ${isUnlocked ? 'text-emerald-400' : 'text-gray-400'}">LỚP ${gameState.currentGrade} • UNIT ${unit.id} • HK${unit.semester}</span>
                                 <h3 class="text-lg font-black text-white">${unit.title}</h3>
                                 <p class="text-xs text-gray-400">${unit.vietnamese}</p>
                             </div>
@@ -597,7 +800,6 @@
                         </span>
                     </div>
 
-                    <!-- Các chặng thử thách -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-gray-800/80">
                         <button onclick="${isUnlocked ? `startStage(${unit.id}, 1)` : 'lockedAlert()'}" class="p-2.5 rounded-xl text-left bg-gray-800/60 hover:bg-gray-800 transition flex items-center gap-2">
                             <i class="fa-solid fa-gem text-emerald-400"></i>
@@ -650,7 +852,6 @@
             if (tab === 'profile') updateProfileStats();
         }
 
-        // --- CỬA HÀNG & HỒ SƠ ---
         function buyHearts() {
             if (gameState.coins >= 30) {
                 gameState.coins -= 30;
@@ -674,9 +875,9 @@
         }
 
         function updateProfileStats() {
-            document.getElementById('prof-units').innerText = `${gameState.completedUnits.length}/12`;
             document.getElementById('prof-score').innerText = gameState.xp;
             document.getElementById('prof-hearts').innerText = gameState.hearts;
+            document.getElementById('prof-streak').innerText = gameState.streak;
         }
 
         function resetData() {
@@ -689,15 +890,18 @@
         function renderBadges() {
             const grid = document.getElementById('badges-grid');
             grid.innerHTML = '';
-            unitsData.forEach(u => {
-                const earned = gameState.completedUnits.includes(u.id);
+            const units = gameState.currentGrade === 8 ? dataGrade8 : dataGrade9;
+            const completedArr = gameState.completedUnits[gameState.currentGrade] || [];
+
+            units.forEach(u => {
+                const earned = completedArr.includes(u.id);
                 const item = document.createElement('div');
                 item.className = `game-card p-4 text-center ${earned ? 'border-yellow-500/50 bg-yellow-500/10' : 'opacity-40'}`;
                 item.innerHTML = `
                     <div class="w-16 h-16 mx-auto mb-2 rounded-2xl ${earned ? 'bg-yellow-500 text-gray-900' : 'bg-gray-800 text-gray-500'} flex items-center justify-center text-3xl shadow">
                         <i class="fa-solid fa-medal"></i>
                     </div>
-                    <h4 class="font-bold text-white text-sm">Huy hiệu Unit ${u.id}</h4>
+                    <h4 class="font-bold text-white text-sm">Lớp ${gameState.currentGrade} - Unit ${u.id}</h4>
                     <p class="text-[11px] text-gray-400">${u.title}</p>
                 `;
                 grid.appendChild(item);
@@ -711,7 +915,8 @@
         let heartsLostInThisLesson = 0;
 
         function startStage(unitId, stageNum) {
-            currentUnitObj = unitsData.find(u => u.id === unitId);
+            const units = gameState.currentGrade === 8 ? dataGrade8 : dataGrade9;
+            currentUnitObj = units.find(u => u.id === unitId);
             currentStageIdx = stageNum;
             lessonStep = 0;
             heartsLostInThisLesson = 0;
@@ -754,7 +959,6 @@
             document.getElementById('lesson-progress').style.width = `${(lessonStep / 4) * 100}%`;
 
             if (currentStageIdx === 1) {
-                // CHẶNG 1: FLASHCARDS
                 if (lessonStep < currentUnitObj.vocab.length) {
                     const v = currentUnitObj.vocab[lessonStep];
                     container.innerHTML = `
@@ -784,7 +988,6 @@
                     finishStageReward();
                 }
             } else if (currentStageIdx === 2) {
-                // CHẶNG 2: NGỮ PHÁP
                 if (lessonStep === 0) {
                     container.innerHTML = `
                         <div class="space-y-6 text-center">
@@ -814,7 +1017,6 @@
                     }
                 }
             } else if (currentStageIdx === 3) {
-                // CHẶNG 3: GHÉP CÂU
                 if (lessonStep < currentUnitObj.sentences.length) {
                     const s = currentUnitObj.sentences[lessonStep];
                     renderSentenceBuilder(s);
@@ -822,7 +1024,6 @@
                     finishStageReward();
                 }
             } else if (currentStageIdx === 4) {
-                // CHẶNG 4: ĐẤU BOSS
                 if (lessonStep < currentUnitObj.quiz.length) {
                     const q = currentUnitObj.quiz[lessonStep];
                     container.innerHTML = `
@@ -852,10 +1053,7 @@
             const buttons = document.querySelectorAll('.option-btn');
             if (selectedIdx === correctIdx) {
                 buttons[selectedIdx].className = "btn-duolingo w-full text-left p-4 rounded-2xl bg-emerald-600 border-2 border-emerald-500 font-bold text-white flex items-center justify-between";
-                setTimeout(() => {
-                    lessonStep++;
-                    loadStageContent();
-                }, 1000);
+                setTimeout(() => { lessonStep++; loadStageContent(); }, 1000);
             } else {
                 loseHeart();
                 if (gameState.hearts <= 0) return;
@@ -868,10 +1066,7 @@
             const buttons = document.querySelectorAll('.option-btn');
             if (selectedIdx === correctIdx) {
                 buttons[selectedIdx].className = "btn-duolingo w-full text-left p-4 rounded-2xl bg-emerald-600 border-2 border-emerald-500 font-bold text-white";
-                setTimeout(() => {
-                    lessonStep++;
-                    loadStageContent();
-                }, 1000);
+                setTimeout(() => { lessonStep++; loadStageContent(); }, 1000);
             } else {
                 loseHeart();
                 if (gameState.hearts <= 0) return;
@@ -894,7 +1089,7 @@
                     <h3 class="text-lg font-black text-white">Hãy sắp xếp các từ sau thành câu đúng:</h3>
                     
                     <div id="selected-words-box" class="min-h-[60px] bg-[#202f36] border-2 border-dashed border-gray-600 rounded-2xl p-3 flex flex-wrap gap-2 items-center">
-                        <span class="text-xs text-gray-500 italic" id="placeholder-text">Chạm vào các từ bên dưới để ghép câu...</span>
+                        <span class="text-xs text-gray-500 italic">Chạm vào các từ bên dưới để ghép câu...</span>
                     </div>
 
                     <div id="pool-words-box" class="flex flex-wrap gap-2 pt-2">
@@ -948,7 +1143,7 @@
             if (heartsLostInThisLesson === 0) {
                 gameState.hearts = Math.min(gameState.maxHearts, gameState.hearts + 1);
                 gameState.coins += 15;
-                bonusText = "<br><span class='text-yellow-400 font-bold'>✨ Thưởng hoàn hảo (0 tim mất): +1 Tim ❤️ & +15 Vàng 🪙!</span>";
+                bonusText = "<br><span class='text-yellow-400 font-bold'>✨ Thưởng hoàn hảo: +1 Tim ❤️ & +15 Vàng 🪙!</span>";
             }
 
             if (gameState.xp >= gameState.level * 100) {
@@ -956,12 +1151,17 @@
                 bonusText += `<br><span class='text-purple-400 font-bold'>🚀 Chúc mừng bạn đã lên Cấp độ ${gameState.level}!</span>`;
             }
 
-            if (!gameState.completedUnits.includes(currentUnitObj.id)) {
-                gameState.completedUnits.push(currentUnitObj.id);
+            const grade = gameState.currentGrade;
+            if(!gameState.completedUnits[grade]) gameState.completedUnits[grade] = [];
+            if(!gameState.completedUnits[grade].includes(currentUnitObj.id)) {
+                gameState.completedUnits[grade].push(currentUnitObj.id);
             }
+
             const nextUnitId = currentUnitObj.id + 1;
-            if (nextUnitId <= unitsData.length && !gameState.unlockedUnits.includes(nextUnitId)) {
-                gameState.unlockedUnits.push(nextUnitId);
+            const units = grade === 8 ? dataGrade8 : dataGrade9;
+            if(!gameState.unlockedUnits[grade]) gameState.unlockedUnits[grade] = [1];
+            if (nextUnitId <= units.length && !gameState.unlockedUnits[grade].includes(nextUnitId)) {
+                gameState.unlockedUnits[grade].push(nextUnitId);
             }
 
             saveState();
@@ -975,7 +1175,7 @@
                     </div>
                     <div>
                         <h2 class="text-2xl font-black text-white">Hoàn Thành Xuất Sắc!</h2>
-                        <p class="text-sm text-emerald-400 mt-1">Bạn đã chinh phục thành công Unit ${currentUnitObj.id}: ${currentUnitObj.title}</p>
+                        <p class="text-sm text-emerald-400 mt-1">Lớp ${grade} - Unit ${currentUnitObj.id}: ${currentUnitObj.title}</p>
                         <p class="text-xs text-gray-400 mt-2">+25 XP | +10 Vàng ${bonusText}</p>
                     </div>
                     <button onclick="closeLesson()" class="btn-duolingo w-full max-w-sm mx-auto bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-2xl text-lg shadow-lg flex items-center justify-center gap-2">
@@ -985,8 +1185,8 @@
             `;
         }
 
-        renderMap();
-        updateHUD();
+        // Khởi tạo hiển thị ban đầu
+        switchGrade(9);
     </script>
 </body>
 </html>
